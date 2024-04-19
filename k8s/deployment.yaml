@@ -14,15 +14,10 @@ spec:
       containers:
         - name: frontend
           image: krmp-d2hub-idock.9rum.cc/dev-test/repo_b332d9de0619
+          envFrom:
+            - configMapRef:
+                name: frontend-config
           env:
-            - name: NEXT_PUBLIC_KAKAO_API_KEY
-              value: "27e18fb1f123f9fa8e5492566f736e97"
-            - name: NEXT_PUBLIC_BASE_URL
-              value: "https://vipandrendezvous.site/"
-            - name: NEXT_PUBLIC_WS_PROXY
-              value: "wss://vipandrendezvous.site/"
-            - name: AWS_S3_BUCKET_REGION
-              value: "ap-northeast-2"
             - name: AWS_S3_BUCKET_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
