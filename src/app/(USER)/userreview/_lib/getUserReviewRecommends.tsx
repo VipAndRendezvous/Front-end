@@ -9,7 +9,7 @@ export async function getUserReviewRecommends({
   sort?: string;
   pageParam?: number;
 }) {
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/review/${sort}&page=${pageParam}&size=10`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/review/${sort}?page=${pageParam}&size=10`;
   const token = localStorage.getItem("Authorization");
   console.log(sort);
 

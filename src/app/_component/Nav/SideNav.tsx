@@ -10,7 +10,7 @@ import { useUser } from "@/app/utils/UserProvider";
 import { FollowingUser } from "@/models/FollowingList";
 
 const SideNav = () => {
-  const { userInfo, isLoggedIn, followingList } = useUser();
+  const { userInfo, isLoggedIn, followingList, withdrawServiceAPI } = useUser();
   const router = useRouter();
   //----------------------------------------------------------------날짜 형식
   const today = new Date();
@@ -76,7 +76,11 @@ const SideNav = () => {
           {/* <button className="btn-basic" type="button" onClick={onLogout}>
             로그아웃
           </button> */}
-          <button className="btn-basic" type="button">
+          <button
+            className="btn-basic"
+            type="button"
+            onClick={(e) => withdrawServiceAPI()}
+          >
             회원탈퇴
           </button>
         </div>

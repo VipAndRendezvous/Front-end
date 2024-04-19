@@ -35,6 +35,7 @@ type UserContextType = {
   applyCheck;
   globalTicketUUID;
   setglobalTicketUUID;
+  withdrawServiceAPI: () => Promise<void>;
 };
 
 const UserContext = createContext<UserContextType | null>(null);
@@ -159,11 +160,15 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     vipIntroduce: string;
     vipEvidenceUrl: string;
   }) {
+    const token = localStorage.getItem("Authorization");
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/basic/applyVip`,
         formData,
-        { withCredentials: true }
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true,
+        }
       );
       // 응답 처리 코드...
     } catch (error) {
@@ -183,6 +188,30 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     fetchInitialData();
   }, []);
 
+  //----------------------------------------------------------------
+
+  async function withdrawServiceAPI() {
+    const token = localStorage.getItem("Authorization");
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/withdrawal`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        localStorage.removeItem("Authorization");
+        window.location.href = "/";
+      } else {
+        throw new Error("Failed to fetch following list");
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
   //----------------------------------------------------------------
   return (
     <UserContext.Provider
@@ -206,6 +235,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         applyCheck,
         globalTicketUUID,
         setglobalTicketUUID,
+        withdrawServiceAPI,
       }}
     >
       {children}
