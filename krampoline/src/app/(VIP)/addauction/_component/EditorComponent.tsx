@@ -7,17 +7,15 @@ import React, { useMemo, useRef, useState } from "react";
 import { useAddAuction } from "@/app/utils/AddAuctionsProvider";
 import AWS from "aws-sdk";
 
-const REGION = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_REGION;
-const ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_ACCESS_KEY_ID;
-const SECRET_ACCESS_KEY =
-  process.env.NEXT_PUBLIC_AWS_S3_BUCKET_SECRET_ACCESS_KEY;
-
-const EditorComponent = () => {
+const EditorComponent = ({region, keyId, AccessKey}) => {
   const ReactQuill =
     typeof window === "object" ? require("react-quill") : () => false;
   const quillRef = useRef(null);
   const [contents, setContents] = useState("");
   const { setAuctionInfo } = useAddAuction();
+  const REGION = region;
+  const ACCESS_KEY = keyId;
+  const SECRET_ACCESS_KEY = AccessKey;
 
   const imageHandler = async () => {
     const input = document.createElement("input");

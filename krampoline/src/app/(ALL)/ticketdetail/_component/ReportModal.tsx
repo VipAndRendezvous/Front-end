@@ -4,18 +4,17 @@ import styles from "./reportModal.module.css";
 import axios from "axios";
 import { useUser } from "@/app/utils/UserProvider";
 
-const REGION = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_REGION; // AWS S3 버킷 리전
-const ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_ACCESS_KEY_ID; // AWS S3 액세스 키
-const SECRET_ACCESS_KEY =
-  process.env.NEXT_PUBLIC_AWS_S3_BUCKET_SECRET_ACCESS_KEY; // AWS S3 비밀 액세스 키
-
-const ReportModal = ({ onReportClose }) => {
+const ReportModal = ({ onReportClose, region, keyId, AccessKey}) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileUrl, setFileUrl] = useState(""); // S3에서 파일 URL을 저장하기 위한 상태
   const { globalTicketUUID } = useUser();
   const [ticketInfo, setTicketInfo] = useState({
     ticketReportContent: "",
   });
+
+  const REGION = region;
+  const ACCESS_KEY = keyId;
+  const SECRET_ACCESS_KEY = AccessKey;
 
   AWS.config.update({
     region: REGION,

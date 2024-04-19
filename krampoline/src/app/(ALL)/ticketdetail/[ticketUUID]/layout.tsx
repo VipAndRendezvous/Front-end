@@ -4,13 +4,23 @@ import Navbar from "../../../_component/Nav/Navbar";
 import styles from "./ticketDetaillayout.module.css";
 import TicketOwnerController from "../_component/TicketOwnerController";
 
-export default function Layout({
+async function getAWS() {
+    const region = process.env.AWS_S3_BUCKET_REGION;
+    const keyId = process.env.AWS_S3_BUCKET_ACCESS_KEY_ID;
+    const AccessKey = process.env.AWS_S3_BUCKET_SECRET_ACCESS_KEY;
+
+    return {region, keyId, AccessKey};
+}
+
+export default async function Layout({
   children,
 }: // modal,
 {
   children: ReactNode;
   // modal: ReactNode;
 }) {
+    const {region, keyId, AccessKey} = await getAWS()
+
   return (
     <div>
       <div className={styles.NavMenuContainer}>
@@ -22,7 +32,7 @@ export default function Layout({
         <header className={styles["Ticket-leftSectionWrapper"]}>
           <main className={styles["main-ticketDetail"]}> {children}</main>
           <div className={styles.rightSectionWrapper}>
-            <TicketOwnerController />
+            <TicketOwnerController region={region} keyId={keyId} AccessKey={AccessKey}/>
           </div>
         </header>
       </div>

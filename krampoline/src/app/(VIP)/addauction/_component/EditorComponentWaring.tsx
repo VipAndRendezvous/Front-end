@@ -7,19 +7,17 @@ import React, { useMemo, useRef, useState } from "react";
 import { useAddAuction } from "@/app/utils/AddAuctionsProvider";
 import AWS from "aws-sdk";
 
-const REGION = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_REGION;
-const ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_ACCESS_KEY_ID;
-const SECRET_ACCESS_KEY =
-  process.env.NEXT_PUBLIC_AWS_S3_BUCKET_SECRET_ACCESS_KEY;
-
 // // SSR을 비활성화하고 클라이언트 사이드에서만 로드하도록 설정
 // const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-const EditorComponentWaring = () => {
+const EditorComponentWaring = ({region, keyId, AccessKey}) => {
   const ReactQuill =
     typeof window === "object" ? require("react-quill") : () => false;
   const quillRef = useRef(null);
   const [contents, setContents] = useState("");
   const { WarningInfo, setWarningInfo } = useAddAuction();
+  const REGION = region;
+  const ACCESS_KEY = keyId;
+  const SECRET_ACCESS_KEY = AccessKey;
 
   const imageHandler = async () => {
     const input = document.createElement("input");
