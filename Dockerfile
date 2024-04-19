@@ -35,7 +35,7 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder /usr/src/app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next/static ./.next/static
-COPY --from=builder /usr/src/app/.env ./.env  # .env 파일 복사
+COPY --from=builder /usr/src/app/.env ./.env
 
 USER nextjs
 EXPOSE 3000
