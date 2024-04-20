@@ -36,7 +36,7 @@ const FaqItem = ({
 };
 //----------------------------------------------------------------
 
-const TicketOwnerController = ({region, keyId, AccessKey}) => {
+const TicketOwnerController = () => {
   const [isOpenMeetModal, setIsOpenMeetModal] = useState<boolean>(false); // Meet 모달 상태
   const [isOpenReviewModal, setIsOpenReviewModal] = useState<boolean>(false); // Report 모달 상태
   const [isOpenReportModal, setIsOpenReportModal] = useState<boolean>(false); // Report 모달 상태
@@ -285,7 +285,7 @@ const TicketOwnerController = ({region, keyId, AccessKey}) => {
   };
   //----------------------------------------------------------------
   if (showChat) {
-    return <Chat region={region} keyId={keyId} AccessKey={AccessKey}/>;
+    return <Chat />;
   }
   //----------------------------------------------------------------
   return (
@@ -364,7 +364,6 @@ const TicketOwnerController = ({region, keyId, AccessKey}) => {
         >
           <div className={styles["modal-inner-content"]}>
             <ReportModal onReportClose={closeReportModal}
-                         region={region} keyId={keyId} AccessKey={AccessKey}
             />
           </div>
         </Modal>

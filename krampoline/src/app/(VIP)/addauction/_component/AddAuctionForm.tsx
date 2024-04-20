@@ -12,7 +12,7 @@ import { useUser } from "@/app/utils/UserProvider";
 import { useAddAuction } from "@/app/utils/AddAuctionsProvider";
 import EditorComponentWaring from "./EditorComponentWaring";
 
-const AddAuctionForm = ({region, keyId, AccessKey}) => {
+const AddAuctionForm = () => {
   const { userInfo, isLoading } = useUser();
   const {
     Address,
@@ -73,13 +73,13 @@ const AddAuctionForm = ({region, keyId, AccessKey}) => {
       <div className={styles.AddFormTextContainer}>
         <div className={styles.TextEditor}>
           <div>이 만남은 이런거에요</div>
-          <EditorComponent region={region} keyId={keyId} AccessKey={AccessKey}/>
+          <EditorComponent />
         </div>
       </div>
       <div className={styles.AddFormTextContainer}>
         <div className={styles.TextEditor}>
           <div>이것 만큼은 지켜주세요</div>
-          <EditorComponentWaring region={region} keyId={keyId} AccessKey={AccessKey}/>
+          <EditorComponentWaring/>
         </div>
       </div>
       <div className={styles.AuthCheck}>
