@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import "./carouselMain.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
 import "swiper/css/navigation";
@@ -11,8 +11,12 @@ import Img1 from "../../../../public/CarouselImg/1.png";
 import Img2 from "../../../../public/CarouselImg/2.png";
 import Img3 from "../../../../public/CarouselImg/3.png";
 import Img4 from "../../../../public/CarouselImg/4.png";
+import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
+import Link from "next/link";
 
 const CarouselMain = () => {
+  const [bannerData, setBannerData] = useState([]);
+
   useEffect(() => {
     const swiper = new Swiper(".swiper", {
       direction: "horizontal",
@@ -30,21 +34,36 @@ const CarouselMain = () => {
     });
   }, []);
 
+  useEffect(() => {
+    fetchBannerData();
+  }, []);
+
+  // 배너 데이터 불러오기
+  async function fetchBannerData() {
+    try {
+      const response = await HttpAuthInstance.get(`/api/all/banner`, {});
+      setBannerData(response.data);
+    } catch (error) {
+      console.error("오류 발생", error);
+    }
+  }
+
   return (
     <div className="swiper">
       <div className="swiper-wrapper">
-        <div className="swiper-slide">
-          <Image src={Img1} alt="slide1" priority />
-        </div>
-        <div className="swiper-slide">
-          <Image src={Img2} alt="slide2" priority />
-        </div>
-        <div className="swiper-slide">
-          <Image src={Img3} alt="slide3" priority />
-        </div>
-        <div className="swiper-slide">
-          <Image src={Img4} alt="slide4" priority />
-        </div>
+        {bannerData.map((banner, index) => (
+          <div className="swiper-slide" key={index}>
+            <Link href={banner.targetUrl} passHref>
+              <Image
+                src={banner.bannerImgUrl}
+                alt={`slide${index + 1}`}
+                objectFit="cover" // Adjust as needed; can be 'contain' or 'cover'
+                width={1920}
+                height={320}
+              />
+            </Link>
+          </div>
+        ))}
       </div>
       <div className="swiper-pagination"></div>
       <div className="swiper-button-prev"></div>

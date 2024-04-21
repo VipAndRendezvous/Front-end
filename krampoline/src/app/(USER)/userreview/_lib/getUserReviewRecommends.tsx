@@ -1,5 +1,6 @@
 "use client";
 
+import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 import axios from "axios";
 
 export async function getUserReviewRecommends({
@@ -9,16 +10,12 @@ export async function getUserReviewRecommends({
   sort?: string;
   pageParam?: number;
 }) {
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/review/${sort}?page=${pageParam}&size=10`;
-  const token = localStorage.getItem("Authorization");
+  const url = `/api/user/review/${sort}?page=${pageParam}&size=10`;
+
   console.log(sort);
 
   try {
-    const response = await axios.get(url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await HttpAuthInstance.get(url, {});
     return response.data;
   } catch (error) {
     console.error(error.response ? error.response.data : error.message);

@@ -1,5 +1,6 @@
 "use client";
 
+import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 import { ApiResponse } from "@/models/UserMyPageAuction";
 import axios from "axios";
 
@@ -9,21 +10,15 @@ export async function getUserAuctionRecommends({
   sort?: string[];
 }): Promise<ApiResponse> {
   const token = localStorage.getItem("Authorization");
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
   try {
     let apiResponse: ApiResponse;
 
     if (sort.includes("participate")) {
-      const { data } = await axios.get(
-        `${baseUrl}/api/basic/auction/participate?page=1&size=10`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      const { data } = await HttpAuthInstance.get(
+        `/api/basic/auction/participate?&page=1&size=9`
       );
-      // console.log(sort);
-      // ApiResponse.content 필드에 API 응답의 content를 직접 할당합니다.
+
       apiResponse = {
         content: data.content,
         pageable: data.pageable,
@@ -41,11 +36,7 @@ export async function getUserAuctionRecommends({
       // 다른 sort 값들에 대해 개별 요청
       const responses = await Promise.all(
         sort.map((s) =>
-          axios.get(`${baseUrl}/api/basic/auction/${s}?page=1&size=10`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
+          HttpAuthInstance.get(`/api/basic/auction/${s}?page=1&size=10`, {})
         )
       );
       apiResponse = {

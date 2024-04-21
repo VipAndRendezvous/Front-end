@@ -7,15 +7,15 @@ import React, { useMemo, useRef, useState } from "react";
 import { useAddAuction } from "@/app/utils/AddAuctionsProvider";
 import AWS from "aws-sdk";
 
-const EditorComponent = ({region, keyId, AccessKey}) => {
+const EditorComponent = () => {
   const ReactQuill =
     typeof window === "object" ? require("react-quill") : () => false;
   const quillRef = useRef(null);
   const [contents, setContents] = useState("");
   const { setAuctionInfo } = useAddAuction();
-  const REGION = region;
-  const ACCESS_KEY = keyId;
-  const SECRET_ACCESS_KEY = AccessKey;
+  const REGION = "1";
+  const ACCESS_KEY = "1";
+  const SECRET_ACCESS_KEY = "{}";
 
   const imageHandler = async () => {
     const input = document.createElement("input");
@@ -79,7 +79,7 @@ const EditorComponent = ({region, keyId, AccessKey}) => {
   };
 
   return (
-    <div style={{ height: "300px" }}>
+    <div style={{ height: "222px" }}>
       <ReactQuill
         style={{ height: "100%" }}
         ref={quillRef}

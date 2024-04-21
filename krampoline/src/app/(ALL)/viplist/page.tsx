@@ -23,12 +23,13 @@ export default async function page() {
   const dehydratedState = dehydrate(queryClient);
 
   return (
-    <div>
+    <div className={styles.Main}>
       <HydrationBoundary state={dehydratedState}>
         <SearchProvider>
           <div className={styles.ListSearchBar}>
             <SearchBar />
           </div>
+          <div className={styles.Title}>VIP 리스트</div>
           <div className={styles.ListWrapper}>
             <div className={styles.VipList}>
               <VipListRecommends />

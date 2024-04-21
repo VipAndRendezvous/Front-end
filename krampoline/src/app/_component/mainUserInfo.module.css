@@ -1,25 +1,210 @@
-.MainUserInfoContainer {
+.rectangleParent {
+  width: 100%;
+  position: relative;
+  text-align: left;
+  font-size: 14px;
+  color: #949597;
+  font-family: SUIT;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+}
+
+.groupChild {
+  top: 0px;
+  left: 0px;
+  box-sizing: border-box;
+  width: 368px;
+  height: 143px;
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
+}
+.signoutIcon {
+  position: absolute;
+  top: 21px;
+  left: 332px;
+  width: 16px;
+  height: 16px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.maskGroupIcon {
+  margin-top: 16px;
+  margin-left: 20px;
+
+  position: flex;
+  width: 111px;
+  height: 111px;
+  object-fit: cover;
+}
+
+.rightWrapper {
   align-items: center;
-  height: 200px;
-}
-
-.ProfilePicContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  width: 40%;
+  height: 143px;
 }
-
-.PointContainer {
+.groupWrapper {
+  margin-left: 12px;
+  height: 100%;
+}
+.group {
+  margin-top: 5px;
   display: flex;
   flex-direction: row;
-  gap: 20px;
 }
-
-.UserOptionContainer {
+.parent {
+  margin-top: 7px;
   display: flex;
   flex-direction: row;
-  gap: 20px;
+}
+
+.denyday {
+  margin-top: 16px;
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  line-height: 30px;
+  font-weight: 800;
+  color: #333;
+}
+
+.wrapper {
+  margin-top: 6px;
+
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  width: 205px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 67px;
+  font-size: 12px;
+  color: #333;
+}
+
+.donation_price {
+  margin-left: 12px;
+  color: #333;
+  font-family: SUIT;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 18px; /* 128.571% */
+  letter-spacing: -0.56px;
+}
+.b1 {
+  width: 65px;
+  color: #949597;
+
+  font-family: SUIT;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 15px; /* 107.143% */
+  letter-spacing: -0.56px;
+}
+
+.b2 {
+  width: 65px;
+  color: #949597;
+  font-family: SUIT;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 15px; /* 107.143% */
+  letter-spacing: -0.56px;
+}
+
+.p {
+  margin-left: 12px;
+  color: #333;
+  font-family: SUIT;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 18px; /* 128.571% */
+  letter-spacing: -0.56px;
+}
+
+.b3 {
+  color: #333;
+  font-family: SUIT;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 150% */
+  letter-spacing: -0.48px;
+  text-decoration: none;
+}
+
+.wrapper a {
+  text-decoration: none; /* 밑줄 제거 */
+  color: #333; /* 부모 요소의 글자 색상을 상속 */
+}
+
+.NonLogin {
+  border-radius: 20px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  width: 368px;
+  height: 143px;
+}
+.NonLoginText {
+  margin-top: 39px;
+  margin-bottom: 16px;
+  width: 159px;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  display: inline-block;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+}
+.NonLoginBoxText {
+  position: relative;
+  letter-spacing: -0.04em;
+  line-height: 18px;
+}
+.NonLoginwrapper {
+  width: 190px;
+  height: 26px;
+  position: relative;
+  border-radius: 5px;
+  background-color: #fff741;
+  border: 1px solid #333;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 67px;
+  text-align: left;
+  font-size: 12px;
+  color: #333;
+  font-family: SUIT;
+}
+.NonLoginContainer {
+  align-items: center;
+  display: flex;
+  width: 368px;
+  flex-direction: column;
+  position: relative;
+  border-radius: 20px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  height: 143px;
+}
+
+.NonLoginwrapper a {
+  text-decoration: none;
+  color: #333;
 }

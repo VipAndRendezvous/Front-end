@@ -26,6 +26,7 @@ const AuctionPlayModal = ({ closeModal, VipInfo }) => {
   const { userInfo } = useUser();
   const webSocket = useRef(null);
   const [bidMessages, setBidMessages] = useState<BidMessage[]>([]);
+  const [HighestBidAmount, setHighestBidAmount] = useState();
   const [currentHighestBidAmount, setCurrentHighestBidAmount] = useState(() =>
     calculateNewBid(VipInfo.currentHighestBidAmount)
   );
@@ -73,6 +74,7 @@ const AuctionPlayModal = ({ closeModal, VipInfo }) => {
       const data = JSON.parse(event.data);
       if (data && data.bidLogs) {
         setBidMessages(data.bidLogs.slice(0, 10));
+        setHighestBidAmount(data.currentHighestBidAmount);
         setCurrentHighestBidAmount(
           calculateNewBid(data.currentHighestBidAmount)
         );
@@ -119,6 +121,15 @@ const AuctionPlayModal = ({ closeModal, VipInfo }) => {
     closeModal();
   };
   //----------------------------------------------------------------
+  function formatNumber(value) {
+    // 숫자로 변환 시도
+    const number = Number(value);
+    if (isNaN(number)) {
+      return "Invalid number"; // 유효하지 않은 숫자일 경우 오류 메시지 반환
+    }
+    return number.toLocaleString(); // 유효한 숫자면 천 단위로 쉼표가 포함된 형식으로 반환
+  }
+
   return (
     <div className={styles.modalContainer}>
       <div className={styles.close}>
@@ -152,7 +163,7 @@ const AuctionPlayModal = ({ closeModal, VipInfo }) => {
       </svg>
       <div className={styles.nowprice}>
         <div className={styles.text}>현재가</div>
-        <div className={styles.point}>{userInfo.point}</div>
+        <div className={styles.point}>{formatNumber(HighestBidAmount)}</div>
       </div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -165,10 +176,10 @@ const AuctionPlayModal = ({ closeModal, VipInfo }) => {
       </svg>
       <div className={styles.havePoint}>
         <div className={styles.text}>보유포인트</div>
-        <div className={styles.point}>{userInfo.point}</div>
+        <div className={styles.point}>{formatNumber(userInfo.point)}</div>
       </div>
       <button className={styles.BidButton} onClick={bid}>
-        {currentHighestBidAmount} P 입찰하기
+        {formatNumber(currentHighestBidAmount)} P 입찰하기
       </button>
       <div className={styles.policy}>
         <li> 응찰하기 버튼을 누르면 취소가 불가능 합니다.</li>
@@ -183,7 +194,9 @@ const AuctionPlayModal = ({ closeModal, VipInfo }) => {
               <div className={styles.BidLogWarp}>
                 <div className={styles.BidLogPic}></div>
                 <div className={styles.BidLogText}>
-                  {`${msg.bidderNickname} 님이 ${msg.bidAmount}P 로 입찰을
+                  {`${msg.bidderNickname} 님이 ${formatNumber(
+                    msg.bidAmount
+                  )}P 로 입찰을
                   진행했습니다.`}
                 </div>
               </div>

@@ -3,6 +3,7 @@
 import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import HttpAuthInstance from "./api/interceptor/axiosConfig";
 
 type UserContextType = {
   onClickPayment: (chargeAmount: number) => Promise<void>;
@@ -81,7 +82,7 @@ export function ChargePointProvider({
       const token = localStorage.getItem("Authorization");
       if (rsp.success) {
         try {
-          const response = await axios.post(
+          const response = await HttpAuthInstance.post(
             `${process.env.NEXT_PUBLIC_BASE_URL}/api/payment/point`,
             {
               imp_uid: rsp.imp_uid,
@@ -98,6 +99,7 @@ export function ChargePointProvider({
           );
           if (response.status === 200) {
             alert("결제가 성공적으로 처리되었습니다.");
+            window.location.href = "/";
           }
         } catch (error) {
           alert(`서버 에러: ${error.response?.data.message || error.message}`);
@@ -131,23 +133,17 @@ export function ChargePointProvider({
       const token = localStorage.getItem("Authorization");
       if (rsp.success) {
         try {
-          const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/payment/subscribe`,
+          const response = await HttpAuthInstance.post(
+            `/api/payment/subscribe`,
             {
               imp_uid: rsp.imp_uid,
               merchant_uid: rsp.merchant_uid,
               paymentAmount: chargeAmount,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem(
-                  "Authorization"
-                )}`,
-              },
             }
           );
           if (response.status === 200) {
             alert("결제가 성공적으로 처리되었습니다.");
+            window.location.href = "/";
           }
         } catch (error) {
           alert(`서버 에러: ${error.response?.data.message || error.message}`);
@@ -170,20 +166,15 @@ export function ChargePointProvider({
 
     if (token) {
       try {
-        const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/payment/exchange`,
-          {
-            exchangeBank: bank,
-            exchangeAccount: accountNumber,
-            exchangeAccountHolder: accountHolder,
-            exchangePoint: withdrawAmount,
-          },
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const response = await HttpAuthInstance.post(`/api/payment/exchange`, {
+          exchangeBank: bank,
+          exchangeAccount: accountNumber,
+          exchangeAccountHolder: accountHolder,
+          exchangePoint: withdrawAmount,
+        });
         if (response.status === 200) {
           console.log(response);
+          window.location.href = "/";
         }
       } catch (error) {
         console.log(error);

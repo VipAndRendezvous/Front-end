@@ -34,16 +34,36 @@ const Carousel = () => {
     <div className="swiper">
       <div className="swiper-wrapper">
         <div className="swiper-slide">
-          <Image src={Img1} alt="slide1" priority />
+          <Image
+            src={Img1}
+            alt="slide1"
+            priority
+            style={{ objectFit: "cover" }}
+          />
         </div>
         <div className="swiper-slide">
-          <Image src={Img2} alt="slide2" priority />
+          <Image
+            src={Img2}
+            alt="slide2"
+            priority
+            style={{ objectFit: "cover" }}
+          />
         </div>
         <div className="swiper-slide">
-          <Image src={Img3} alt="slide3" priority />
+          <Image
+            src={Img3}
+            alt="slide3"
+            priority
+            style={{ objectFit: "cover" }}
+          />
         </div>
         <div className="swiper-slide">
-          <Image src={Img4} alt="slide4" priority />
+          <Image
+            src={Img4}
+            alt="slide4"
+            priority
+            style={{ objectFit: "cover" }}
+          />
         </div>
       </div>
       <div className="swiper-pagination"></div>

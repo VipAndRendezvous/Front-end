@@ -4,6 +4,7 @@ import { Suspense, useEffect } from "react";
 import axios from "axios";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useUser } from "@/app/utils/UserProvider";
+import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 
 function Oauth() {
   const params = useSearchParams();
@@ -21,8 +22,8 @@ function Oauth() {
 
       try {
         // 카카오 OAuth 서버로부터 액세스 토큰을 요청합니다.
-        const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/oauth2/accessKakao`,
+        const response = await HttpAuthInstance.post(
+          `/api/auth/oauth2/accessKakao`,
           { code },
           { withCredentials: true }
         );

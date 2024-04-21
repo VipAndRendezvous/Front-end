@@ -10,6 +10,7 @@ import Link from "next/link";
 import Chat from "../../chat/_component/Chat";
 import axios from "axios";
 import { useUser } from "@/app/utils/UserProvider";
+import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 //---------------------------------------------------------------- 알림 열고 닫기
 const FaqItem = ({
   question,
@@ -36,7 +37,7 @@ const FaqItem = ({
 };
 //----------------------------------------------------------------
 
-const TicketOwnerController = ({region, keyId, AccessKey}) => {
+const TicketOwnerController = ({ region, keyId, AccessKey }) => {
   const [isOpenMeetModal, setIsOpenMeetModal] = useState<boolean>(false); // Meet 모달 상태
   const [isOpenReviewModal, setIsOpenReviewModal] = useState<boolean>(false); // Report 모달 상태
   const [isOpenReportModal, setIsOpenReportModal] = useState<boolean>(false); // Report 모달 상태
@@ -160,9 +161,8 @@ const TicketOwnerController = ({region, keyId, AccessKey}) => {
     }
     try {
       const token = localStorage.getItem("Authorization");
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/checkTime/${globalTicketUUID}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+      const response = await HttpAuthInstance.get(
+        `/api/ticket/checkTime/${globalTicketUUID}`
       );
       if (response.status === 200) {
         startMeeting();
@@ -190,11 +190,9 @@ const TicketOwnerController = ({region, keyId, AccessKey}) => {
     try {
       const token = localStorage.getItem("Authorization");
       const currentIsoTime = new Date().toISOString();
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/checkTime`,
-        { ticketUUID: globalTicketUUID },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const response = await HttpAuthInstance.post(`/api/ticket/checkTime`, {
+        ticketUUID: globalTicketUUID,
+      });
       if (response.status === 200) {
         startMeeting();
         console.log(response);
@@ -285,7 +283,7 @@ const TicketOwnerController = ({region, keyId, AccessKey}) => {
   };
   //----------------------------------------------------------------
   if (showChat) {
-    return <Chat region={region} keyId={keyId} AccessKey={AccessKey}/>;
+    return <Chat region={region} keyId={keyId} AccessKey={AccessKey} />;
   }
   //----------------------------------------------------------------
   return (
@@ -363,8 +361,11 @@ const TicketOwnerController = ({region, keyId, AccessKey}) => {
           overlayClassName={styles["modal-overlay"]}
         >
           <div className={styles["modal-inner-content"]}>
-            <ReportModal onReportClose={closeReportModal}
-                         region={region} keyId={keyId} AccessKey={AccessKey}
+            <ReportModal
+              onReportClose={closeReportModal}
+              region={region}
+              keyId={keyId}
+              AccessKey={AccessKey}
             />
           </div>
         </Modal>

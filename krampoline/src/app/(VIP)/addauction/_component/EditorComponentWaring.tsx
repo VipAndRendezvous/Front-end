@@ -9,15 +9,15 @@ import AWS from "aws-sdk";
 
 // // SSR을 비활성화하고 클라이언트 사이드에서만 로드하도록 설정
 // const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-const EditorComponentWaring = ({region, keyId, AccessKey}) => {
+const EditorComponentWaring = () => {
   const ReactQuill =
     typeof window === "object" ? require("react-quill") : () => false;
   const quillRef = useRef(null);
   const [contents, setContents] = useState("");
   const { WarningInfo, setWarningInfo } = useAddAuction();
-  const REGION = region;
-  const ACCESS_KEY = keyId;
-  const SECRET_ACCESS_KEY = AccessKey;
+  const REGION = "1";
+  const ACCESS_KEY = "keyId";
+  const SECRET_ACCESS_KEY = "AccessKey";
 
   const imageHandler = async () => {
     const input = document.createElement("input");
@@ -79,7 +79,7 @@ const EditorComponentWaring = ({region, keyId, AccessKey}) => {
   };
 
   return (
-    <div style={{ height: "300px" }}>
+    <div style={{ height: "222px" }}>
       <ReactQuill
         style={{ height: "100%" }}
         ref={quillRef}

@@ -1,0 +1,93 @@
+.MenuContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 568px;
+  margin-top: 20px;
+}
+
+.Button,
+.SelectedButton {
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  border-bottom: 1px solid #949597;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0px;
+  text-align: left;
+  font-size: 16px;
+  color: #949597;
+  font-family: "SUIT", sans-serif;
+}
+
+.Button a,
+.SelectedButton a {
+  text-decoration: none;
+  color: inherit; /* Use the color of the parent */
+}
+
+.SelectedButton {
+  background-color: #fff741; /* Highlight background for selected button */
+  border-bottom: 2px solid #333; /* Darker bottom border for selected button */
+  color: #333; /* Darker text color for selected button */
+}
+.auctionInfoRef {
+  margin-top: 40px;
+}
+
+.textStart {
+  width: auto;
+  position: relative;
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  line-height: 30px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+.textContainer {
+  width: 508px;
+  position: absolute;
+  border-radius: 10px;
+  background-color: #fafafa;
+  margin-top: 25px;
+  margin-bottom: 100px;
+  padding: 24px 30px 24px 30px;
+}
+
+.Title {
+  width: auto;
+  position: relative;
+  font-size: 28px;
+  letter-spacing: -0.04em;
+  line-height: 42px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.cancelAuction {
+  width: auto;
+  position: relative;
+  font-size: 10px;
+  letter-spacing: -0.04em;
+  line-height: 15px;
+  font-family: SUIT;
+  color: #ff3d00;
+  text-align: right;
+  display: inline-block;
+  margin-top: 21px;
+  cursor: pointer;
+  margin-left: 20px;
+}

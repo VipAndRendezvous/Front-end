@@ -1,9 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import styles from "./navbar.module.css";
 import Link from "next/link";
-import Logo from "../../../../public/Logo.png";
 import Modal from "react-modal";
 import { useEffect, useState } from "react";
 import VipApplyModal from "../VipApply/VipApplyModal";
@@ -11,8 +9,25 @@ import { useUser } from "@/app/utils/UserProvider";
 
 const Navbar = () => {
   const { isLoggedIn, logout, userInfo } = useUser();
-
   const [isOpen, setIsOpen] = useState<boolean>(false); //추가
+
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    // 스크롤 이벤트 리스너 추가
+    window.addEventListener("scroll", handleScroll);
+
+    // 컴포넌트가 언마운트될 때 리스너 제거
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const isScrolled = scrollY > 80;
 
   // 모달을 닫는 함수
   const closeModal = () => {
@@ -30,52 +45,70 @@ const Navbar = () => {
   };
 
   return (
-    <div className={styles.NavContainer}>
-      <Link href="/">
-        <Image src={Logo} alt="Logo" height={40} priority />
-      </Link>
-      <div className={styles.NavMenu}>
-        {isLoggedIn && userInfo.userType == "ROLE_BASIC" && (
-          <div onClick={toggle}>VIP Apply</div>
-        )}
-        <div>
-          <Link href="/auctions/original">Auction </Link>
+    <div
+      className={`${styles.property1w} ${isScrolled ? "scrolled" : ""}`}
+      style={{
+        backgroundColor: isScrolled ? "rgba(51, 51, 51, 0.8)" : "#fff",
+        color: isScrolled ? "rgba(255, 255, 255, 0.8)" : "#333",
+      }}
+    >
+      {" "}
+      <div className={styles.navContainer}>
+        <div className={styles.vipApplyParent}>
+          {isLoggedIn && userInfo.userType == "ROLE_BASIC" && (
+            <b className={styles.vipApply} onClick={toggle}>
+              VIP Apply
+            </b>
+          )}
+          <b className={styles.vipApply}>
+            <Link href="/auctions/original">Auction </Link>
+          </b>
+          <b className={styles.membership}>
+            <Link href="/membership">Membership</Link>
+          </b>
+          <b className={styles.membership}>
+            <Link href="/chargepoint">Point</Link>
+          </b>
+          <b className={styles.membership}>
+            <Link href="/viplist">VIP List</Link>
+          </b>
         </div>
-
-        <div>
-          <Link href="/viplist">Vip List </Link>
-        </div>
-      </div>
-      <div className={styles.NavMenu2}>
-        <div>
-          <Link href="/usermypage">My Page </Link>
-        </div>
-
-        <div>
-          <Link href="/faq">FAQ </Link>
-        </div>
-        <div>
+        <div className={styles.myPageParent}>
+          <b className={styles.membership}>
+            <Link href="/usermypage">My page</Link>
+          </b>
+          <b className={styles.membership}>
+            <Link href="/faq">FAQ</Link>
+          </b>
           {isLoggedIn ? (
-            <div onClick={handleLogout} style={{ cursor: "pointer" }}>
+            <b className={styles.membership} onClick={handleLogout}>
               로그아웃
-            </div>
+            </b>
           ) : (
-            // 로그인 상태가 아닐 때 로그인 버튼 표시
-            <Link href="/login">로그인</Link>
+            <b className={styles.membership}>
+              <Link href="/login">로그인</Link>
+            </b>
           )}
         </div>
+        <Link href="/">
+          <img
+            className={styles.property1wChild}
+            alt="logo"
+            src={isScrolled ? "/yellowLOGO.png" : "/blackLOGO.png"}
+          />
+        </Link>
+        <Modal
+          className={styles.modalContent}
+          isOpen={isOpen}
+          onRequestClose={closeModal}
+          ariaHideApp={false}
+          overlayClassName={styles.modalOverlay}
+        >
+          <div className={styles.modalInnerContent}>
+            <VipApplyModal closeModal={closeModal} />
+          </div>
+        </Modal>
       </div>
-      <Modal
-        className={styles.modalContent}
-        isOpen={isOpen}
-        onRequestClose={closeModal}
-        ariaHideApp={false}
-        overlayClassName={styles.modalOverlay}
-      >
-        <div className={styles.modalInnerContent}>
-          <VipApplyModal closeModal={closeModal} />
-        </div>
-      </Modal>
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import MyPageMenu from "@/app/_component/Menu/MyPageMenu";
 import styles from "./dinnerTicket.module.css";
-import TicketBox from "@/app/_component/TicketBox";
 import SearchBar from "./SearchBar";
 import UserMyPageRecommends from "./UserMyPageRecommends";
 import {
@@ -16,6 +15,7 @@ import SortButton from "./SortButton";
 function DinnerTicket({ dehydratedState }: { dehydratedState: any }) {
   return (
     <div>
+      <div className={styles.title}>마이페이지</div>
       <div>
         <MyPageMenu />
       </div>
@@ -23,8 +23,8 @@ function DinnerTicket({ dehydratedState }: { dehydratedState: any }) {
         <SearchProvider>
           <div className={styles.dinnerTicketContainer}>
             <div className={styles.dinnerTicketFilter}>
-              <SearchBar />
               <SortButton />
+              <SearchBar />
             </div>
             <UserMyPageRecommends />
           </div>

@@ -1,54 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
+@import url("https://fonts.googleapis.com/css2?family=SUIT:wght@400&display=swap");
 body {
-  color: rgb(var(--foreground-rgb));
-}
-
-@layer utilities {
-  .btn-basic {
-    @apply bg-blue-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded;
-  }
-
-  .btn-basic:disabled {
-    @apply bg-gray-400 text-gray-200 cursor-not-allowed;
-  }
-}
-/* 
-button class="btn-basic" {
   margin: 0;
-  padding: 0.5rem 1rem;
+  line-height: normal;
+  min-width: 1600px;
+}
 
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  text-align: center;
-  text-decoration: none;
-
-  display: inline-block;
-  width: auto;
-  cursor: pointer;
-  border: none;
-  border-radius: 4px;
-} */
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+html {
 }

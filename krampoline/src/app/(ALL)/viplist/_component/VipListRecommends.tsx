@@ -62,7 +62,7 @@ export default function VipListRecommends() {
         ))
       )}
       <div ref={ref} style={{ height: 1, margin: "1rem 0" }}>
-        {showEndMessage && <div>마지막 페이지에 도달했습니다.</div>}
+        {/* {showEndMessage && <div>마지막 페이지에 도달했습니다.</div>} */}
       </div>
     </Fragment>
   );

@@ -32,7 +32,7 @@ const VipPr = () => {
         url: vipIntro.vipEvidenceUrl || "",
       });
     }
-  }, []);
+  }, [vipIntro]);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -71,37 +71,53 @@ const VipPr = () => {
       <div className={styles.FormContainer}>
         <form>
           <div className={styles.VipPrContainer}>
-            소개
+            <div className={styles.VipPrintro}>
+              <div className={styles.VipText}>직업</div>
+
+              <textarea
+                className={styles.VipPrText}
+                name="job"
+                value={profile.job}
+                placeholder="직업"
+                onChange={handleChange}
+                disabled={!isEditing} // 편집 모드가 아닐 때 비활성화
+                rows={1}
+                cols={86}
+                maxl-ength="5"
+              />
+            </div>
+          </div>
+          <div className={styles.VipCarrer}>
+            <div className={styles.VipText}>경력</div>
             <textarea
-              className={styles.VipPrText}
-              name="introduction"
-              value={profile.introduction}
-              placeholder="소개"
-              onChange={handleChange}
-              disabled={!isEditing} // 편집 모드가 아닐 때 비활성화
-            />
-            경력
-            <textarea
-              className={styles.VipPrText}
+              className={styles.VipCarrerInpot}
               name="career"
               value={profile.career}
               placeholder="경력"
               onChange={handleChange}
               disabled={!isEditing} // 편집 모드가 아닐 때 비활성화
+              rows={1}
+              cols={86}
             />
-            직업
-            <input
-              className={styles.VipPrInput}
-              name="job"
-              type="text"
-              value={profile.job}
-              placeholder="직업"
+          </div>
+          <div className={styles.VipStory}>
+            <div className={styles.VipText}>소개글</div>
+            <textarea
+              className={styles.VipStoryInput}
+              name="introduction"
+              value={profile.introduction}
+              placeholder="소개글"
               onChange={handleChange}
               disabled={!isEditing} // 편집 모드가 아닐 때 비활성화
+              rows={10}
+              cols={93}
             />
-            포트폴리오
+          </div>
+          <div className={styles.VipProfile}>
+            <div className={styles.VipText}>포트폴리오</div>
+
             <input
-              className={styles.VipPrInput}
+              className={styles.VipProfileInput}
               name="url"
               type="text"
               value={profile.url}
@@ -113,11 +129,11 @@ const VipPr = () => {
         </form>
         <div className={styles.PrButtonContainer}>
           {isEditing ? (
-            <button className="btn-basic" onClick={handleSave}>
+            <button className={styles.save} onClick={handleSave}>
               저장
             </button>
           ) : (
-            <button className="btn-basic" onClick={handleEdit}>
+            <button className={styles.edit} onClick={handleEdit}>
               수정
             </button>
           )}

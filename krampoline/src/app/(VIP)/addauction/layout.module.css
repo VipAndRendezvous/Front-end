@@ -4,12 +4,13 @@
   left: 0;
   right: 0;
   margin: 0 auto; /* 좌우 중앙 정렬 */
+  z-index: 3;
 }
 .AddAuction-container {
   display: flex;
   justify-content: center;
   background-color: #fff;
-  padding-top: 60px;
+  padding-top: 140px;
   top: 0;
   left: 0;
   right: 0;
@@ -20,4 +21,9 @@
   width: 1280px;
   height: 100dvh;
   align-items: center;
+}
+
+.contet3 a {
+  text-decoration: none;
+  color: inherit;
 }

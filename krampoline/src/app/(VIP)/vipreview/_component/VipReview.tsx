@@ -13,14 +13,11 @@ import styles from "./vipReview.module.css";
 
 function VipReview() {
   return (
-    <div>
+    <>
       <HydrationBoundary>
         <SearchProvider>
           <div>
             <VipPageMenu />
-          </div>
-          <div className={styles.ReviewMenu}>
-            <div className={styles["Review-btn"]}></div>
           </div>
 
           <div className={styles.ReviewMenu}>
@@ -31,7 +28,7 @@ function VipReview() {
           <VipReviewRecommends />
         </SearchProvider>
       </HydrationBoundary>
-    </div>
+    </>
   );
 }
 

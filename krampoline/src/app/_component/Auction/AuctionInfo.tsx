@@ -6,6 +6,7 @@ import AuctionInfo_box from "./AuctionInfo_box";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
+import { useUser } from "@/app/utils/UserProvider";
 
 type UserInfo = {
   auctionCreatedTime: string;
@@ -20,7 +21,7 @@ type UserInfo = {
   vipUUID: string;
 };
 
-const AuctionInfo = ({ VipInfo, ObjectauctionUUID }) => {
+const AuctionInfo = ({ VipInfo }) => {
   //----------------------------------------------------------------날짜 형식
   const today = new Date();
   const year = today.getFullYear();
@@ -30,13 +31,13 @@ const AuctionInfo = ({ VipInfo, ObjectauctionUUID }) => {
   //----------------------------------------------------------------시간 형식
   const twoHoursInMs = 2 * 60 * 60 * 1000;
   const [timeLeft, setTimeLeft] = useState(twoHoursInMs);
-
+  const { userInfo } = useUser();
+  userInfo.userType;
   useEffect(() => {
     // 타이머가 마운트되면 시작합니다.
     const timerId = setInterval(() => {
       setTimeLeft((prevTime: number) => {
         const newTime: number = prevTime - 1000;
-        // 시간이 다 되면 인터벌을 정지합니다.
         if (newTime <= 0) {
           clearInterval(timerId);
           return 0;
@@ -45,56 +46,14 @@ const AuctionInfo = ({ VipInfo, ObjectauctionUUID }) => {
       });
     }, 1000);
 
-    // 컴포넌트가 언마운트될 때 인터벌을 정리합니다.
     return () => clearInterval(timerId);
   }, []);
-
-  const cancelAuction = async (event) => {
-    try {
-      const token = localStorage.getItem("Authorization");
-      const response = await axios.patch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/vip/auction/cancel/${ObjectauctionUUID}`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      if (response.status === 200) {
-        console.log(response);
-      } else {
-        console.error("Failed to submit report");
-      }
-    } catch (error) {
-      console.error("Error submitting report:", error);
-    }
-  };
 
   //----------------------------------------------------------------
 
   return (
-    <div>
-      <div className={styles.AuctionInfoContainer}>
-        <div className={styles["AuctionInfo-Info"]}>
-          <div className={styles["AuctionInfo-Pic"]}>
-            <Link href={`/vipinfo/${VipInfo.vipUUID}`}>
-              <Image
-                src={VipInfo.vipProfileImgUrl || ProfilePic} // Use a default picture if url is not available
-                alt="AuctionInfo_Img"
-                width={600}
-                height={600}
-              />
-            </Link>
-          </div>
-          <button
-            onClick={(e) => {
-              cancelAuction(e);
-            }}
-          >
-            경매 취소하기
-          </button>
-          <article className={styles.AuctionInfoBoxFixed}>
-            <AuctionInfo_box VipInfo={VipInfo} />
-          </article>
-        </div>
-      </div>
+    <div className={styles.con}>
+      <AuctionInfo_box VipInfo={VipInfo} />
     </div>
   );
 };
