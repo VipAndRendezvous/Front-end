@@ -1,0 +1,23 @@
+.NavMenuContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto; /* 좌우 중앙 정렬 */
+}
+.faq-container {
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  padding-top: 60px;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto; /* 좌우 중앙 정렬 */
+}
+
+.main {
+  width: 980px;
+  height: 100dvh;
+  align-items: center;
+}

@@ -1,0 +1,13 @@
+.navContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333333;
+  width: 100%;
+  margin: 0 auto;
+  color: white;
+  position: sticky;
+  top: 0; /* 화면 상단에 붙습니다 */
+  z-index: 998; /* 다른 요소들보다 앞에 오도록 z-index 설정 */
+}

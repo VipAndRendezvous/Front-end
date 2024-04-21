@@ -1,0 +1,77 @@
+.tableTitle {
+  font-size: 20px;
+}
+
+.searchBar input[type="text"] {
+  position: absolute;
+  right: 40px;
+  padding: 10px 20px;
+  background-color: #ececec;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  width: 200px;
+  height: 20px;
+}
+
+.adminTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 60px;
+  table-layout: fixed;
+}
+
+.adminTable thead {
+  background-color: #ececec;
+  font-weight: bold;
+}
+
+.adminTable a {
+  cursor: pointer;
+}
+
+.adminTable th,
+.adminTable td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+  height: 30px;
+  /* text-overflow: ellipsis; */
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.adminTable th:nth-child(1),
+.adminTable td:nth-child(1) {
+  width: 5%;
+}
+
+.adminTable th:nth-child(2) {
+  width: 25%;
+}
+
+.adminTable th:nth-child(3) {
+  width: 50%;
+}
+
+.adminTable th:nth-child(4),
+.adminTable th:nth-child(5),
+.adminTable td:nth-child(4),
+.adminTable td:nth-child(5) {
+  width: 10%;
+}
+
+.approval-btn {
+  padding: 5px 10px;
+  border: 1px solid;
+  background-color: white;
+  cursor: pointer;
+}
+
+.refusal-btn {
+  padding: 5px 10px;
+  border: 1px solid red;
+  color: red;
+  background-color: white;
+  cursor: pointer;
+}

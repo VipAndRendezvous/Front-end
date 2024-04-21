@@ -1,0 +1,16 @@
+.adminPage {
+  background-color: #ededed;
+}
+
+.adminContainer {
+  display: flex;
+}
+
+.tableContainer {
+  position: relative;
+  width: 100%;
+  margin: 40px 40px 80px 40px;
+  padding: 30px 40px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
