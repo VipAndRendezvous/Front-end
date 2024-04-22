@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import React, { useMemo, useRef, useState } from "react";
 import { useAddAuction } from "@/app/utils/AddAuctionsProvider";
 import AWS from "aws-sdk";
+import axios from "axios";
 
 const EditorComponent = () => {
   const ReactQuill =
@@ -13,9 +14,6 @@ const EditorComponent = () => {
   const quillRef = useRef(null);
   const [contents, setContents] = useState("");
   const { setAuctionInfo } = useAddAuction();
-  const REGION = "1";
-  const ACCESS_KEY = "1";
-  const SECRET_ACCESS_KEY = "{}";
 
   const imageHandler = async () => {
     const input = document.createElement("input");
@@ -27,27 +25,23 @@ const EditorComponent = () => {
       if (!file) return;
 
       try {
-        const name = Date.now();
-        AWS.config.update({
-          region: REGION,
-          accessKeyId: ACCESS_KEY,
-          secretAccessKey: SECRET_ACCESS_KEY,
-        });
-
-        const upload = new AWS.S3.ManagedUpload({
-          params: {
-            ACL: "public-read",
-            Bucket: "varwonimgbucket",
-            Key: `upload/${name}`,
-            Body: file,
-          },
-        });
-
-        const result = await upload.promise();
-        const imageUrl = result.Location;
-        const editor = quillRef.current.getEditor();
-        const range = editor.getSelection();
-        if (range) {
+        const token = localStorage.getItem("Authorization");
+        const formData = new FormData();
+        formData.append("boardImg", file);
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/s3/upload`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.status === 200) {
+          const imageUrl = response.data;
+          const editor = quillRef.current.getEditor();
+          const range = editor.getSelection();
           editor.insertEmbed(range.index, "image", imageUrl);
         }
       } catch (error) {

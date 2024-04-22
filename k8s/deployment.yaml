@@ -13,5 +13,18 @@ spec:
     spec:
       containers:
         - name: frontend
-          # 여러분의 image 주소를 입력해주세요.
           image: krmp-d2hub-idock.9rum.cc/dev-test/repo_b332d9de0619
+          envFrom:
+            - configMapRef:
+                name: frontend-config
+          env:
+            - name: AWS_S3_BUCKET_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets
+                  key: AWS_S3_BUCKET_ACCESS_KEY_ID
+            - name: AWS_S3_BUCKET_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets
+                  key: AWS_S3_BUCKET_SECRET_ACCESS_KEY

@@ -81,7 +81,7 @@ const Message = ({ message, isCurrentUser }) => {
   );
 };
 
-const Chat = ({region, keyId, AccessKey}) => {
+const Chat = () => {
   const chatBodyRef = useRef(null);
   const [isOpenReportModal, setIsOpenReportModal] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -129,7 +129,7 @@ const Chat = ({region, keyId, AccessKey}) => {
 
   // 다른 컴포넌트로 전환
   if (showChat) {
-    return <TicketOwnerController region={region} keyId={keyId} AccessKey={AccessKey}/>;
+    return <TicketOwnerController />;
   }
 
   return (

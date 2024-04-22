@@ -1,0 +1,50 @@
+.sidebar {
+  width: 300px;
+  background-color: #434343;
+  min-height: 100vh;
+  color: white;
+}
+
+.navHeader {
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: default;
+}
+
+.sidebarNav {
+  padding-top: 0px;
+}
+
+.sidebarNav a {
+  color: white;
+  text-decoration: none;
+}
+
+.sidebarNav ul {
+  padding-left: 30px;
+}
+
+.sidebarNav li {
+  padding: 10px 0px;
+  list-style-type: none;
+}
+
+.sidebarNav li:not(.navHeader) {
+  padding-left: 10px;
+}
+
+.sidebarNav a:not(.navHeader):hover {
+  color: #15cd12;
+}
+
+.sidebarNav ul li.navHeader:not(:first-child):before {
+  content: "";
+  display: block;
+  width: calc(100% + 30px);
+  height: 2px;
+  background-color: #515151;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  position: relative;
+  left: -30px;
+}

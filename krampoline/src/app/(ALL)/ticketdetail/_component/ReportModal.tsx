@@ -5,22 +5,12 @@ import axios from "axios";
 import { useUser } from "@/app/utils/UserProvider";
 import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 
-const ReportModal = ({ onReportClose, region, keyId, AccessKey }) => {
+const ReportModal = ({ onReportClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileUrl, setFileUrl] = useState(""); // S3에서 파일 URL을 저장하기 위한 상태
   const { globalTicketUUID } = useUser();
   const [ticketInfo, setTicketInfo] = useState({
     ticketReportContent: "",
-  });
-
-  const REGION = region;
-  const ACCESS_KEY = keyId;
-  const SECRET_ACCESS_KEY = AccessKey;
-
-  AWS.config.update({
-    region: REGION,
-    accessKeyId: ACCESS_KEY,
-    secretAccessKey: SECRET_ACCESS_KEY,
   });
 
   const handleFileChange = async (event) => {
@@ -30,18 +20,22 @@ const ReportModal = ({ onReportClose, region, keyId, AccessKey }) => {
     if (file) {
       try {
         // 파일 업로드 로직
-        const upload = new AWS.S3.ManagedUpload({
-          params: {
-            ACL: "public-read",
-            Bucket: "varwonimgbucket",
-            Key: `upload/${Date.now()}-${file.name}`, // 파일 이름 설정을 보다 유니크하게 조정
-            Body: file,
-          },
-        });
-
-        const result = await upload.promise();
-
-        setFileUrl(result.Location); // 업로드된 파일의 URL을 상태에 저장
+        const token = localStorage.getItem("Authorization");
+        const formData = new FormData();
+        formData.append("boardImg", file);
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/s3/upload`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.status === 200) {
+          setFileUrl(response.data); // 업로드된 파일의 URL을 상태에 저장
+        }
       } catch (error) {
         console.error("File upload error:", error);
         onReportClose(); // 오류 발생 시에도 모달 닫기

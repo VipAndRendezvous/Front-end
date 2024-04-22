@@ -6,6 +6,8 @@ import dynamic from "next/dynamic";
 import React, { useMemo, useRef, useState } from "react";
 import { useAddAuction } from "@/app/utils/AddAuctionsProvider";
 import AWS from "aws-sdk";
+import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
+import axios from "axios";
 
 // // SSR을 비활성화하고 클라이언트 사이드에서만 로드하도록 설정
 // const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -15,9 +17,6 @@ const EditorComponentWaring = () => {
   const quillRef = useRef(null);
   const [contents, setContents] = useState("");
   const { WarningInfo, setWarningInfo } = useAddAuction();
-  const REGION = "1";
-  const ACCESS_KEY = "keyId";
-  const SECRET_ACCESS_KEY = "AccessKey";
 
   const imageHandler = async () => {
     const input = document.createElement("input");
@@ -28,28 +27,25 @@ const EditorComponentWaring = () => {
       //이미지를 담아 전송할 file을 만든다
       const file = input.files?.[0];
       try {
-        //업로드할 파일의 이름으로 Date 사용
-        const name = Date.now();
-        //생성한 s3 관련 설정들
-        AWS.config.update({
-          region: REGION,
-          accessKeyId: ACCESS_KEY,
-          secretAccessKey: SECRET_ACCESS_KEY,
-        });
-        //앞서 생성한 file을 담아 s3에 업로드하는 객체를 만든다
-        const upload = new AWS.S3.ManagedUpload({
-          params: {
-            ACL: "public-read",
-            Bucket: "varwonimgbucket", //버킷 이름
-            Key: `upload/${name}`,
-            Body: file,
-          },
-        });
-        const result = await upload.promise();
-        const imageUrl = result.Location; // Direct URL from S3
-        const editor = quillRef.current.getEditor();
-        const range = editor.getSelection();
-        editor.insertEmbed(range.index, "image", imageUrl);
+        const token = localStorage.getItem("Authorization");
+        const formData = new FormData();
+        formData.append("boardImg", file);
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/s3/upload`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (response.status === 200) {
+          const imageUrl = response.data;
+          const editor = quillRef.current.getEditor();
+          const range = editor.getSelection();
+          editor.insertEmbed(range.index, "image", imageUrl);
+        }
       } catch (error) {
         console.log(error);
       }
