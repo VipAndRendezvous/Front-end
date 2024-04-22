@@ -4,6 +4,7 @@ export interface VipBox {
   vipNickname: string;
   vipRate: number;
   follow: boolean;
+  isFollow: string;
 }
 
 export interface ApiResponse {

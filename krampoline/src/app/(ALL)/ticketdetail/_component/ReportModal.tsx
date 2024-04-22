@@ -3,8 +3,9 @@ import AWS from "aws-sdk";
 import styles from "./reportModal.module.css";
 import axios from "axios";
 import { useUser } from "@/app/utils/UserProvider";
+import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 
-const ReportModal = ({onReportClose}) => {
+const ReportModal = ({ onReportClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileUrl, setFileUrl] = useState(""); // S3에서 파일 URL을 저장하기 위한 상태
   const { globalTicketUUID } = useUser();
@@ -21,14 +22,16 @@ const ReportModal = ({onReportClose}) => {
         // 파일 업로드 로직
         const token = localStorage.getItem("Authorization");
         const formData = new FormData();
-        formData.append("boardImg", file)
+        formData.append("boardImg", file);
         const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/s3/upload`,
-            formData,
-            {headers: {
-                'Content-Type': 'multipart/form-data',
-                "Authorization": `Bearer ${token}`
-              }}
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/s3/upload`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         if (response.status === 200) {
           setFileUrl(response.data); // 업로드된 파일의 URL을 상태에 저장
@@ -57,15 +60,11 @@ const ReportModal = ({onReportClose}) => {
       const token = localStorage.getItem("Authorization");
 
       // API 요청 부분
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/report`,
-        {
-          ticketUUID: globalTicketUUID,
-          ticketReportContent: ticketInfo.ticketReportContent,
-          ticketReportEvidenceUrl: fileUrl,
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const response = await HttpAuthInstance.post(`/api/ticket/report`, {
+        ticketUUID: globalTicketUUID,
+        ticketReportContent: ticketInfo.ticketReportContent,
+        ticketReportEvidenceUrl: fileUrl,
+      });
       if (response.status === 200) {
         onReportClose(); // 모달 닫기 함수 호출
       }

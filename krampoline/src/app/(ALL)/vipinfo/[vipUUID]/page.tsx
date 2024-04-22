@@ -7,6 +7,7 @@ import Vip_Introduce from "../_component/Vip_Introduce";
 import { usePathname } from "next/navigation";
 import axios from "axios";
 import { useVip } from "@/app/utils/VipProvider";
+import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 
 const Page = () => {
   const pathname = usePathname();
@@ -15,7 +16,6 @@ const Page = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [reviews, setReviews] = useState(null);
   const [auctions, setAuctions] = useState(null);
-
   const { vipIntro } = useVip();
 
   let vipUUID = currPath;
@@ -29,6 +29,7 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
+    if (!vipUUID) return;
     const fetchData = async () => {
       setIsLoading(true);
 
@@ -36,18 +37,16 @@ const Page = () => {
         // 리뷰 데이터를 가져옵니다.
         const token = localStorage.getItem("Authorization");
 
-        const Allresponse = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/all/vipDetail/${vipUUID}`,
-          { headers: { Authorization: `Bearer ${token}` } }
+        const Allresponse = await HttpAuthInstance.get(
+          `/api/all/vipDetail/${vipUUID}`
         );
         if (Allresponse.status === 200) {
           setVipInfo(Allresponse.data);
           console.log(Allresponse);
         }
 
-        const reviewsResponse = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/all/review/${vipUUID}?page=1&size=10`,
-          { headers: { Authorization: `Bearer ${token}` } }
+        const reviewsResponse = await HttpAuthInstance.get(
+          `/api/all/review/${vipUUID}?page=1&size=10`
         );
         if (reviewsResponse.status === 200) {
           setReviews(reviewsResponse.data);
@@ -55,9 +54,8 @@ const Page = () => {
         }
 
         // 경매 데이터를 가져옵니다.
-        const auctionsResponse = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/auction/${vipUUID}/progressList?page=1&size=10`,
-          { headers: { Authorization: `Bearer ${token}` } }
+        const auctionsResponse = await HttpAuthInstance.get(
+          `/api/all/auction/${vipUUID}/progressList?page=1&size=10`
         );
         if (auctionsResponse.status === 200) {
           setAuctions(auctionsResponse.data);
@@ -71,7 +69,7 @@ const Page = () => {
     };
 
     fetchData();
-  }, []);
+  }, [vipUUID]);
 
   return (
     <div>

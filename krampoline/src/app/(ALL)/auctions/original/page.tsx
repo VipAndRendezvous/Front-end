@@ -34,24 +34,30 @@ export default function Page() {
   const dehydratedState = dehydrate(queryClient);
 
   return (
-    <div>
-      <div className={styles.CarouselContainer}>
-        <Carousel />
-      </div>
-      <div className={styles.AuctionListInfo}>
-        <h1>일반 경매</h1>
-        <div>
-          {userInfo && userInfo.userType === "ROLE_VIP" && (
-            <button className="btn-basic">
-              <Link href="/addauction">경매 올리기</Link>
-            </button>
-          )}
-        </div>
-      </div>
+    <div className={styles.AuctionMainPage}>
       <HydrationBoundary state={dehydratedState}>
         <SearchProvider>
+          <div className={styles.SearchWrapper}>
+            <div className={styles.SearchContainer}>
+              <SearchBar />
+            </div>
+          </div>
+
+          <div className={styles.AuctionListInfo}>
+            <h1>진행중인 경매</h1>
+
+            {userInfo && userInfo.userType === "ROLE_VIP" && (
+              <Link href="/addauction">
+                <div className={styles.addAcution}>경매 올리기</div>
+              </Link>
+            )}
+          </div>
+          <div className={styles.DonationContainer}>
+            <div className={styles.DonationSubText}>현재 기부 금액</div>
+            <div className={styles.DonationText}>4,675,965,000 원</div>
+          </div>
+
           <div className={styles.ListUtil}>
-            <SearchBar />
             <div className={styles.ListUtilButton}>
               <SortButton />
             </div>

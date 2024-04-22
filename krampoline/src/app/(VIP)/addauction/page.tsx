@@ -6,7 +6,7 @@ import { AddAuctionsProvider } from "@/app/utils/AddAuctionsProvider";
 function Page() {
   return (
     <div>
-      <AddAuctionWarning />
+      {/* <AddAuctionWarning /> */}
       <UserProvider>
         <AddAuctionsProvider>
           <AddAuctionForm />
@@ -14,6 +14,6 @@ function Page() {
       </UserProvider>
     </div>
   );
-};
+}
 
 export default Page;

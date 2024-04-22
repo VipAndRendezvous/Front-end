@@ -10,6 +10,7 @@ import Link from "next/link";
 import Chat from "../../chat/_component/Chat";
 import axios from "axios";
 import { useUser } from "@/app/utils/UserProvider";
+import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 //---------------------------------------------------------------- 알림 열고 닫기
 const FaqItem = ({
   question,
@@ -160,9 +161,8 @@ const TicketOwnerController = () => {
     }
     try {
       const token = localStorage.getItem("Authorization");
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/checkTime/${globalTicketUUID}`,
-        { headers: { Authorization: `Bearer ${token}` } }
+      const response = await HttpAuthInstance.get(
+        `/api/ticket/checkTime/${globalTicketUUID}`
       );
       if (response.status === 200) {
         startMeeting();
@@ -190,11 +190,9 @@ const TicketOwnerController = () => {
     try {
       const token = localStorage.getItem("Authorization");
       const currentIsoTime = new Date().toISOString();
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/checkTime`,
-        { ticketUUID: globalTicketUUID },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const response = await HttpAuthInstance.post(`/api/ticket/checkTime`, {
+        ticketUUID: globalTicketUUID,
+      });
       if (response.status === 200) {
         startMeeting();
         console.log(response);
@@ -363,8 +361,7 @@ const TicketOwnerController = () => {
           overlayClassName={styles["modal-overlay"]}
         >
           <div className={styles["modal-inner-content"]}>
-            <ReportModal onReportClose={closeReportModal}
-            />
+            <ReportModal onReportClose={closeReportModal} />
           </div>
         </Modal>
         <Modal

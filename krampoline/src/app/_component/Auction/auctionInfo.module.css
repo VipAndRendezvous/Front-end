@@ -1,7 +1,8 @@
 .AuctionInfoContainer {
-  margin-top: 10px;
+  margin-top: 122px;
   display: flex;
   width: 610px;
+  margin-left: 632px;
 }
 
 .AuctionInfo-Pic {
@@ -11,14 +12,19 @@
   border: 1px solid black;
 }
 
-.AuctionInfo-Info {
+/* .AuctionInfo-Info {
   height: 275px;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 80px;
-}
+} */
 
-.AuctionInfoBoxFixed {
+.cancelAuction {
+  display: flex;
+  height: auto;
+}
+.con {
+  margin-left: 600px;
 }

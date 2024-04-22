@@ -1,0 +1,64 @@
+.container {
+}
+
+.frame-screen {
+  align-items: flex-start;
+  display: inline-flex;
+  flex-direction: row;
+  gap: 32px;
+  flex-wrap: wrap;
+  position: relative;
+  width: 868px;
+  margin-bottom: 80px;
+}
+
+.parent {
+  justify-content: center;
+  display: flex;
+  gap: 20px;
+  height: 100px;
+}
+
+.arrow1 {
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.2em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #333;
+  text-align: right;
+  cursor: pointer;
+}
+
+.arrow2 {
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #333;
+  text-align: right;
+  cursor: pointer;
+}
+
+.b {
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #333;
+  text-align: right;
+  cursor: pointer;
+}
+
+.div2 {
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #949597;
+  text-align: right;
+  cursor: pointer;
+}

@@ -72,7 +72,6 @@ export default function AuctionListRecommends() {
         )}
         <div ref={ref} style={{ height: 1, margin: "1rem 0" }} />
       </Fragment>
-      {showEndMessage && <div>마지막 페이지에 도달했습니다.</div>}
     </>
   );
 }

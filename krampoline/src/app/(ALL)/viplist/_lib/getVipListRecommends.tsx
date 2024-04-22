@@ -1,5 +1,6 @@
 "use client";
 
+import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 import axios from "axios";
 
 export async function getVipListRecommends({
@@ -11,15 +12,11 @@ export async function getVipListRecommends({
 }) {
   const encodedSearchQuery = encodeURIComponent(searchQuery);
   const searchPart = encodedSearchQuery ? `&search=${encodedSearchQuery}` : "";
-
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/all/vipList?page=${pageParam}&size=10${searchPart}`;
+  const token = localStorage.getItem("Authorization");
+  const url = `/api/all/vipList?page=${pageParam}&size=10${searchPart}`;
 
   try {
-    const response = await axios.get(url, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await HttpAuthInstance.get(url, {});
     return response.data;
   } catch (error) {
     console.error(error.response ? error.response.data : error.message);

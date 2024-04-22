@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { VipIntroduce } from "@/models/VipIntro";
+import HttpAuthInstance from "./api/interceptor/axiosConfig";
 
 type UserContextType = {
   vipIntro: VipIntroduce | null;
@@ -24,12 +25,7 @@ export function VipProvider({ children }: { children: React.ReactNode }) {
     const token = localStorage.getItem("Authorization");
     setIsLoading(true); // 데이터 로딩 시작 시 true로 설정
     try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/vip/info`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await HttpAuthInstance.get(`/api/vip/info`);
       if (response.status === 200) {
         console.log(response.data);
         setIsLoading(false);
@@ -50,10 +46,9 @@ export function VipProvider({ children }: { children: React.ReactNode }) {
     const token = localStorage.getItem("Authorization");
     setIsLoading(true); // 데이터 로딩 시작 시 true로 설정
     try {
-      const response = await axios.patch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/vip/editInfo`,
-        updatedProfile,
-        { headers: { Authorization: `Bearer ${token}` } }
+      const response = await HttpAuthInstance.patch(
+        `/api/vip/editInfo`,
+        updatedProfile
       );
       if (response.status === 200) {
         setIsLoading(false);

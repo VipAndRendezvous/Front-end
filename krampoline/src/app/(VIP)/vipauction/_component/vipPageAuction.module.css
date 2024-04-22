@@ -1,11 +1,7 @@
 .Auction-menu {
   display: flex;
-  justify-content: space-around;
 }
 
 .Auction-btn {
-  display: flex;
-
-  flex-direction: row;
-  width: 600px;
+  margin: 20px 0;
 }

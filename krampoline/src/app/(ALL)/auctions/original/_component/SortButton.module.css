@@ -1,0 +1,34 @@
+/* SortButton.module.css */
+.parent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; /* 버튼들을 중앙에 위치시킵니다 */
+  gap: 12px;
+}
+
+.selected {
+  /* 선택된 버튼의 스타일 */
+  font-weight: 800;
+  color: #333;
+}
+
+.unselected {
+  /* 선택되지 않은 버튼의 스타일 */
+  font-weight: normal;
+  color: #949597;
+}
+
+/* 기본 버튼 스타일 */
+.btn-basic {
+  padding: 8px 16px;
+  margin: 0 4px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-basic:hover {
+  background-color: #f0f0f0;
+}

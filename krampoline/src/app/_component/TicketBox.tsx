@@ -57,6 +57,7 @@ const TicketBox = ({ ticket }: Props) => {
             className={styles["mask-group"]}
             alt="Mask group"
             src={ticket.profileImgUrl}
+            style={{ objectFit: "cover" }}
           />
           <div className={styles["group-wrapper"]}>
             <div className={styles["group-2"]}></div>
@@ -68,7 +69,7 @@ const TicketBox = ({ ticket }: Props) => {
                 {ticket.meetingLocation}
               </div>
               <div className={styles["group-5"]}>
-                <Link href={`/ticketdetail/${ticket.ticketUUID}`}>
+                <Link href={`/ticketdetail/${ticket.ticketUUID} `}>
                   <div className={styles["text-wrapper-9"]}>상세보기</div>
                 </Link>
                 <div className={styles["arrow-right"]}>

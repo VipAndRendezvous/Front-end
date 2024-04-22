@@ -25,6 +25,8 @@ const FollowContainer = ({ vipfollwing }: Props) => {
   };
   return (
     <div className={styles.VIPFallowList}>
+      <div className={styles.VIPtext}>팔로우중인 VIP</div>
+
       <div className={styles.VIPFallowContainer}>
         <div>
           <Image
@@ -36,6 +38,7 @@ const FollowContainer = ({ vipfollwing }: Props) => {
             alt="ProfilePic"
             width={40}
             height={40}
+            style={{ objectFit: "cover" }}
           />
         </div>
         <div>{vipfollwing.nickname}</div>

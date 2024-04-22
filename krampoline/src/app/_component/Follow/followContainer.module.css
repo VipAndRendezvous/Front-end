@@ -1,6 +1,18 @@
 .VIPFallowList {
-  border: 1px solid black;
+  width: 100%;
+  position: relative;
   border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  height: 257px;
+  display: flex;
+  flex-direction: column;
+}
+
+.VIPtext {
+  margin-top: 16px;
+  margin-left: 16px;
 }
 
 .VIPFallowContainer {

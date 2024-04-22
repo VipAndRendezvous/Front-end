@@ -29,7 +29,6 @@ export default function VipPageAuction() {
           <VipAuctionRecommends />
         </SearchProvider>
       </HydrationBoundary>
-      <div>페이지 네이션 이동</div>
     </div>
   );
 }

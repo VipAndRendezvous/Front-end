@@ -1,42 +1,204 @@
 .ReviewContainer {
   display: flex;
   flex-direction: row;
+  width: 868px;
+  margin-bottom: 4px;
 }
 .ReviewBox {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  min-width: 500px;
-  width: 600px;
-  margin: 5px auto;
-  border: 1px solid black;
   border-radius: 10px;
-  padding: 10px 30px;
+  background-color: #fafafa;
+  height: 88px;
 }
-.ReviewProfile,
-.ReviewProfileExpanded {
+.ReviewBoxExpanded {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px;
+  background-color: #fafafa;
+  height: 100%;
+  padding-bottom: 40px;
+}
+
+.fisrt {
+  width: 140px;
   display: flex;
   flex-direction: column;
 }
 
-.ReviewInfo {
+.rating {
+  margin-top: 18px;
+  margin-left: 22px;
+}
+
+.meetingDate {
+  margin-top: 16px;
+  margin-left: 25px;
+  width: 61px;
+  position: relative;
+  font-size: 12px;
+  letter-spacing: -0.04em;
+  line-height: 18px;
+  font-family: SUIT;
+  color: #949597;
+  text-align: right;
+  display: inline-block;
+}
+
+.second {
+  margin-left: 45px;
+  width: 406px;
+}
+.con1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vipNickname {
+  margin-top: 16px;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+.expanded {
+  white-space: normal;
+  overflow: visible;
+  height: auto;
+  margin-top: 16px;
+  width: 406px;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-family: SUIT;
+  color: #333;
+  text-align: justify;
+  display: inline-block;
+}
+
+.collapsed {
+  margin-top: 8px;
+  width: 406px;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-family: SUIT;
+  color: #333;
+  text-align: justify;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 24px; /* 한 줄 높이로 제한 */
+}
+
+.ReviewProfileExpanded {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+  margin-top: 16px;
+  margin-right: 8px;
+}
+.writerNickname {
+  margin-top: 16px;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #949597;
+  text-align: right;
+}
+.third {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+}
+
+.collapsed {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.fourth {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 14px;
+  padding-right: 20px;
+}
+
+.con {
+  width: 242px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.additionalInfo {
+  transition: max-height 0.3s ease-in-out;
+  overflow: hidden;
+  max-height: 0; /* 초기 상태에서는 높이가 0 */
+}
+
+.report {
+  display: none;
+}
+
+.reportExpanded {
+  width: 34px;
+  position: relative;
+  font-size: 10px;
+  letter-spacing: -0.04em;
+  line-height: 15px;
+  font-family: SUIT;
+  color: #ff3d00;
+  text-align: right;
+  display: inline-block;
+
+  margin-top: 21px;
+  cursor: pointer;
+}
+
+.Info {
+  margin-top: 12px;
+  width: 406px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  border-radius: 5px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 6px 40px 6px 20px;
+  text-align: left;
+  font-size: 12px;
+  color: #949597;
+  font-family: SUIT;
+}
+.part {
   display: flex;
   flex-direction: row;
 }
 
-.ReviewTitle {
-  width: 250px;
-  white-space: pre-wrap;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  border: 1px solid black;
-}
-
-.ReviewTitle.collapsed {
-  width: 250px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border: none;
+.textInfo {
+  margin-left: 8px;
 }

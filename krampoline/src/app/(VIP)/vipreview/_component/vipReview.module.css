@@ -1,11 +1,7 @@
 .ReviewMenu {
   display: flex;
-  justify-content: space-around;
 }
 
 .Review-btn {
-  display: flex;
-
-  flex-direction: row;
-  width: 600px;
+  margin: 20px 0;
 }

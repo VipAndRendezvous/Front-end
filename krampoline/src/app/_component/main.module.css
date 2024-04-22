@@ -3,48 +3,384 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  max-width: 1280px;
   background-color: white;
   width: 100%;
   margin: 0 auto;
 }
-
-.MainBannerContainer {
-  width: 100%; /* 원하는 너비 설정 */
-  padding: 50px 0; /* 상단과 하단에 padding 적용 */
-  box-sizing: border-box;
+.MainPage {
+  padding: 80px 0;
+  height: 1000px;
 }
 
-.MainBanner {
+.MainBannerContainer {
+  width: 1920px;
   position: relative;
-  height: 400px; /* 원하는 높이 설정 */
-  width: 100%; /* padding을 포함한 부모 컨테이너의 100% */
-  overflow: hidden;
+  background-color: #333;
+  height: 320px;
 }
 
 .SecondSection {
-  width: 100%;
+  display: flex; /* Flex 컨테이너 설정 */
+  flex-direction: column;
+  justify-content: center; /* 가로축 중앙 정렬 */
+  align-items: center; /* 세로축 중앙 정렬 */
+}
+
+.TopPart {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  padding: 0 0 50px 0;
+  align-items: center;
+  margin-top: 47px;
+  gap: 32px;
+}
+
+.leftDonation {
+  height: 167px;
+}
+
+.title1 {
+  width: 131px;
+  position: relative;
+  font-size: 24px;
+  letter-spacing: -0.04em;
+  line-height: 36px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+}
+
+.DonationContainer {
+  display: flex; /* Flex 컨테이너로 설정 */
+  justify-content: center; /* 가로축 중앙 정렬 */
+  align-items: center; /* 세로축 중앙 정렬 */
+  position: border-box;
+  width: 768px;
+  border-radius: 20px;
+  background-color: #fff741;
+  height: 143px;
+  margin-top: 12px;
+}
+.DonationText {
+  font-size: 28px;
+  letter-spacing: -0.04em;
+  line-height: 36px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+}
+
+.rightDonation {
+  height: 167px;
+}
+.MainUser {
+  margin-top: 12px;
+}
+
+.BottomPart {
+  margin-top: 58px;
+  display: flex;
+  flex-direction: column;
+}
+.Title2 {
+  width: 497px;
+  position: relative;
+  font-size: 40px;
+  letter-spacing: -0.04em;
+  line-height: 48px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: center;
+  display: inline-block;
+}
+
+.Title3 {
+  width: 483px;
+  position: relative;
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  line-height: 30px;
+  font-family: SUIT;
+  color: #949597;
+  text-align: center;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.TitleContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 65px;
   align-items: center;
 }
 
-.MainCarousel {
-  width: 700px;
-  background-color: white;
-  height: 200px;
+.Title5 {
+  width: 68px;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-family: SUIT;
+  color: rgba(148, 149, 151, 0.5);
+  text-align: center;
+  display: inline-block;
 }
 
-.MainUser {
-  width: 500px;
-  /* background-color: red; */
-  height: 200px;
+.arrow {
+  margin-top: 12px;
 }
 
-.MainAbout {
-  height: 1000px;
+/* 1페이지 */
+
+.firstPage {
+  width: 1168px;
+}
+
+.charlesdeluvioW8m5mcm91ryUnsIcon {
+  position: absolute;
+  top: 0px;
+  left: 500px;
+  height: 800px;
+  object-fit: cover;
+}
+.vip {
+  position: absolute;
+  top: 48px;
+  left: calc(50% - 184px);
+  font-size: 40px;
+  letter-spacing: -0.04em;
+  line-height: 48px;
+  font-weight: 800;
+}
+.varVip {
+  position: absolute;
+  top: 116px;
+  left: calc(50% - 184px);
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  color: rgba(51, 51, 51, 0.6);
+  display: inline-block;
+  width: 368px;
+}
+.divfist {
+  position: relative;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-weight: 800;
+}
+.wrapper1 {
+  position: absolute;
+  top: 0px;
+  left: calc(50% - 184px);
+  border-radius: 27px;
+  background-color: #333;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 20px;
+  text-align: center;
+  color: #fff741;
+}
+.vipParent {
+  position: absolute;
+  top: 219px;
+  left: calc(50% - 584px);
+  width: 368px;
+  height: 236px;
+}
+.charlesdeluvioW8m5mcm91ryUnsParent {
   width: 100%;
-  background-color: aqua;
+  position: relative;
+  height: 934px;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+  font-family: SUIT;
+}
+
+/* 2페이지 */
+.secondPage {
+  width: 1920px;
+  height: 934px;
+  padding-top: 219px;
+}
+
+.charlesdeluvioLks7veiEagUnsIcon {
+  position: absolute;
+  top: 72px;
+  left: 0px;
+  width: 1920px;
+  height: 582px;
+  object-fit: cover;
+}
+.var2 {
+  position: absolute;
+  top: 116px;
+  left: calc(50% - 193px);
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  color: rgba(51, 51, 51, 0.6);
+  text-align: center;
+  display: inline-block;
+  width: 386px;
+}
+.divsec {
+  position: absolute;
+  top: 48px;
+  left: calc(50% - 142px);
+  font-size: 40px;
+  letter-spacing: -0.04em;
+  line-height: 48px;
+  font-weight: 800;
+}
+.div1 {
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+}
+.wrapper {
+  position: absolute;
+  top: 0px;
+  left: calc(50% - 55px);
+  border-radius: 27px;
+  background-color: #fff741;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 20px;
+}
+.varParent {
+  position: absolute;
+  top: 0px;
+  left: calc(50% - 193px);
+  width: 386px;
+  height: 236px;
+}
+.charlesdeluvioLks7veiEagUnsParent {
+  width: 100%;
+  position: relative;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+  font-family: SUIT;
+}
+
+/* 3페이지 */
+.thirdPage {
+  width: 1168px;
+  /* height: 800px; */
+}
+
+.marandaVandergriff7aakzdil4vIcon {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 668px;
+  height: 800px;
+  object-fit: cover;
+}
+.divthird {
+  position: absolute;
+  top: 48px;
+  left: calc(50% - 67px);
+  font-size: 40px;
+  letter-spacing: -0.04em;
+  line-height: 48px;
+  font-weight: 800;
+}
+.var3 {
+  position: absolute;
+  top: 116px;
+  left: calc(50% - 184px);
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  color: rgba(51, 51, 51, 0.8);
+  display: inline-block;
+  width: 368px;
+  text-align: right;
+}
+.divthirds {
+  position: relative;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-weight: 800;
+}
+.wrapperthird {
+  position: absolute;
+  top: 0px;
+  left: calc(50% + 73px);
+  border-radius: 27px;
+  background-color: #333;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 20px;
+  text-align: right;
+  color: #fff741;
+}
+.parentthird {
+  position: absolute;
+  top: 219px;
+  left: calc(50% + 216px);
+  width: 368px;
+  height: 236px;
+}
+.divthirds {
+  position: relative;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+}
+.arrowrightIcon {
+  width: 16px;
+  position: relative;
+  height: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.groupthird {
+  position: absolute;
+  top: 735px;
+  left: 1012px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 8px;
+  color: #000;
+}
+.marandaVandergriff7aakzdil4vParent {
+  width: 100%;
+  position: relative;
+  height: 820px;
+  text-align: right;
+  font-size: 16px;
+  color: #333;
+  font-family: SUIT;
+}
+.gotoauction {
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-family: SUIT;
+  color: #000;
+  cursor: pointer;
+}
+
+.gotoauction a {
+  color: #000;
+  text-decoration: none;
 }

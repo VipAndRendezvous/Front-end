@@ -13,17 +13,18 @@ import SortButton from "./SortButton";
 function MyPageReview() {
   return (
     <div>
+      <div className={styles.title}>마이페이지</div>
       <div>
         <MyPageMenu />
       </div>
       <HydrationBoundary>
         <SearchProvider>
-          <div className={styles.ReviewMenu}>
-            <div className={styles["Review-btn"]}>
+          <div className={styles.dinnerTicketContainer}>
+            <div className={styles.dinnerTicketFilter}>
               <SortButton />
             </div>
+            <UserReviewRecommends />
           </div>
-          <UserReviewRecommends />
         </SearchProvider>
       </HydrationBoundary>
     </div>
