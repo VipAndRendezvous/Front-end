@@ -37,9 +37,6 @@ const FaqItem = ({
 };
 //----------------------------------------------------------------
 
-<<<<<<< HEAD
-const TicketOwnerController = ({ region, keyId, AccessKey }) => {
-=======
 const TicketOwnerController = () => {
 >>>>>>> main
   const [isOpenMeetModal, setIsOpenMeetModal] = useState<boolean>(false); // Meet 모달 상태
@@ -287,11 +284,7 @@ const TicketOwnerController = () => {
   };
   //----------------------------------------------------------------
   if (showChat) {
-<<<<<<< HEAD
-    return <Chat region={region} keyId={keyId} AccessKey={AccessKey} />;
-=======
     return <Chat />;
->>>>>>> main
   }
   //----------------------------------------------------------------
   return (
@@ -369,15 +362,7 @@ const TicketOwnerController = () => {
           overlayClassName={styles["modal-overlay"]}
         >
           <div className={styles["modal-inner-content"]}>
-<<<<<<< HEAD
-            <ReportModal
-              onReportClose={closeReportModal}
-              region={region}
-              keyId={keyId}
-              AccessKey={AccessKey}
-=======
             <ReportModal onReportClose={closeReportModal}
->>>>>>> main
             />
           </div>
         </Modal>
