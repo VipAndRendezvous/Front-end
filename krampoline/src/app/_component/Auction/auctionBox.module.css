@@ -1,8 +1,10 @@
 .AuctionWrapper {
   display: flex;
+  width: 268px;
   flex-direction: column;
-  padding-right: 10px;
-  border: 1px solid red;
+  height: 451px;
+  margin-bottom: 52px;
+  text-decoration: none;
 }
 
 .AuctionContainer {
@@ -10,34 +12,89 @@
   height: 300px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
+  text-decoration: none;
 }
 
 .AuctionProfile {
   display: flex;
-  justify-content: center;
-  width: 200px;
-  border: 1px solid black;
+  width: 268px;
+  height: 336px;
 }
 .AuctionTitle {
-  display: flex;
-  justify-content: center;
-  width: 200px;
-  border: 1px solid black;
+  margin-top: 16px;
+
+  width: 118px;
+  position: relative;
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  line-height: 30px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
 }
 
 .AuctionInfo {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   align-items: flex-start;
-  width: 200px;
+  margin-top: 8px;
 }
 
 .AuctionFigure {
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #949597;
+  box-sizing: border-box;
+  overflow: hidden;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  width: 200px;
-  border: 1px solid black;
+  padding: 8px 67px;
+  text-align: left;
+  font-size: 14px;
+  color: #949597;
+  font-family: SUIT;
+  margin-top: 16px;
+}
+.TimePart {
+  margin-top: 2px;
+  width: 100%;
+  display: flex;
+}
+
+.AucionText {
+  width: auto;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.AucionInfoState {
+  width: auto;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.AuctionFigure a {
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
 }

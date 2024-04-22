@@ -58,8 +58,8 @@ const AdressSearch: React.FC = () => {
     <div className={styles.SearchPostWrapper}>
       <div className={styles.SearchPostContainer}>
         <input value={zipCode} readOnly placeholder="우편번호" />
-        <button className="btn-basic" type="button" onClick={toggle}>
-          우편번호 검색
+        <button className={styles.btnbasic} type="button" onClick={toggle}>
+          검색
         </button>
       </div>
       <div className={styles.PostInfoContainer}>

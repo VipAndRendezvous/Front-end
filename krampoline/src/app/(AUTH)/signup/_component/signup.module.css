@@ -5,58 +5,93 @@
   justify-content: center;
   height: 100vh;
 }
-
-.logo-container {
-  margin-bottom: 20px;
+.SignupBox {
+  margin-top: -10%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 70%;
 }
-
 .signup-title {
+  margin-top: 0px;
+}
+.signup-container p {
+  font-size: 14px;
+  color: #888;
+  margin-top: 0px;
   margin-bottom: 20px;
 }
-
 .signup-form {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 400px;
+  width: 80%;
 }
-
 .signup-form label {
+  display: block;
   margin-bottom: 5px;
-}
-
-.signup-form input {
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.verify-btn {
-  padding: 10px;
-  margin-bottom: 15px;
-  background-color: #f7f7f7;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.verify-btn-active {
-  color: white;
-  padding: 10px;
-  margin-bottom: 15px;
-  background-color: #007bff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.error {
   font-weight: bold;
-  color: red;
 }
-
-.signup-form input[readonly] {
-  background-color: #f7f7f7;
+.signup-form input {
+  width: 70%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  outline: none;
+}
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.signup-form input[type="text"],
+.signup-form input[type="email"] {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+.verify-btn,
+.verify-btn-active,
+.verify-btn-yellow,
+.verify-btn-active-yellow {
+  background-color: #e0e0e0;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin-bottom: 20px;
   cursor: pointer;
+  min-width: 80px;
+}
+.verify-btn:disabled,
+.verify-btn-yellow:disabled {
+  cursor: not-allowed;
+}
+.error {
+  color: #e74c3c;
+  margin-top: 10px;
+}
+.signup-form input[readonly] {
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+.verify-btn-yellow,
+.verify-btn-active-yellow {
+  background-color: #fff742;
+  color: #000;
+  font-weight: bold;
+}
+.signup-btn {
+  font-size: 16px;
+  background-color: #e0e0e0;
+  color: #fff;
+  border: none;
+  padding: 16px;
+  min-width: 180px;
+  cursor: pointer;
+  align-self: center;
 }

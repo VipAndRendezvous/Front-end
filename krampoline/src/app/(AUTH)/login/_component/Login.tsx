@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Logo from "../../../../../public/Logo.png";
+import Logo from "../../../../../public/blackLOGO.png";
 import Kakao from "../../../../../public/kakao_login.png";
 import styles from "./login.module.css";
 import { useRouter } from "next/navigation";
@@ -15,11 +15,13 @@ export default function Login() {
   return (
     <>
       <div className={styles.LoginContainer}>
-        <div>
-          <Image src={Logo} alt="logo" />
-        </div>
-        <div onClick={() => onClick()}>
-          <Image src={Kakao} alt="logo" />
+        <div className={styles.LoginBox}>
+          <div>
+            <Image src={Logo} alt="logo" />
+          </div>
+          <div onClick={() => onClick()}>
+            <Image src={Kakao} alt="logo" />
+          </div>
         </div>
       </div>
     </>

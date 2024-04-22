@@ -1,10 +1,9 @@
 .VipList {
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
   height: 100%;
-  padding: 20px;
-  width: 600px;
+
+  width: 1168px;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: flex-start; /* 변경됨 */
@@ -23,4 +22,17 @@
 .EndMessage {
   text-align: center; /* 메시지 텍스트를 가운데 정렬 */
   width: 100%; /* 부모 컨테이너의 전체 너비를 사용 */
+}
+
+.Title {
+  width: 139px;
+  position: relative;
+  font-size: 32px;
+  letter-spacing: -0.04em;
+  line-height: 48px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
 }

@@ -55,7 +55,11 @@ const AuctionTicketInfo = () => {
         <div className={styles.AuctionInfoInfo}>
           <div className={styles.AuctionInfoPic}>
             <Link href="/vipinfo">
-              <Image src={user.profile} alt="ProfilePic" />
+              <Image
+                src={user.profile}
+                alt="ProfilePic"
+                style={{ objectFit: "cover" }}
+              />
             </Link>
           </div>
           <article className={styles.AuctionInfoBoxFixed}>

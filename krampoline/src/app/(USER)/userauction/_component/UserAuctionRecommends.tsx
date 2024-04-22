@@ -7,6 +7,7 @@ import { getUserAuctionRecommends } from "../_lib/getUserAuctionRecommends";
 import { useState } from "react";
 import { useSearch } from "./SearchProvider";
 import AuctionBox from "@/app/_component/Auction/AuctionBox";
+import styles from "./UserAuctionRecommends.module.css";
 
 export default function UserAuctionRecommends() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -20,45 +21,62 @@ export default function UserAuctionRecommends() {
     },
   });
 
-  if (isError) return <div>An error occurred: {error?.message}</div>;
+  if (isError) return <div>잠시후에 다시 시도해주세요</div>;
 
   if (isLoading) return <div>Loading...</div>;
 
-  if (!isLoading && !data?.content?.length)
-    return <div>데이터가 없습니다.</div>;
+  const maxPage = data ? data.totalPages : 1;
+  const pages = Array.from({ length: maxPage }, (_, i) => i + 1);
+
+  const renderPageNumbers = () => {
+    return pages.map((page, index) => (
+      <div
+        key={index}
+        className={currentPage === page - 1 ? styles.b : styles.div2}
+        onClick={() => setCurrentPage(page - 1)}
+      >
+        {page}
+      </div>
+    ));
+  };
 
   return (
-    <>
-      {data?.content?.map((auctionBox, index: number) => {
-        // auctionUUID 속성이 있는지 확인
-        if (!auctionBox || !auctionBox.auctionUUID) {
-          // 적절한 처리: 로깅, 건너뛰기, 또는 에러 메시지 표시
-          console.error("Invalid item without auctionUUID", auctionBox);
-          return null; // 이 항목을 건너뛰고 렌더링하지 않음
-        }
+    <div className={styles.container}>
+      <div className={styles["frame-screen"]}>
+        {data?.content?.map((auctionBox, index: number) => {
+          if (!auctionBox || !auctionBox.auctionUUID) {
+            console.error("Invalid item without auctionUUID", auctionBox);
+            return null;
+          }
 
-        // auctionUUID가 있으므로 안전하게 사용
-        return (
-          <AuctionBox
-            key={`${auctionBox.auctionUUID}-${index}`}
-            auctionData={auctionBox}
-          />
-        );
-      })}
-      <div>
-        <button
-          onClick={() => setCurrentPage((old) => Math.max(old - 1, 0))}
-          disabled={currentPage === 0}
-        >
-          이전 페이지
-        </button>
-        <button
-          onClick={() => setCurrentPage((old) => old + 1)}
-          disabled={data?.last || false}
-        >
-          다음 페이지
-        </button>
+          // auctionUUID가 있으므로 안전하게 사용
+          return (
+            <AuctionBox
+              key={`${auctionBox.auctionUUID}-${index}`}
+              auctionData={auctionBox}
+            />
+          );
+        })}
       </div>
-    </>
+      <div className={styles.parent}>
+        <div
+          className={styles.arrow1}
+          onClick={() => setCurrentPage(0)}
+        >{`<<`}</div>
+        <div
+          className={styles.arrow2}
+          onClick={() => setCurrentPage(Math.max(currentPage - 1, 0))}
+        >{`<`}</div>
+        {renderPageNumbers()}
+        <div
+          className={styles.arrow1}
+          onClick={() => setCurrentPage(Math.min(currentPage + 1, maxPage - 1))}
+        >{`>`}</div>
+        <div
+          className={styles.arrow2}
+          onClick={() => setCurrentPage(maxPage - 1)}
+        >{`>>`}</div>
+      </div>
+    </div>
   );
 }

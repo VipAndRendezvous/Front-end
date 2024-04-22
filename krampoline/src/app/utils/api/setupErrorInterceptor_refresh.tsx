@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import HttpAuthInstance from "./interceptor/axiosConfig";
 
 export default function setupErrorInterceptor_refresh() {
   const token = localStorage.getItem("Authorization");
@@ -11,7 +12,7 @@ export default function setupErrorInterceptor_refresh() {
     async (error) => {
       if (error.response && errorCodes.includes(error.response.data.code)) {
         try {
-          const res = await axios.post(`/api/auth/refresh`, null, {
+          const res = await HttpAuthInstance.post(`/api/auth/refresh`, null, {
             headers: { Authorization: token },
           });
 

@@ -27,14 +27,16 @@ const EditorComponent = () => {
       try {
         const token = localStorage.getItem("Authorization");
         const formData = new FormData();
-        formData.append("boardImg", file)
+        formData.append("boardImg", file);
         const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/s3/upload`,
-            formData,
-            {headers: {
-                'Content-Type': 'multipart/form-data',
-                "Authorization": `Bearer ${token}`
-              }}
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/s3/upload`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         if (response.status === 200) {
           const imageUrl = response.data;
@@ -71,7 +73,7 @@ const EditorComponent = () => {
   };
 
   return (
-    <div style={{ height: "300px" }}>
+    <div style={{ height: "222px" }}>
       <ReactQuill
         style={{ height: "100%" }}
         ref={quillRef}

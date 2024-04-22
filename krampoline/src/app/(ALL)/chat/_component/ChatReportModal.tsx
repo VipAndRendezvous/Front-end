@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import styles from "./chatReportModal.module.css";
 import { useUser } from "@/app/utils/UserProvider";
 import axios from "axios";
+import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 const ReportModal = ({ onReportClose }: { onReportClose: () => void }) => {
   // 버튼 선택 상태를 저장하는 상태
   const [selectedReason, setSelectedReason] = useState<string | null>(null);
@@ -26,10 +27,9 @@ const ReportModal = ({ onReportClose }: { onReportClose: () => void }) => {
       };
       try {
         const token = localStorage.getItem("Authorization");
-        const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/chat/report`,
-          reportData,
-          { headers: { Authorization: `Bearer ${token}` } }
+        const response = await HttpAuthInstance.post(
+          `/api/chat/report`,
+          reportData
         );
         if (response.status === 200) {
           onReportClose(); // 모달 닫기

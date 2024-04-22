@@ -1,80 +1,209 @@
-.VipPrContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  border: 1px solid #e0e0e0;
-}
-
-.VipPrText {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #d0d0d0;
-  border-radius: 4px;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #333;
-  background-color: #fff;
-  resize: none;
-  min-height: 300px;
-}
-
-.VipPrText::placeholder {
-  color: #888;
-}
-
-.VipPrText:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
-
-.VipPrText:disabled {
-  color: #6c757d;
-  background-color: #e9ecef;
-  border: 1px solid #ced4da;
-  cursor: not-allowed;
-}
-
-.VipPrInput {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #d0d0d0;
-  border-radius: 4px;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #333;
-  background-color: #fff;
-  resize: none;
-}
-
-.VipPrInput::placeholder {
-  color: #888;
-}
-
-.VipPrInput:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-}
-
-.VipPrInput:disabled {
-  color: #6c757d;
-  background-color: #e9ecef;
-  border: 1px solid #ced4da;
-  cursor: not-allowed;
-}
-
-.PrButtonContainer {
-  margin-top: 20px;
-  margin-left: auto;
-  align-self: flex-end;
-}
-
 .FormContainer {
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-top: 20px;
+}
+
+.VipPrintro {
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+  background-color: #fafafa;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px 28px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+  font-family: SUIT;
+  flex-direction: row;
+}
+
+.VipPrText {
+  width: auto;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+  border: none;
+  height: auto;
+  margin-left: 16px;
+}
+
+.VipCarrer {
+  margin-top: 4px;
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+  background-color: #fafafa;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 24px 28px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+  font-family: SUIT;
+}
+
+.VipText {
+  width: auto;
+  position: relative;
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  line-height: 30px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.VipCarrer {
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+  background-color: #fafafa;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 24px 28px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+  font-family: SUIT;
+  flex-direction: row;
+}
+
+.VipCarrerInpot {
+  width: auto;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+  border: none;
+  height: auto;
+  margin-left: 16px;
+}
+
+.VipStory {
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+  background-color: #fafafa;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 24px 28px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+  font-family: SUIT;
+  margin-top: 4px;
+}
+
+.VipStoryInput {
+  display: flex;
+
+  border: none;
+}
+
+.VipProfile {
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+  background-color: #fafafa;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px 28px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+  font-family: SUIT;
+  margin-top: 4px;
+}
+
+.VipProfileInput {
+  margin-left: 16px;
+  border: none;
+}
+
+.VipPrText:focus,
+.VipCarrerInpot:focus,
+.VipStoryInput:focus,
+.VipProfileInput:focus {
+  outline: none; /* 포커스 시 아웃라인 제거 */
+  /* 필요한 경우 추가적인 스타일을 여기에 추가하세요 */
+}
+
+.edit {
+  width: 168px;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #333;
+  box-sizing: border-box;
+  height: 45px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 67px;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+  font-family: SUIT;
+}
+
+.save {
+  width: 168px;
+  position: relative;
+  background-color: #fff741;
+  border: 1px solid #333;
+  box-sizing: border-box;
+  height: 45px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 67px;
+  text-align: left;
+  font-size: 16px;
+  color: #333;
+  font-family: SUIT;
+}
+
+.PrButtonContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 700px;
 }

@@ -1,35 +1,120 @@
+/* membershipTerms.module.css */
+
 .MembershipContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto; /* 좌우 중앙 정렬 */
-  height: 700px;
-  justify-content: space-between;
-  margin-top: 50px;
+  max-width: 689px;
+  margin: auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.MembershipTitleContainer,
+.MembershipTitleWrapper {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .MembershipTitleContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-weight: bold;
+  font-size: 1.4em; /* Increased font size for emphasis */
+  color: #333; /* Darker color for higher contrast */
+  padding: 5px 0;
 }
 
-.MembershipInputContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50%;
+.MembershipTitleContainer2 {
+  font-size: 1.1em; /* Slightly larger than normal text for emphasis */
+  color: #444; /* Slightly darker color for non-title text */
+  padding: 5px 0;
+  font-size: 12px;
 }
 
-.MembershipTermsContainer {
-  align-items: center;
-  width: 355px;
-  text-align: center;
+/* Terms container with a fixed height and scroll */
+.MembershipTermsContainer .answer {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 10px;
+  text-align: justify;
+  line-height: 1.5;
+  padding-right: 10px;
 }
 
-.MembershipButtonGroup {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
+/* Custom scrollbar styles */
+.MembershipTermsContainer .answer::-webkit-scrollbar {
+  width: 5px;
+}
+
+.MembershipTermsContainer .answer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.MembershipTermsContainer .answer::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.MembershipTermsContainer .answer::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Button styles with specific color */
+.startButton {
+  background-color: #fff741; /* Bright yellow color */
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  display: block;
+  width: 100px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.startButton:hover {
+  background-color: #ece430; /* Slightly darker yellow on hover */
+}
+
+.startButton:disabled {
+  background-color: #f7f7c1; /* Lighter yellow when disabled */
+  cursor: default;
+}
+
+/* Base item styles */
+.termsItem {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.question {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.agreeSection {
+  margin-top: 10px;
+}
+
+/* Input styles */
+.MembershipInputContainer input[type="radio"] {
+  margin-right: 5px;
+}
+
+.text {
+  width: 637px;
+  position: relative;
+  font-size: 12px;
+  letter-spacing: -0.04em;
+  line-height: 18px;
+  font-family: SUIT;
+  color: #949597;
+  text-align: left;
+  display: -webkit-inline-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
 }

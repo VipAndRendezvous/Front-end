@@ -13,17 +13,22 @@ import SortButton from "./SortButton";
 export default function MyPageAuction() {
   return (
     <div>
+      <div className={styles.title}>마이페이지</div>
       <div>
         <MyPageMenu />
       </div>
       <HydrationBoundary>
         <SearchProvider>
-          <div className={styles["Auction-menu"]}>
-            <div className={styles["Auction-btn"]}>
+          <div className={styles.dinnerTicketContainer}>
+            <div className={styles.dinnerTicketFilter}>
               <SortButton />
             </div>
           </div>
-          <UserAuctionRecommends />
+          <div className={styles.ListWrapper}>
+            <div className={styles.VipList}>
+              <UserAuctionRecommends />
+            </div>
+          </div>
         </SearchProvider>
       </HydrationBoundary>
     </div>

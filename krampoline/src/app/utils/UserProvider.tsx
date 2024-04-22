@@ -1,6 +1,6 @@
 "use client";
 
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { UserInfo } from "@/models/UserInfo";
 import { KakaoInfo } from "@/models/KakaoInfo";
@@ -16,9 +16,9 @@ type UserContextType = {
   setIsLoggedIn: (isLoggedIn: boolean) => void;
   logout: () => void;
   fetchUserInfo: () => Promise<void>;
-  following: (followingId: string) => void;
-  unfollowing: (followingId: string) => void;
-  followingListAPI: () => void;
+  following;
+  unfollowing;
+  followingListAPI: () => Promise<void>;
   followingList: FollowingListResponse | null; // 여기에 추가합니다.
   vipapplyAPI: (formData: {
     userUUID: string;
@@ -35,6 +35,7 @@ type UserContextType = {
   applyCheck;
   globalTicketUUID;
   setglobalTicketUUID;
+  withdrawServiceAPI: () => Promise<void>;
 };
 
 const UserContext = createContext<UserContextType | null>(null);
@@ -61,16 +62,13 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
     if (token) {
       try {
-        // `HttpAuthInstance` 인스턴스를 사용하여 요청을 보냅니다.
-        // 이 인스턴스는 자동으로 'Authorization' 헤더를 설정합니다.
         const response = await HttpAuthInstance.get("/api/user/profile");
-
+        followingListAPI();
         if (response.status === 200) {
           console.log(response);
           setUserInfo(response.data);
           setIsLoggedIn(true);
         } else {
-          // 응답 상태 코드가 200이 아닐 경우 로그인 상태를 false로 설정합니다.
           setIsLoggedIn(false);
         }
       } catch (error) {
@@ -114,24 +112,23 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       const response = await HttpAuthInstance.get(
         `/api/user/follow/${followingId}`
       );
-      if (response.status === 200) {
-        // 팔로잉 성공 처리
-      }
+
+      return response.data;
     } catch (error) {
-      console.error(error);
+      console.error("Error during the follow operation:", error);
+      throw error;
     }
   };
+
   //----------------------------------------------------------------언팔로잉 하기
   const unfollowing = async (followingId) => {
     try {
       const response = await HttpAuthInstance.delete(
         `/api/user/unfollow/${followingId}`
       );
-      if (response.status === 200) {
-        // 언팔로잉 성공 처리
-      }
     } catch (error) {
-      console.error(error);
+      console.error("Error during the unfollow operation:", error);
+      throw error;
     }
   };
   //----------------------------------------------------------------팔로잉 리스트 가져오기
@@ -159,11 +156,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     vipIntroduce: string;
     vipEvidenceUrl: string;
   }) {
+    const token = localStorage.getItem("Authorization");
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/basic/applyVip`,
-        formData,
-        { withCredentials: true }
+      const response = await HttpAuthInstance.post(
+        `/api/basic/applyVip`,
+        formData
       );
       // 응답 처리 코드...
     } catch (error) {
@@ -183,6 +180,23 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     fetchInitialData();
   }, []);
 
+  //----------------------------------------------------------------
+
+  async function withdrawServiceAPI() {
+    const token = localStorage.getItem("Authorization");
+    try {
+      const response = await HttpAuthInstance.post(`/api/auth/withdrawal`, {});
+      if (response.status === 200) {
+        localStorage.removeItem("Authorization");
+        window.location.href = "/";
+      } else {
+        throw new Error("Failed to fetch following list");
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
   //----------------------------------------------------------------
   return (
     <UserContext.Provider
@@ -206,6 +220,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         applyCheck,
         globalTicketUUID,
         setglobalTicketUUID,
+        withdrawServiceAPI,
       }}
     >
       {children}

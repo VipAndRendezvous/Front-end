@@ -13,6 +13,7 @@ import TicketCancel from "../_component/TicketCancel";
 import { usePathname } from "next/navigation";
 import axios from "axios";
 import { useUser } from "@/app/utils/UserProvider";
+import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 
 const Page = () => {
   const pathname = usePathname();
@@ -41,9 +42,8 @@ const Page = () => {
 
         // Make API call with extracted ticketUUID
         const token = localStorage.getItem("Authorization");
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/${extractedTicketUUID}`,
-          { headers: { Authorization: `Bearer ${token}` } }
+        const response = await HttpAuthInstance.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/${extractedTicketUUID}`
         );
 
         if (response.status === 200) {
@@ -110,10 +110,8 @@ const Page = () => {
   const cancelTicket = async (event) => {
     try {
       const token = localStorage.getItem("Authorization");
-      const response = await axios.patch(
-        `${process.env.EXT_PUBLIC_NEXT_PUBLIC_BASE_URL}/api/ticket/cancel/${ticketUUID}`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
+      const response = await HttpAuthInstance.patch(
+        `/api/ticket/cancel/${ticketUUID}`
       );
       if (response.status === 200) {
         console.log(response);
@@ -148,13 +146,19 @@ const Page = () => {
         </button>
       </div>
       <div ref={auctionInfoRef}>
-        <Image src={AuctionInfo_Img} alt="AuctionInfo_Img" width={600} />
+        <Image
+          src={AuctionInfo_Img}
+          alt="AuctionInfo_Img"
+          width={600}
+          style={{ objectFit: "cover" }}
+        />
       </div>
       <div ref={auctionWarningRef}>
         <Image
           src={AuctionInfo_warning}
           alt="AuctionInfo_warning"
           width={600}
+          style={{ objectFit: "cover" }}
         />
       </div>
 

@@ -5,6 +5,8 @@ export interface Auctions {
   createdTime: string;
   currentHighestBidAmount: number;
   bidCount: number;
+  auctionCreatedDate: string;
+  vipUserName: string;
 }
 
 export interface ApiResponse {

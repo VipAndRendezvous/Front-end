@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Auctions } from "@/models/Auctions";
+import HttpAuthInstance from "./api/interceptor/axiosConfig";
 
 type UserContextType = {
   AuctionInfo: string;
@@ -51,22 +52,22 @@ export function AddAuctionsProvider({
   ) {
     try {
       const token = localStorage.getItem("Authorization");
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/vip/auction/create`,
-        {
-          minBidAmount,
-          meetingDate,
-          meetingLocation,
-          meetingInfoText,
-          meetingPromiseText,
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const response = await HttpAuthInstance.post(`/api/vip/auction/create`, {
+        minBidAmount,
+        meetingDate,
+        meetingLocation,
+        meetingInfoText,
+        meetingPromiseText,
+      });
       if (response.status === 200) {
+        router.push("/");
+        alert("경매 생성이 완료되었습니다.🫡");
+
         console.log(response);
       }
     } catch (error) {
       console.error(error);
+      alert("경매 생성에 실패했습니다.🥲");
       throw error; // 오류를 던져서 상위 핸들러에서 처리할 수 있도록 합니다.
     }
   }

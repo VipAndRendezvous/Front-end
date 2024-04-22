@@ -1,4 +1,5 @@
 import { useUser } from "@/app/utils/UserProvider";
+import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 import axios from "axios";
 import React, { useState } from "react";
 
@@ -24,15 +25,11 @@ const ReviewModal = ({ onReViewClose, handleWriteReview }) => {
       const token = localStorage.getItem("Authorization");
 
       // API 요청 부분
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/review`,
-        {
-          ticketUUID: globalTicketUUID,
-          reviewContent: review,
-          reviewRating: rating,
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const response = await HttpAuthInstance.post(`/api/ticket/review`, {
+        ticketUUID: globalTicketUUID,
+        reviewContent: review,
+        reviewRating: rating,
+      });
       if (response.status === 200) {
         onReViewClose(); // 모달 닫기 함수 호출
       }

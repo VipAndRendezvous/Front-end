@@ -1,39 +1,263 @@
-.SideNavContainer {
+.sideNavContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 900px;
-  width: 300px;
-  background-color: aqua;
+  width: 268px;
+  height: 590px;
 }
 
-.SideNavProfile {
+.sideNav1st {
+}
+
+.sideNav1st {
   display: flex;
   flex-direction: row;
 }
 
-.SideNav1st {
+.profilePic {
+  margin-left: 20px;
+  margin-top: 16px;
+}
+
+.nomalInfo {
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+.VipCheck {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.nickName {
+  width: 61px;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+  margin-left: 20px;
+  margin-top: 16px;
+}
+.nickNameVip {
+  width: 61px;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+  margin-left: 4px;
+  margin-top: 16px;
+}
+.Vip {
+  margin-left: 20px;
+  margin-top: 19px;
+}
+.rating {
+  margin-left: 20px;
+  margin-top: 7px;
+  width: 17px;
+  position: relative;
+  font-size: 12px;
+  text-decoration: underline;
+  letter-spacing: -0.04em;
+  line-height: 18px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
 }
 
-.ProfileInfo div {
-  margin-top: 10px;
-}
-
-.SideButton {
+.sideNavProfile {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
-.SideButton button {
-  margin-top: 10px;
-}
-
-.VIPCheck {
-  align-items: center;
-  border: 1px solid black;
+.sideNav1stContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
   border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  height: 198px;
+}
+
+.subInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 20px;
+  align-items: center;
+}
+
+.pointsec {
+  display: flex;
+  flex-direction: row;
+}
+
+.text1 {
+  margin-right: 13px;
+  width: 62px;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  display: inline-block;
+  font-family: SUIT;
+  color: #949597;
+  text-align: left;
+}
+
+.text2 {
+  width: 96px;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.chargepoint {
+  position: relative;
+  border-radius: 3px;
+  background-color: #fff741;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 10px;
+  color: #333;
+  font-family: SUIT;
+  text-decoration: none;
+}
+.chargepoint a {
+  text-decoration: none;
+  color: #333;
+}
+
+.withdraw {
+  position: relative;
+  border-radius: 3px;
+  background-color: #fff;
+  border: 0.5px solid #333;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  text-align: left;
+  font-size: 10px;
+  color: #333;
+  font-family: SUIT;
+}
+
+.withdraw a {
+  text-decoration: none;
+  color: #333;
+}
+
+.stroke {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.signoutIcon {
+  position: relative;
+  overflow: hidden;
+  height: 16px;
+  margin-left: 4px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.cancleAccount {
+  height: 39px;
+}
+
+.text3 {
+  width: 34px;
+  position: relative;
+  font-size: 10px;
+  text-decoration: underline;
+  letter-spacing: -0.04em;
+  line-height: 15px;
+  font-family: SUIT;
+  color: #d9d9d9;
+  text-align: left;
+  display: inline-block;
+  margin-left: 217px;
+  margin-top: 4px;
+  cursor: pointer;
+}
+
+.vipCheck {
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+  background-color: #fafafa;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 61px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 12px;
+  color: #949597;
+  font-family: SUIT;
+}
+
+.followContainer {
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  height: 257px;
+  margin-top: 20px;
+}
+
+.followContainer p {
+  border-radius: 10px;
+  margin-top: 0px;
+  width: 100%;
+  background-color: #fafafa;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 61px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 12px;
+  color: #949597;
+  font-family: SUIT;
+  height: 100%;
 }

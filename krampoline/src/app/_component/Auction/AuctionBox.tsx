@@ -16,7 +16,8 @@ const AuctionBox = ({ auctionData }: Props) => {
   const auction = auctionData;
 
   const auctionEndTime =
-    new Date(auction.createdTime).getTime() + 3 * 24 * 60 * 60 * 1000; // 3일을 밀리초로 계산하여 더합니다.
+    new Date(auction.createdTime || auction.auctionCreatedDate).getTime() +
+    3 * 24 * 60 * 60 * 1000; // 3일을 밀리초로 계산하여 더합니다.
   const [timeLeft, setTimeLeft] = useState(
     auctionEndTime - new Date().getTime()
   );
@@ -49,8 +50,8 @@ const AuctionBox = ({ auctionData }: Props) => {
       .padStart(2, "0")}분 ${seconds.toString().padStart(2, "0")}초`;
   };
 
-  // const formattedAuctionCurrentMoney =
-  //   auction.currentHighestBidAmount.toLocaleString();
+  const formattedAuctionCurrentMoney =
+    auction.currentHighestBidAmount.toLocaleString();
   return (
     <div className={styles.AuctionWrapper}>
       <div className={styles.AuctionContainer}>
@@ -62,21 +63,36 @@ const AuctionBox = ({ auctionData }: Props) => {
                 : ProfilePic
             }
             alt="ProfilePic"
-            width={100}
-            height={100}
+            width={268}
+            height={268}
+            style={{ objectFit: "cover" }}
           />
         </div>
-        <div className={styles.AuctionTitle}>{auction.vipNickname}</div>
-        <hr></hr>
-        <div className={styles.AuctionInfo}>
-          {/* <div>{user.state}</div> */}
-          <div>남은 시간: {formatTime(timeLeft)}</div>
-          {/* <div>현재 입찰 금액: {formattedAuctionCurrentMoney} 원</div> */}
-          <div>입찰 수: {auction.bidCount} 회</div>
+        <div className={styles.AuctionTitle}>
+          {auction.vipNickname || auction.vipUserName}
         </div>
-        <Link href={`/auctionInfo/${auctionData.auctionUUID}`}>
-          <div className={styles.AuctionFigure}>상세보기</div>
-        </Link>
+
+        <div className={styles.AuctionInfo}>
+          <div className={styles.TimePart}>
+            <div className={styles.AucionText}>남은 시간</div>
+            <div className={styles.AucionInfoState}>{formatTime(timeLeft)}</div>
+          </div>
+          <div className={styles.TimePart}>
+            <div className={styles.AucionText}>현재 입찰 금액</div>{" "}
+            <div className={styles.AucionInfoState}>
+              {formattedAuctionCurrentMoney} 원
+            </div>
+          </div>
+          <div className={styles.TimePart}>
+            <div className={styles.AucionText}>입찰 수 </div>{" "}
+            <div className={styles.AucionInfoState}>{auction.bidCount} 회</div>
+          </div>
+          <div className={styles.AuctionFigure}>
+            <Link href={`/auctionInfo/${auctionData.auctionUUID}`}>
+              상세보기
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

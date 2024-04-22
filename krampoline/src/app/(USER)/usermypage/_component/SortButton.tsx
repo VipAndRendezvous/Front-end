@@ -2,29 +2,36 @@
 
 import React from "react";
 import { useSearch } from "./SearchProvider";
+import styles from "./SortButton.module.css";
 
 const SortButton: React.FC = () => {
-  const { setSort } = useSearch();
-
-  const handleSortChange = (newSort: string) => {
-    setSort(newSort);
-  };
+  const { sort, setSort } = useSearch();
 
   return (
-    <>
-      <button
-        className="btn-basic"
-        onClick={() => handleSortChange("TIME_DESC")}
+    <div className={styles.parent}>
+      <div
+        className={sort === "TIME_DESC" ? styles.selected : styles.unselected}
+        onClick={() => setSort("TIME_DESC")}
       >
-        오래된 티켓보기
-      </button>
-      <button
-        className="btn-basic"
-        onClick={() => handleSortChange("TIME_ASC")}
+        신규 경매순
+      </div>
+      <svg
+        width="2"
+        height="8"
+        viewBox="0 0 2 8"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        최근 티켓보기
-      </button>
-    </>
+        <path d="M1 0V8" stroke="#949597" />
+      </svg>
+
+      <div
+        className={sort === "TIME_ASC" ? styles.selected : styles.unselected}
+        onClick={() => setSort("TIME_ASC")}
+      >
+        인기 경매순
+      </div>
+    </div>
   );
 };
 

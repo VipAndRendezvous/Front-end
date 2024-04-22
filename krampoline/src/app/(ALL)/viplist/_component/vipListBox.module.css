@@ -1,15 +1,100 @@
-.ListBoxContainer {
+.AuctionWrapper {
+  display: flex;
+  width: 268px;
+  flex-direction: column;
+  height: 451px;
+  margin-bottom: 52px;
+  text-decoration: none;
+}
+
+.AuctionContainer {
+  width: 270px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-decoration: none;
+}
+
+.AuctionProfile {
+  display: flex;
+  width: 268px;
+  height: 336px;
+}
+.AuctionTitle {
+  margin-top: 16px;
+
+  width: 118px;
+  position: relative;
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  line-height: 30px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.AuctionInfo {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+  margin-top: 8px;
+}
+
+.AuctionFigure {
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #949597;
+  box-sizing: border-box;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
-  border: 1px solid black;
-  border-radius: 10px;
-  width: 240px;
-  height: 250px;
+  justify-content: center;
+  padding: 8px 67px;
+  text-align: left;
+  font-size: 14px;
+  color: #949597;
+  font-family: SUIT;
+  margin-top: 16px;
+}
+.TimePart {
+  margin-top: 2px;
+  width: 100%;
+  display: flex;
 }
 
-.ListBoxContainer img {
-  min-height: 100px; /* 이미지의 최대 높이를 100px로 제한 */
-  object-fit: cover; /* 이미지 비율을 유지하면서 해당 영역을 완전히 채움 */
+.AucionText {
+  width: auto;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.AucionInfoState {
+  width: auto;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.AuctionFigure a {
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
 }
