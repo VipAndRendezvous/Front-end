@@ -38,7 +38,6 @@ const FaqItem = ({
 //----------------------------------------------------------------
 
 const TicketOwnerController = () => {
->>>>>>> main
   const [isOpenMeetModal, setIsOpenMeetModal] = useState<boolean>(false); // Meet 모달 상태
   const [isOpenReviewModal, setIsOpenReviewModal] = useState<boolean>(false); // Report 모달 상태
   const [isOpenReportModal, setIsOpenReportModal] = useState<boolean>(false); // Report 모달 상태
@@ -362,8 +361,7 @@ const TicketOwnerController = () => {
           overlayClassName={styles["modal-overlay"]}
         >
           <div className={styles["modal-inner-content"]}>
-            <ReportModal onReportClose={closeReportModal}
-            />
+            <ReportModal onReportClose={closeReportModal} />
           </div>
         </Modal>
         <Modal
