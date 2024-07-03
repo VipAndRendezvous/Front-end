@@ -14,7 +14,19 @@ type Props = {
 
 const AuctionBox = ({ auctionData }: Props) => {
   const auction = auctionData;
+  const profileImages = [
+    "/user/1.jpg",
+    "/user/2.jpg",
+    "/user/3.jpg",
+    "/user/4.jpg",
+    "/user/5.jpg",
+    "/user/6.jpg",
+  ];
 
+  // useState를 사용하여 컴포넌트가 처음 로딩될 때 한 번만 랜덤 이미지를 선택하도록 합니다.
+  const [randomImage, setRandomImage] = useState(
+    profileImages[Math.floor(Math.random() * profileImages.length)]
+  );
   const auctionEndTime =
     new Date(auction.createdTime || auction.auctionCreatedDate).getTime() +
     3 * 24 * 60 * 60 * 1000; // 3일을 밀리초로 계산하여 더합니다.
@@ -60,7 +72,7 @@ const AuctionBox = ({ auctionData }: Props) => {
             src={
               auction.profileImgUrl.startsWith("http")
                 ? auction.profileImgUrl
-                : ProfilePic
+                : randomImage
             }
             alt="ProfilePic"
             width={268}

@@ -17,7 +17,7 @@ import SortButton from "./_component/SortButton";
 import { useEffect } from "react";
 
 export default function Page() {
-  const { userInfo } = useUser(); // useUser 훅은 컴포넌트의 최상위에서 호출합니다.
+  const { userInfo, donation } = useUser(); // useUser 훅은 컴포넌트의 최상위에서 호출합니다.
   const queryClient = new QueryClient();
 
   useEffect(() => {
@@ -54,7 +54,12 @@ export default function Page() {
           </div>
           <div className={styles.DonationContainer}>
             <div className={styles.DonationSubText}>현재 기부 금액</div>
-            <div className={styles.DonationText}>4,675,965,000 원</div>
+            <div className={styles.DonationText}>
+              {new Intl.NumberFormat("ko-KR", { style: "decimal" }).format(
+                donation.totalDonationPrice
+              )}
+              원
+            </div>
           </div>
 
           <div className={styles.ListUtil}>

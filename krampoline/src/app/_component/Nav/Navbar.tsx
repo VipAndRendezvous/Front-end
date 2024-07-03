@@ -8,7 +8,7 @@ import VipApplyModal from "../VipApply/VipApplyModal";
 import { useUser } from "@/app/utils/UserProvider";
 
 const Navbar = () => {
-  const { isLoggedIn, logout, userInfo } = useUser();
+  const { isLoggedIn, logout, userInfo, applyCheck } = useUser();
   const [isOpen, setIsOpen] = useState<boolean>(false); //추가
 
   const [scrollY, setScrollY] = useState(0);
@@ -52,12 +52,11 @@ const Navbar = () => {
         color: isScrolled ? "rgba(255, 255, 255, 0.8)" : "#333",
       }}
     >
-      {" "}
       <div className={styles.navContainer}>
         <div className={styles.vipApplyParent}>
-          {isLoggedIn && userInfo.userType == "ROLE_BASIC" && (
-            <b className={styles.vipApply} onClick={toggle}>
-              VIP Apply
+          {isLoggedIn && userInfo.userType == "ROLE_BASIC" && !applyCheck && (
+            <b className={styles.vipApply}>
+              <Link href="/vipapply">VIP Apply </Link>
             </b>
           )}
           <b className={styles.vipApply}>

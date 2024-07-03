@@ -18,18 +18,7 @@ export default function Layout({
         </nav>
       </div>
       <div className={styles.container}>
-        <header className={styles.leftSectionWrapper}>
-          <section className={styles.leftSection}>
-            <div className={styles.leftSectionFixed}>
-              <nav>{/* <Vip_Info_SideNav /> */}</nav>
-            </div>
-          </section>
-        </header>
-        <div className={styles.rightSectionWrapper}>
-          <main className={styles.main}> {children}</main>
-        </div>
-
-        {/* {modal} */}
+        <main className={styles.main}> {children}</main>
       </div>
     </div>
   );

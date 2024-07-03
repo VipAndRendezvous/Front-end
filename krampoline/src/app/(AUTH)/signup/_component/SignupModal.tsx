@@ -1,125 +1,162 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import Image from "next/image";
-import Logo from "../../../../../public/Logo.png";
+import React, { useEffect, useState } from "react";
 import styles from "./signup.module.css";
 import { useUser } from "@/app/utils/UserProvider";
-import axios from "axios";
 import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 
 export default function Signup() {
   const router = useRouter();
   const { kakaoInfo } = useUser();
-  const [isNickVerified, setNickVerified] = useState("");
-  const [isNickButtonEnabled, setIsNickButtonEnabled] = useState(false);
-
-  const [isEmailVerified, setEmailVerified] = useState("");
-  const [isEmailButtonEnabled, setIsEmailButtonEnabled] = useState(false);
-
+  const [nickname, setNickname] = useState("");
+  const [email, setEmail] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
-  const [isVerificationButtonEnabled, setIsVerificationButtonEnabled] =
-    useState(false);
 
-  //닉네임 입력 처리 함수
-  function handleVerifyNick(event) {
-    setNickVerified(event.target.value);
-    if (event.target.value) {
-      setIsNickButtonEnabled(true);
+  const [nicknameValid, setNicknameValid] = useState(false);
+  const [emailValid, setEmailValid] = useState(false);
+  const [verificationCodeValid, setVerificationCodeValid] = useState(false);
+  const [emailDuplicateChecked, setEmailDuplicateChecked] = useState(false);
+
+  const [nicknameError, setNicknameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [verificationCodeError, setVerificationCodeError] = useState("");
+
+  const nicknameRegex = /^[a-z0-9]{8,16}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  useEffect(() => {
+    // Validate nickname and update its related states
+    if (nickname) {
+      if (nicknameRegex.test(nickname)) {
+        setNicknameValid(true);
+        setNicknameError("");
+      } else {
+        setNicknameValid(false);
+        setNicknameError(
+          "닉네임은 영어 소문자, 숫자로 이루어진 8~16 글자로 이루어져야 합니다."
+        );
+      }
     } else {
-      setIsNickButtonEnabled(false);
+      setNicknameValid(false);
     }
-  }
 
-  // 이메일 입력 처리 함수
-  function handleVerifyEmail(event) {
-    setEmailVerified(event.target.value);
-    if (event.target.value) {
-      setIsEmailButtonEnabled(true);
+    // Validate email and update its related states
+    if (email) {
+      if (emailRegex.test(email)) {
+        setEmailValid(true);
+        setEmailError("");
+      } else {
+        setEmailValid(false);
+        setEmailError("이메일 형식이 아닙니다.");
+      }
     } else {
-      setIsEmailButtonEnabled(false);
+      setEmailValid(false);
     }
-  }
 
-  // 인증번호 입력 처리 함수
-  function handleVerificationCodeChange(event) {
-    setVerificationCode(event.target.value);
-    if (event.target.value) {
-      setIsVerificationButtonEnabled(true);
+    // Validate verification code by its length
+    setVerificationCodeValid(verificationCode.length === 8);
+    if (verificationCode.length > 8) {
+      setVerificationCodeError("올바른 인증번호가 아닙니다.");
     } else {
-      setIsVerificationButtonEnabled(false);
+      setVerificationCodeError("");
     }
-  }
-
-  //----------------------------------------------------------------
-  const VerifyNicknameButton = async () => {
+  }, [nickname, email, verificationCode]);
+  const handleVerifyNickname = async () => {
+    if (!nicknameValid) return;
     try {
       const response = await HttpAuthInstance.get(
-        `/api/all/duplicate/nickname/${isNickVerified}`
+        `/api/all/duplicate/nickname/${nickname}`
       );
-      // API 호출 성공 시, 응답 처리
-      console.log("API 호출 결과:", response.data);
-      // 예: 응답으로 받은 데이터를 사용하여 상태 업데이트 또는 사용자에게 알림 등
+      if (response.status === 200) {
+        setNicknameError("사용가능한 닉네임입니다");
+      }
+      console.log("Nickname check result:", response);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const VerifyEmailButton = async () => {
+  const handleCheckEmailDuplicate = async () => {
+    if (!emailValid) return;
+    try {
+      const response = await HttpAuthInstance.get(
+        `/api/all/duplicate/email/${email}`
+      );
+      if (response.status === 200) {
+        setEmailError("사용가능한 이메일입니다");
+        setEmailDuplicateChecked(true); // 중복 검사가 성공적으로 완료되었음을 표시
+      } else {
+        setEmailError("이메일이 이미 사용중입니다.");
+        setEmailDuplicateChecked(false);
+      }
+    } catch (error) {
+      setEmailError("중복 검사 중 오류가 발생했습니다.");
+      setEmailDuplicateChecked(false);
+      console.error(error);
+    }
+  };
+
+  const handleSendEmail = async () => {
+    if (!emailValid || !emailDuplicateChecked) return;
     try {
       const response = await HttpAuthInstance.post(
         `/api/all/email/sendAuthCode`,
-        {
-          email: isEmailVerified,
-        }
+        { email }
       );
-      // API 호출 성공 시, 응답 처리
-      console.log("API 호출 결과:", response.data);
-      // 예: 응답으로 받은 데이터를 사용하여 상태 업데이트 또는 사용자에게 알림 등
+      if (response.status === 200) {
+        setEmailError("이메일로 인증코드를 전송하였습니다. 확인해주세요");
+      } else {
+        setEmailError("이메일 전송에 실패하였습니다.");
+      }
+      console.log("Email send result:", response.data);
     } catch (error) {
+      setEmailError("이메일 전송 중 오류가 발생했습니다.");
       console.error(error);
     }
   };
 
   const handleVerifyCode = async () => {
+    if (!verificationCodeValid) return;
     try {
       const response = await HttpAuthInstance.post(
         `/api/all/email/checkAuthCode`,
         {
-          email: isEmailVerified,
+          email,
           code: verificationCode,
         }
       );
+      if (response.status === 200) {
+        setVerificationCodeError("인증코드가 인증되었습니다");
+      }
 
-      console.log("API 호출 결과:", response.data);
+      console.log("Verification code result:", response.data);
     } catch (error) {
       console.error(error);
     }
   };
-  //----------------------------------------------------------------
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // 폼의 기본 제출 동작을 방지
+    event.preventDefault();
+    if (!nicknameValid || !emailValid || !verificationCodeValid) {
+      alert("Please make sure all fields are valid");
+      return;
+    }
 
-    const formData = new FormData(event.target);
     const body = {
       kakaoId: kakaoInfo.id,
       userName: kakaoInfo.name,
-      nickname: formData.get("nickname"),
-      email: formData.get("email"),
+      nickname,
+      email,
       phoneNumber: kakaoInfo.phoneNumber,
       profileImgUrl: kakaoInfo.profileImgUrl,
     };
 
     try {
-      const response = await HttpAuthInstance({
-        method: "post",
-        url: `/api/all/signup`,
-        data: body,
+      const response = await HttpAuthInstance.post("/api/all/signup", body, {
         withCredentials: true,
       });
-
       if (response.status === 200) {
+        alert("🎉환영합니다!🎉 가입이 완료되었습니다🙌");
         router.replace("/");
       }
     } catch (error) {
@@ -137,29 +174,41 @@ export default function Signup() {
             <label htmlFor="name">이름</label>
           </div>
           <input name="name" defaultValue={kakaoInfo?.name} readOnly />
+          <span className={styles.error}></span>
           <label htmlFor="nickname">닉네임</label>
           <div className={styles["input-group"]}>
             <input
               type="text"
               id="nickname"
               name="nickname"
-              value={isNickVerified}
-              onChange={handleVerifyNick}
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
               required
             />
             <button
               type="button"
               className={
-                isNickButtonEnabled
-                  ? styles["verify-btn-active"]
+                nicknameValid
+                  ? styles["verify-btn-active-yellow"]
                   : styles["verify-btn"]
               }
-              disabled={!isNickButtonEnabled}
-              onClick={VerifyNicknameButton}
+              disabled={!nicknameValid} // `nicknameValid`가 참일 때만 버튼 활성화
+              onClick={handleVerifyNickname}
             >
               중복확인
             </button>
           </div>
+
+          <span
+            className={
+              nicknameError === "사용가능한 닉네임입니다"
+                ? `${styles.error} ${styles.success}`
+                : styles.error
+            }
+          >
+            {nicknameError}
+          </span>
+
           <div>
             <label htmlFor="phone">전화번호</label>
             <input
@@ -168,6 +217,7 @@ export default function Signup() {
               readOnly
             />
           </div>
+          <span className={styles.error}></span>
           <label htmlFor="email">이메일</label>
           <div className={styles["input-group"]}>
             <input
@@ -175,46 +225,93 @@ export default function Signup() {
               id="email"
               name="email"
               required
-              value={isEmailVerified}
-              onChange={handleVerifyEmail}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <button
-              type="button"
-              className={
-                isEmailButtonEnabled
-                  ? styles["verify-btn-active"]
-                  : styles["verify-btn"]
-              }
-              disabled={!isEmailButtonEnabled}
-              onClick={VerifyEmailButton}
-            >
-              전송
-            </button>
+            {!emailDuplicateChecked ? (
+              <button
+                type="button"
+                className={
+                  emailValid
+                    ? styles["verify-btn-active-yellow"]
+                    : styles["verify-btn"]
+                }
+                disabled={!emailValid}
+                onClick={handleCheckEmailDuplicate}
+              >
+                중복확인
+              </button>
+            ) : (
+              <button
+                type="button"
+                className={styles["verify-btn-active-yellow"]}
+                onClick={handleSendEmail}
+              >
+                전송
+              </button>
+            )}
           </div>
-          <label htmlFor="verification">이메일 인증 번호</label>
+          <span
+            className={
+              emailError === "사용가능한 이메일입니다" ||
+              emailError === "이메일로 인증코드를 전송하였습니다. 확인해주세요"
+                ? `${styles.error} ${styles.success}`
+                : styles.error
+            }
+          >
+            {emailError}
+          </span>
+          <label htmlFor="verification">인증 번호 입력</label>
           <div className={styles["input-group"]}>
             <input
               type="text"
               id="verification"
               name="verification"
               value={verificationCode}
-              onChange={handleVerificationCodeChange}
+              onChange={(e) => setVerificationCode(e.target.value)}
               required
             />
             <button
               type="button"
               className={
-                isVerificationButtonEnabled
+                verificationCodeValid
                   ? styles["verify-btn-active-yellow"]
-                  : styles["verify-btn-yellow"]
+                  : styles["verify-btn"]
               }
-              disabled={!isVerificationButtonEnabled}
+              disabled={!verificationCodeValid} // `verificationCodeValid`가 참일 때만 버튼 활성화
               onClick={handleVerifyCode}
             >
               인증
             </button>
           </div>
-          <button type="submit" className={styles["signup-btn"]}>
+          <span
+            className={
+              verificationCodeError === "인증코드가 인증되었습니다"
+                ? `${styles.error} ${styles.success}`
+                : styles.error
+            }
+          >
+            {verificationCodeError}
+          </span>
+          <button
+            type="submit"
+            className={
+              !nicknameValid ||
+              !emailValid ||
+              !verificationCodeValid ||
+              !emailDuplicateChecked ||
+              verificationCodeError !== "인증코드가 인증되었습니다"
+                ? styles["signup-btn"]
+                : styles["signup-btn-active"]
+            }
+            disabled={
+              !nicknameValid ||
+              !emailValid ||
+              !verificationCodeValid ||
+              !emailDuplicateChecked ||
+              verificationCodeError !== "인증코드가 인증되었습니다"
+            }
+          >
             가입하기
           </button>
         </form>

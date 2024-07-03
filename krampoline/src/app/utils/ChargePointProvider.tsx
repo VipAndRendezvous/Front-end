@@ -174,6 +174,9 @@ export function ChargePointProvider({
         });
         if (response.status === 200) {
           console.log(response);
+          alert(
+            "성공적으로 출금 신청이 완료되었습니다. 영업일 기준 3일 이내에 처리될 예정입니다."
+          );
           window.location.href = "/";
         }
       } catch (error) {

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Modal from "react-modal";
 import AuctionInfo_Img from "/public/detailInfo.png";
@@ -14,6 +14,7 @@ import { usePathname } from "next/navigation";
 import axios from "axios";
 import { useUser } from "@/app/utils/UserProvider";
 import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
+import styles from "./page.module.css";
 
 const Page = () => {
   const pathname = usePathname();
@@ -21,27 +22,24 @@ const Page = () => {
   const auctionInfoRef = useRef<HTMLDivElement | null>(null);
   const auctionWarningRef = useRef<HTMLDivElement | null>(null);
   const auctionMapRef = useRef<HTMLDivElement | null>(null);
-  const [isOpen, setIsOpen] = useState<boolean>(false); //추가
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
   const { ticketInfo, setTicketInfo, setglobalTicketUUID } = useUser();
   const [ticketUUID, setTicketUUID] = useState("");
+  const [selectedSection, setSelectedSection] = useState<string>("");
 
   useEffect(() => {
     setCurrPath(pathname);
     let extractedTicketUUID = pathname.replace("/ticketdetail/", "");
     setTicketUUID(extractedTicketUUID);
-    setglobalTicketUUID(extractedTicketUUID); // Update ticketUUID state here
+    setglobalTicketUUID(extractedTicketUUID);
   }, [pathname]);
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        // Extract ticketUUID from pathname
         const extractedTicketUUID = pathname.replace("/ticketdetail/", "");
-
-        // Make API call with extracted ticketUUID
-        const token = localStorage.getItem("Authorization");
         const response = await HttpAuthInstance.get(
           `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/${extractedTicketUUID}`
         );
@@ -57,32 +55,42 @@ const Page = () => {
       }
     };
 
-    fetchData(); // Call fetchData immediately after component mounts
-  }, [pathname]); // Run useEffect whenever pathname changes
+    fetchData();
+  }, [pathname]);
 
   const scrollToAuctionInfo = () => {
     if (auctionInfoRef.current) {
-      // auctionInfoRef.current가 존재하는지 확인
-      auctionInfoRef.current.scrollIntoView({ behavior: "smooth" });
+      const offsetTop =
+        auctionInfoRef.current.getBoundingClientRect().top +
+        window.pageYOffset -
+        80;
+      window.scrollTo({ top: offsetTop, behavior: "smooth" });
+      setSelectedSection("auctionInfo");
     }
   };
 
   const scrollToAuctionWarning = () => {
     if (auctionWarningRef.current) {
-      // auctionWarningRef.current가 존재하는지 확인
-      auctionWarningRef.current.scrollIntoView({ behavior: "smooth" });
+      const offsetTop =
+        auctionWarningRef.current.getBoundingClientRect().top +
+        window.pageYOffset -
+        80;
+      window.scrollTo({ top: offsetTop, behavior: "smooth" });
+      setSelectedSection("auctionWarning");
     }
   };
 
   const scrollToMapInfo = () => {
     if (auctionMapRef.current) {
-      auctionMapRef.current.scrollIntoView({ behavior: "smooth" });
+      const offsetTop =
+        auctionMapRef.current.getBoundingClientRect().top +
+        window.pageYOffset -
+        80;
+      window.scrollTo({ top: offsetTop, behavior: "smooth" });
+      setSelectedSection("mapInfo");
     }
   };
 
-  //----------------------------------------------------------------
-
-  // Modal 스타일
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0,0,0,0.5)",
@@ -97,19 +105,16 @@ const Page = () => {
     },
   };
 
-  // 검색 클릭
   const toggle = () => {
     setIsOpen(!isOpen);
   };
 
-  // 모달을 닫는 함수
   const closeModal = () => {
     setIsOpen(false);
   };
-  //----------------------------------------------------------------
+
   const cancelTicket = async (event) => {
     try {
-      const token = localStorage.getItem("Authorization");
       const response = await HttpAuthInstance.patch(
         `/api/ticket/cancel/${ticketUUID}`
       );
@@ -122,48 +127,80 @@ const Page = () => {
       console.error("Error submitting report:", error);
     }
   };
+  console.log("여기", ticketInfo);
 
-  //----------------------------------------------------------------
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div>
+      <div className={styles.rectangleParent}>
+        <div className={styles.rectangle} />
+        <div className={styles.header}>
+          <div className={styles.headerWrapper}>
+            {ticketInfo.organizerNickname}와의 식사권
+            <button className={styles.CancelBtn} onClick={cancelTicket}>
+              식사권 취소하기
+            </button>
+          </div>
+        </div>
+      </div>
       <div>
         <AuctionTicketInfo />
       </div>
-      <div>
-        <div className="AuctionInfo-btn-Container">
-          <button className="btn-basic" onClick={scrollToAuctionInfo}>
-            이 만남은 이런거에요
-          </button>
-          <button className="btn-basic" onClick={scrollToAuctionWarning}>
-            이것 만큼은 지켜주세요
-          </button>
-          <button className="btn-basic" onClick={scrollToMapInfo}>
-            지도
-          </button>
-        </div>
-        <button className="btn-basic" onClick={cancelTicket}>
-          식사권 취소하기
+
+      <div className={styles.MenuContainer}>
+        <button
+          className={
+            selectedSection === "auctionInfo"
+              ? styles.selected
+              : styles.unselected
+          }
+          onClick={scrollToAuctionInfo}
+        >
+          경매 소개
+        </button>
+        <button
+          className={
+            selectedSection === "auctionWarning"
+              ? styles.selected
+              : styles.unselected
+          }
+          onClick={scrollToAuctionWarning}
+        >
+          경매 수칙
+        </button>
+        <button
+          className={
+            selectedSection === "mapInfo" ? styles.selected : styles.unselected
+          }
+          onClick={scrollToMapInfo}
+        >
+          식사 위치
         </button>
       </div>
-      <div ref={auctionInfoRef}>
-        <Image
-          src={AuctionInfo_Img}
-          alt="AuctionInfo_Img"
-          width={600}
-          style={{ objectFit: "cover" }}
-        />
-      </div>
-      <div ref={auctionWarningRef}>
-        <Image
-          src={AuctionInfo_warning}
-          alt="AuctionInfo_warning"
-          width={600}
-          style={{ objectFit: "cover" }}
-        />
-      </div>
+      <div className={styles.textContainer}>
+        <div className={styles.section} ref={auctionInfoRef}>
+          <div className={styles.rectangle1} />
+          <div className={styles.subtitle}>이 만남은요,</div>
+          <div
+            dangerouslySetInnerHTML={{ __html: ticketInfo.meetingInfoText }}
+          />
+        </div>
+        <div className={styles.section} ref={auctionWarningRef}>
+          <div className={styles.rectangle2} />
+          <div className={styles.subtitle}>이것만큼은 꼿 지켜주세요.</div>
+          <div
+            dangerouslySetInnerHTML={{ __html: ticketInfo.meetingPromiseText }}
+          />
+        </div>
 
-      <div ref={auctionMapRef}>
-        <TicketDetailMap />
+        <div className={styles.map} ref={auctionMapRef}>
+          <div className={styles.rectangle3} />
+          <div className={styles.subtitle}>여기서 만나요.</div>
+          <div className={styles.address}>{ticketInfo.meetingLocation}</div>
+          <TicketDetailMap address={ticketInfo.meetingLocation} />
+        </div>
       </div>
       <Modal
         isOpen={isOpen}

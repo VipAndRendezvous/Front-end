@@ -7,46 +7,55 @@ import { useState } from "react";
 
 type Props = {
   vipfollwing: FollowingUser;
+  handleUnfollow: (followUUID: string) => void;
 };
 
-const FollowContainer = ({ vipfollwing }: Props) => {
-  const { following, unfollowing } = useUser();
-  const [isFollowed, setIsFollowed] = useState(false); // 팔로우 상태 관리
+const FollowContainer = ({ vipfollwing, handleUnfollow }: Props) => {
+  const [isFollowed, setIsFollowed] = useState(true); // 팔로우 상태 관리
 
   const toggleFollow = () => {
     // 팔로우 상태에 따라 함수 호출
     if (isFollowed) {
-      unfollowing(vipfollwing.followUUID);
-    } else {
-      following(vipfollwing.followUUID);
+      handleUnfollow(vipfollwing.followUUID);
+      setIsFollowed(false);
     }
-    // 팔로우 상태 토글
-    setIsFollowed(!isFollowed);
   };
+
+  const profileImages = [
+    "/user/1.jpg",
+    "/user/2.jpg",
+    "/user/3.jpg",
+    "/user/4.jpg",
+    "/user/5.jpg",
+    "/user/6.jpg",
+  ];
+
+  // useState를 사용하여 컴포넌트가 처음 로딩될 때 한 번만 랜덤 이미지를 선택하도록 합니다.
+  const [randomImage, setRandomImage] = useState(
+    profileImages[Math.floor(Math.random() * profileImages.length)]
+  );
+
   return (
     <div className={styles.VIPFallowList}>
-      <div className={styles.VIPtext}>팔로우중인 VIP</div>
-
       <div className={styles.VIPFallowContainer}>
-        <div>
+        <div className={styles.followerPic}>
           <Image
             src={
               vipfollwing.profileImgUrl.startsWith("http")
                 ? vipfollwing.profileImgUrl
-                : ProfilePic
+                : randomImage
             }
             alt="ProfilePic"
-            width={40}
-            height={40}
-            style={{ objectFit: "cover" }}
+            width={24}
+            height={24}
+            style={{ objectFit: "cover", borderRadius: "50%" }}
           />
+          <div className={styles.followerNickname}>{vipfollwing.nickname}</div>{" "}
         </div>
-        <div>{vipfollwing.nickname}</div>
-        <button onClick={toggleFollow} className="btn-basic">
+        <button onClick={toggleFollow} className={styles.followerbutton}>
           {isFollowed ? "언팔로우" : "팔로우"}
         </button>
       </div>
-      <hr />
     </div>
   );
 };

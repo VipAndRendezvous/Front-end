@@ -3,6 +3,11 @@ import { truncateSync } from "fs";
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  webpack5: true,
+  webpack: (config, options) => {
+    config.cache = false;
+    return config;
+  },
   images: {
     domains: [
       "k.kakaocdn.net",

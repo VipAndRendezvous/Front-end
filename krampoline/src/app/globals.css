@@ -2,8 +2,8 @@
 body {
   margin: 0;
   line-height: normal;
-  min-width: 1600px;
 }
 
 html {
+  height: auto;
 }
