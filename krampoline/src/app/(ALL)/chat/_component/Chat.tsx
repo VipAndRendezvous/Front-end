@@ -5,6 +5,7 @@ import ReportModal from "./ChatReportModal";
 import Modal from "react-modal";
 import TicketOwnerController from "../../ticketdetail/_component/TicketOwnerController";
 import { useUser } from "@/app/utils/UserProvider";
+import moment from "moment";
 
 // 환경 변수 한 번만 참조하기
 const NEXT_PUBLIC_WS_PROXY = process.env.NEXT_PUBLIC_WS_PROXY;
@@ -63,34 +64,35 @@ const useWebSocket = (chatRoomUUID) => {
 
   return { chatMessages, sendMessage };
 };
+
 const Message = ({ message, isCurrentUser }) => {
   const messageClass = isCurrentUser
     ? styles.currentUserMessage
     : styles.otherUserMessage;
 
+  const formattedTime = moment(message?.sendTime).format("YY-MM-DD HH:mm");
   return (
-    <div className={`${styles.message} ${messageClass}`}>
+    <div className={styles.messageWrapper}>
       <div className={styles.messageSender}>
-        {isCurrentUser ? "나" : message.nickname}
+        {isCurrentUser ? "나" : message?.nickname || "Unknown"}
       </div>
-      <div className={styles.messageContent}>{message.content}</div>
-      <div className={styles.messageMetadataTalk}>
-        <span>{message.sendTime}</span>
+      <div className={`${styles.message} ${messageClass}`}>
+        <div className={styles.messageContent}>{message?.content || ""}</div>
       </div>
+      <span className={styles.messageTime}>{formattedTime}</span>
     </div>
   );
 };
 
-const Chat = () => {
+const Chat = ({ chatRoomUUID }) => {
   const chatBodyRef = useRef(null);
   const [isOpenReportModal, setIsOpenReportModal] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [showChat, setShowChat] = useState(false);
   const [token, setToken] = useState(null);
-  const { globalTicketUUID, userInfo, isLoading } = useUser();
-  const { chatMessages, sendMessage } = useWebSocket(
-    globalTicketUUID.chatRoomUUID
-  );
+  const { userInfo, isLoading } = useUser();
+  const { chatMessages, sendMessage } = useWebSocket(chatRoomUUID);
+  const { ticketInfo } = useUser();
 
   useEffect(() => {
     const tokenFromStorage = localStorage.getItem("Authorization");
@@ -108,15 +110,17 @@ const Chat = () => {
   useEffect(() => {
     scrollToBottom();
   }, [chatMessages]);
-  if (isLoading || !globalTicketUUID || !userInfo) {
+
+  if (isLoading || !chatRoomUUID || !userInfo) {
     return <div>Loading...</div>;
   }
+
   // 메시지 전송 함수
   const sendMSG = () => {
     if (token) {
       const message = {
         accessToken: token,
-        chatRoomUUID: globalTicketUUID.chatRoomUUID,
+        chatRoomUUID: chatRoomUUID,
         message: inputValue,
         isChatMessage: true,
       };
@@ -135,45 +139,62 @@ const Chat = () => {
   return (
     <div className={styles.chatContainer}>
       <div className={styles.chatHeader}>
-        <button
-          onClick={() => setShowChat(true)}
-          className={styles["btn-basic"]}
-        >
-          뒤로가기
-        </button>
-        <button
+        <div className={styles.back} onClick={() => setShowChat(true)}>
+          <svg
+            width="8"
+            height="12"
+            viewBox="0 0 8 12"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0.512 5.862L5.986 0.402L7.26 1.704L3.102 5.862L7.26 10.034L5.986 11.322L0.512 5.862Z"
+              fill="#333333"
+            />
+          </svg>
+        </div>
+        <div className={styles.FAQTitle}>
+          {ticketInfo?.organizerNickname || "Unknown"} 채팅
+        </div>
+        <div
           onClick={() => setIsOpenReportModal(true)}
-          className="btn-basic"
+          className={styles.report}
         >
-          신고하기
-        </button>
+          신고
+        </div>
+      </div>
+      <div className={styles.warningWrapper}>
+        <div className={styles.warning}>
+          채팅 내용은 상시 모니터링되고 있습니다. 상대에게 모욕감이나 불쾌감을
+          줄 경우 제재를 받을 수 있습니다.
+        </div>
       </div>
       <div className={styles.chatBody} ref={chatBodyRef}>
         {chatMessages.map((msg, index) => (
           <Message
             key={index}
             message={msg}
-            isCurrentUser={msg.nickname === userInfo.nickname}
+            isCurrentUser={msg?.nickname === userInfo?.nickname}
           />
         ))}
       </div>
       <div className={styles.chatFooter}>
-        <input
-          type="text"
+        <textarea
           className={styles.messageInput}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyPress={(e) => e.key === "Enter" && sendMSG()}
+          placeholder="내용을 입력해주세요"
         />
-        <button onClick={sendMSG} className="btn-basic">
-          보내기
+        <button onClick={sendMSG} className={styles.sendButton}>
+          전송
         </button>
       </div>
       <Modal
         isOpen={isOpenReportModal}
         onRequestClose={() => setIsOpenReportModal(false)}
-        className={styles["modal-content"]}
-        overlayClassName={styles["modal-overlay"]}
+        className={styles.modalContent}
+        overlayClassName={styles.overlay}
         ariaHideApp={false}
       >
         <ReportModal onReportClose={() => setIsOpenReportModal(false)} />

@@ -2,6 +2,7 @@ import styles from "./ticketBox.module.css";
 import ProfilePic from "../../../public/user.png";
 import { MyPage } from "@/models/MyPage";
 import Link from "next/link";
+import { useState } from "react";
 
 type Props = {
   ticket: MyPage;

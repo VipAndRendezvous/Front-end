@@ -4,11 +4,7 @@ import React from "react";
 import Chat from "./_component/Chat";
 
 function Page() {
-  return (
-    <>
-      <Chat />
-    </>
-  );
-};
+  return <>{/* <Chat /> */}</>;
+}
 
 export default Page;

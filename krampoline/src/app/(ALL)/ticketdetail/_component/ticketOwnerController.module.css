@@ -1,20 +1,157 @@
 .TicketControllerWrapper {
-  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
   position: fixed;
-  width: 650px;
+  width: 468px;
+  height: 700px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.header {
+  width: 100%;
+  position: relative;
+  border-radius: 10px 10px 0px 0px;
+  background-color: #fff741;
+  height: 45px;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: center;
+}
+
+.FAQTitle {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.TicketInfoWrapper {
+  width: 428px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.title {
+  width: 428px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-start;
+  position: relative; /* position: relative 추가 */
+}
+
+.TicketControllerWrapper {
+}
+
+.InfoWrapper {
+  width: 100%;
+  position: relative;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  font-family: SUIT;
+  margin-top: 9px;
+}
+
+.InfoOne {
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.InfoWarning {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: -0.04em;
+  line-height: 15px;
+  font-family: SUIT;
+  color: #ff3d00;
+  text-align: left;
+  display: inline-block;
+}
+.rectangle1 {
+  position: absolute;
+  bottom: 5px; /* 부모 요소의 아래에 위치하도록 설정 */
+  left: 21px;
+  background-color: #fff741;
+  width: 71px;
+  height: 5px; /* 원하는 밑줄 두께로 조정 */
+  z-index: -1; /* 텍스트 위에 겹치지 않도록 설정 */
+}
+.rectangle2 {
+  position: absolute;
+  bottom: 5px; /* 부모 요소의 아래에 위치하도록 설정 */
+  left: 21px;
+  background-color: #fff741;
+  width: 58px;
+  height: 5px; /* 원하는 밑줄 두께로 조정 */
+  z-index: -1; /* 텍스트 위에 겹치지 않도록 설정 */
+}
+
+.rectangle3 {
+  position: absolute;
+  bottom: 5px; /* 부모 요소의 아래에 위치하도록 설정 */
+  left: 21px;
+  background-color: #fff741;
+  width: 147px;
+  height: 5px; /* 원하는 밑줄 두께로 조정 */
+  z-index: -1; /* 텍스트 위에 겹치지 않도록 설정 */
+}
+.rectangle4 {
+  position: absolute;
+  bottom: 5px; /* 부모 요소의 아래에 위치하도록 설정 */
+  left: 21px;
+  background-color: #fff741;
+  width: 28px;
+  height: 5px; /* 원하는 밑줄 두께로 조정 */
+  z-index: -1; /* 텍스트 위에 겹치지 않도록 설정 */
+}
+.p {
+  margin: 0;
+}
+.vip {
+  margin: 0;
+  font-family: inherit;
+  font-size: 12px;
+  padding-left: 16px;
+}
+.subtitle {
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  z-index: 1; /* 텍스트를 밑줄 위에 오도록 설정 */
+}
 .AddAuctionTitle {
-  width: 650px;
+  width: 100%;
   margin: 50px 0;
   font-size: 80px;
 }
 
 .AddAuctionSelect {
-  width: 650px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   font-size: 30px;
@@ -33,15 +170,6 @@
 .AddAuctionText li {
   list-style: none;
   text-align: start;
-}
-.TicketInfoWrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  height: 300px;
-  justify-content: space-around;
-
-  align-items: center;
 }
 
 .TicketInfoButtonContainer {
@@ -85,4 +213,117 @@
   align-items: center;
   text-align: center;
   height: 100%;
+}
+
+.TicketMeetButtonContainer {
+  width: 428px;
+  height: 37px;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 67px;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  font-family: SUIT;
+  cursor: pointer;
+}
+
+.chattingWrapper {
+  width: 468px;
+  position: relative;
+  border-radius: 0px 0px 10px 10px;
+  background-color: #fff741;
+  height: 45px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 67px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  font-family: SUIT;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-weight: 800;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.dma {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: -0.04em;
+  line-height: 15px;
+  color: #ff3d00;
+  text-align: center;
+  display: inline-block;
+  font-family: SUIT;
+}
+
+.InfoWrapper1 {
+  width: 100%;
+  position: relative;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  font-family: SUIT;
+  margin-top: 9px;
+  margin-bottom: 20px;
+}
+
+.modalOverlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* 배경 색상을 설정하여 모달 뒤의 내용을 흐리게 함 */
+  z-index: 1000; /* 다른 요소보다 모달이 위에 오도록 설정 */
+}
+
+.modalContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  width: 427px;
+  height: 588px;
+  max-height: 90%;
+  overflow: auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  overflow: hidden;
+  outline: none;
 }

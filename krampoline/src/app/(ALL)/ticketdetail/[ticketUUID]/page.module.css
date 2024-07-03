@@ -1,0 +1,193 @@
+.header {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  letter-spacing: -0.04em;
+  line-height: 42px;
+  font-weight: 800;
+}
+
+.rectangle {
+  position: absolute;
+  top: 28px;
+  left: 0px;
+  background-color: #fff741;
+  width: 150px;
+  height: 9px;
+}
+
+.rectangleParent {
+  width: 100%;
+  position: relative;
+  height: 42px;
+  text-align: left;
+  font-size: 28px;
+  color: #333;
+  font-family: SUIT;
+}
+
+.headerWrapper {
+  width: 668px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.CancelBtn {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  width: 114px;
+  height: 37px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  font-family: SUIT;
+}
+.MenuContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 668px;
+  margin-top: 40px;
+}
+
+.Button {
+  flex: 1; /* 버튼이 동일한 너비를 가지도록 설정 */
+  background-color: #fff;
+  border: none;
+  border-bottom: 1px solid #949597;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0px; /* 버튼 높이 조정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  font-size: 16px;
+  color: #949597;
+  font-family: "SUIT", sans-serif;
+  cursor: pointer; /* 커서 모양 변경 */
+  width: 221px;
+}
+
+.Button a {
+  background-color: #fff741; /* 선택된 버튼의 배경색 */
+  border-bottom: 2px solid #333; /* 선택된 버튼의 하단 경계선 */
+  color: #333; /* 선택된 버튼의 텍스트 색상 */
+}
+
+.selected {
+  background-color: #fff741; /* 선택된 버튼의 배경색 */
+  border: none;
+  border-bottom: 2px solid #333;
+  color: #333; /* 선택된 버튼의 텍스트 색상 */
+  flex: 1; /* 버튼이 동일한 너비를 가지도록 설정 */
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0px; /* 버튼 높이 조정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  font-size: 16px;
+  font-family: "SUIT", sans-serif;
+  cursor: pointer; /* 커서 모양 변경 */
+  width: 221px;
+}
+
+.unselected {
+  flex: 1; /* 버튼이 동일한 너비를 가지도록 설정 */
+  background-color: #fff;
+  border: none;
+  border-bottom: 1px solid #949597;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0px; /* 버튼 높이 조정 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  font-size: 16px;
+  color: #949597;
+  font-family: "SUIT", sans-serif;
+  cursor: pointer; /* 커서 모양 변경 */
+}
+
+.textContainer {
+  width: 608px;
+  position: absolute;
+  border-radius: 10px;
+  background-color: #fafafa;
+  margin-top: 25px;
+  margin-bottom: 100px;
+  padding: 24px 30px 24px 30px;
+}
+
+.map {
+  width: 608px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.subtitle {
+  position: relative;
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  line-height: 30px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.address {
+  width: 368px;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #333;
+  text-align: justify;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.rectangle1 {
+  position: relative;
+  top: 24px;
+  background-color: #fff741;
+  width: 94px;
+  height: 9px;
+}
+.rectangle2 {
+  position: relative;
+  top: 24px;
+
+  background-color: #fff741;
+  width: 197px;
+  height: 9px;
+}
+.rectangle3 {
+  position: relative;
+  top: 24px;
+  background-color: #fff741;
+  width: 110px;
+  height: 9px;
+}

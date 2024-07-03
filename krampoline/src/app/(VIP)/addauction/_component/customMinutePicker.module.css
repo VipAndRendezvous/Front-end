@@ -1,0 +1,64 @@
+@import "react-datepicker/dist/react-datepicker.css";
+
+.minutePicker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #aeaeae;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 80px; /* 가로 100px */
+  height: 200px; /* 세로 200px */
+  overflow-y: auto; /* 세로 스크롤 추가 */
+  overflow-x: hidden; /* 가로 스크롤 숨기기 */
+}
+
+.minutePickerHeader {
+  margin-top: 10px;
+  width: 24px;
+  font-weight: 800;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #333;
+  text-align: center;
+  display: inline-block;
+}
+
+.minutePickerBody {
+  display: flex;
+  flex-direction: column; /* 세로로 배치 */
+  align-items: center;
+  padding: 10px;
+}
+
+.minute {
+  width: 60px; /* 선택기 내부 아이템 너비 */
+  height: 30px; /* 선택기 내부 아이템 높이 */
+  margin: 2px 0; /* 위아래 간격 조정 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid transparent;
+}
+
+.minute:hover {
+  background-color: #f0f0f0;
+}
+
+.selected {
+  background-color: #fff741;
+  color: #333;
+  border-color: #fff741;
+}

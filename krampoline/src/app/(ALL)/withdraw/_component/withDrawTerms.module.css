@@ -1,83 +1,339 @@
-.WithDrawContainer {
+.ChargePointContainer {
+  height: 813px;
   display: flex;
   flex-direction: column;
+}
+
+.ChargePointTitle {
+  width: 124px;
+  position: relative;
+  font-size: 28px;
+  letter-spacing: -0.04em;
+  line-height: 42px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+  margin-bottom: 40px;
+}
+
+.subscribeInfo {
+  width: 868px;
+  display: flex;
+  flex-direction: row;
+}
+
+.subscribeInfo2 {
+  width: 868px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+}
+
+.subTitle {
+  width: 200px;
+  position: relative;
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.subInfoTitle {
+  width: 131px;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.subInfoData {
+  width: 120px;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.subInfoWrapper {
+  width: 668px;
+  border-top: 1px solid #333333;
+}
+
+.subInfoContainer {
+  margin-top: 12px;
+}
+
+.rightTerm {
+  margin: 16px 12px 16px 16px;
+  width: 650px;
+  max-height: 179px;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: overlay;
+  position: relative;
+  font-size: 12px;
+  letter-spacing: -0.04em;
+  line-height: 18px;
+  font-family: SUIT;
+  color: #949597;
+  text-align: left;
+  display: -webkit-inline-box;
+}
+
+div.rightTerm::-webkit-scrollbar {
+  width: 4px;
+}
+
+div.rightTerm::-webkit-scrollbar-thumb {
+  outline: none;
+  border-radius: 10px;
+  border: 4px solid transparent;
+  background-color: rgba(224, 224, 224, 0.5);
+  width: 4px;
+}
+
+div.rightTerm::-webkit-scrollbar-track {
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.rightTerm pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.rightBox {
+  width: 669px;
+  position: relative;
+  border-radius: 10px;
+  background-color: #fafafa;
+  max-height: 209px;
+  margin-top: 12px;
+}
+
+.rightCheck {
+  display: flex;
+  justify-content: start;
+  margin-top: 13px;
   align-items: center;
-  margin: 0 auto; /* 좌우 중앙 정렬 */
-  height: 900px;
+}
+
+.TermCheckBoxText {
+  width: 312px;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.TermCheckBoxText1 {
+  width: 8px;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #ff3d00;
+  text-align: left;
+  display: inline-block;
+}
+
+.TermCheckBox {
+  width: 24px; /* 체크박스 크기 조정 */
+  height: 24px; /* 체크박스 크기 조정 */
+  margin-right: 4px; /* 체크박스와 텍스트 사이 간격 */
+  cursor: pointer; /* 마우스 오버 시 포인터 모양 변경 */
+  accent-color: #fff741;
+}
+
+.subInfoContainer2 input {
+  width: 261px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  outline: none;
+  height: 26px;
+}
+
+.subInfoContainer2 input::placeholder {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: -0.04em;
+  line-height: 15px;
+  font-family: SUIT;
+  color: #ff3d00;
+  text-align: left;
+  display: inline-block;
+}
+
+.subInfoContainer3 input {
+  width: 261px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  outline: none;
+  height: 26px;
+}
+
+.subInfoContainer3 input::placeholder {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: -0.04em;
+  line-height: 15px;
+  font-family: SUIT;
+  color: #949597;
+  text-align: left;
+  display: inline-block;
+}
+
+.subInfoData2 {
+  width: 100px;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.chargeButton {
+  margin-top: 80px;
+  width: 168px;
+  position: relative;
+  background-color: #d9d9d9;
+  height: 45px;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #fff;
+  font-family: SUIT;
+  border: none;
+}
+
+.chargeButtonActive {
+  margin-top: 80px;
+  width: 168px;
+  position: relative;
+  background-color: #fff741;
+  height: 45px;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #333333;
+  font-family: SUIT;
+  border: none;
+}
+.subInfoWrapper2 {
+  width: 668px;
+  border-top: 1px solid #333333;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.subInfoWrapper3 {
+  width: 668px;
+
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 
-.WithDrawContainer h1 {
-  margin-top: 50px;
-}
-
-.WithDrawInputContainer {
+.ChargePointButtonGroup {
+  margin-left: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 4px;
+  width: 268px;
   align-items: center;
-  width: 50%;
 }
 
-.WithDrawInput {
-  margin-bottom: 50px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.WithDrawInput input {
-  flex: 1;
-  padding: 8px 12px;
-  margin-right: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease-in-out;
-}
-
-.WithDrawInput input:focus {
-  border-color: #4a90e2;
-  outline: none;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1),
-    0 0 0 2px rgba(74, 144, 226, 0.5);
-}
-
-.WithDrawTermsContainer {
-  align-items: center;
-  width: 355px;
-  text-align: center;
-}
-
-.WithDrawButtonGroup {
+.btn-basic {
+  position: relative;
+  border-radius: 3px;
+  background-color: #fff741;
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
-  margin-top: 10px;
+  justify-content: center;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 10px;
+  color: #333;
+  font-family: SUIT;
+  height: 30px;
+  cursor: pointer;
+  border: none;
 }
 
-.WithDrawInfoInput {
+.subInfoContainer2 {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 10px;
-  margin-bottom: 10px;
+  flex-direction: row;
+  margin-top: 12px;
+  width: 400px;
 }
 
-.WithDrawInfoInput input {
-  flex: 1;
-  padding: 8px 12px;
+.subInfoContainer3 {
+  display: flex;
+  flex-direction: row;
+  margin-top: 12px;
+  width: 500px;
+}
+
+.subInfoTitle2 {
+  width: 11px;
+  position: relative;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease-in-out;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
 }
 
-.WithDrawInfoInput input:focus {
-  border-color: #4a90e2;
-  outline: none;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1),
-    0 0 0 2px rgba(74, 144, 226, 0.5);
+.selectBank {
+  background-color: #fff;
+  border: 1px solid #333;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 12px;
+  gap: 8px;
+  text-align: left;
+  font-size: 12px;
+  color: #949597;
+  font-family: SUIT;
+  margin-right: 8px;
+  margin-left: 25px;
 }

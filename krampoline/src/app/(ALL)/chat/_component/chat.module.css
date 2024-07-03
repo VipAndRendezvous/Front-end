@@ -1,10 +1,11 @@
 .chatContainer {
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  height: 600px;
-  margin: 0 auto; /* 가로 중앙 정렬을 위해 추가 */
-  border: 1px solid black;
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  height: 680px;
 }
 
 .chatHeader {
@@ -19,6 +20,7 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
+  height: 420px;
 }
 
 .message {
@@ -31,28 +33,76 @@
 
 .chatFooter {
   display: flex;
-  padding: 10px;
+  border-top: 1px solid #ccc;
+  flex-direction: column;
 }
 
 .messageInput {
-  flex: 1;
-  margin-right: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-}
-.chat-input button {
-  /* 버튼 스타일링 */
+  width: 428px;
+  position: relative;
+  background-color: #fafafa;
+  height: 80px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #949597;
+  font-family: SUIT;
+  resize: none;
+  margin-top: 12px;
+  margin-left: 20px;
+  border: none;
+  outline: none; /* 기본 포커스 아웃라인 제거 */
 }
 
-/* 모달 오버레이 스타일 */
-.modal-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+.sendButton {
+  position: relative;
+  border-radius: 5px;
+  background-color: #fff741;
+  width: 60px;
+  height: 37px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  font-family: SUIT;
+  border: none;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-right: 20px;
+  margin-top: 8px;
+}
+
+.overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* 배경 색상을 설정하여 모달 뒤의 내용을 흐리게 함 */
+  z-index: 1000; /* 다른 요소보다 모달이 위에 오도록 설정 */
 }
 
 /* 모달 콘텐츠 스타일 */
-.modal-content {
+.modalContent {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -60,31 +110,128 @@
   bottom: auto;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  width: 500px;
-  height: 300px;
+  width: 427px;
+  height: 588px;
   max-height: 90%;
-  padding: 20px;
   overflow: auto;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid #ccc;
-}
-
-/* 내부 콘텐츠 중앙 정렬을 위한 스타일 */
-.modal-inner-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100%;
+  overflow: hidden;
+  outline: none;
 }
 
 .currentUserMessage {
-  background-color: lightblue; /* Style for current user's messages */
+  background-color: #fafafa;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block; /* Style for current user's messages */
+  align-self: flex-end; /* Adjust alignment */
+  border-radius: 10px 10px 0 10px; /* Adjust border radius */
 }
 
 .otherUserMessage {
-  background-color: lightgreen; /* Style for other users' messages */
+  background-color: #fff741;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block; /* Style for other user's messages */
+  align-self: flex-start; /* Adjust alignment */
+  border-radius: 10px 10px 10px 0; /* Adjust border radius */
+}
+
+.back {
+  margin-left: 20px;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+.chatHeader {
+  width: 100%;
+  position: relative;
+  border-radius: 10px 10px 0px 0px;
+  background-color: #fff741;
+  height: 45px;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: center;
+}
+
+.FAQTitle {
+  margin-top: 12px;
+}
+
+.report {
+  width: 24px;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #ff3d00;
+  text-align: right;
+  display: inline-block;
+  margin-top: 12px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.warning {
+  width: 428px;
+  height: 30px;
+  position: relative;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #ff3d00;
+  font-family: SUIT;
+  margin-top: 16px;
+  margin-left: 20px;
+}
+
+.messageWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
+}
+
+.messageTime {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: -0.04em;
+  line-height: 15px;
+  font-family: SUIT;
+  color: #949597;
+  text-align: left;
+  display: inline-block;
+}
+
+.messageSender {
+  position: relative;
+  font-size: 12px;
+  letter-spacing: -0.04em;
+  line-height: 18px;
+  font-family: SUIT;
+  color: #949597;
+  text-align: left;
+  display: inline-block;
 }

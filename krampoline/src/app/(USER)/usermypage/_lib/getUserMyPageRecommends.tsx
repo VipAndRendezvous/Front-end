@@ -12,7 +12,7 @@ export async function getUserMyPageRecommends({
   searchQuery?: string;
   sort?: string;
 }) {
-  const url = `$/api/basic/ticketList?page=${pageParam}&size=10&sortType=${sort}&search=${searchQuery}`;
+  const url = `/api/basic/ticketList?page=${pageParam}&size=10&sortType=${sort}&search=${searchQuery}`;
   const token = localStorage.getItem("Authorization");
   console.log(token);
   const headers = token ? { Authorization: `Bearer ${token}` } : undefined;

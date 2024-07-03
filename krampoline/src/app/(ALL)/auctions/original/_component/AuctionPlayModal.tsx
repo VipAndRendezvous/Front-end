@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./auctionPlayModal.module.css";
 import { useUser } from "@/app/utils/UserProvider";
@@ -5,7 +7,7 @@ import { useUser } from "@/app/utils/UserProvider";
 type BidMessage = {
   bidderNickname: string;
   bidAmount: number;
-  participateBidTime: string; // 서버에서 받는 시간 형식에 맞게 조정 필요
+  participateBidTime: string;
 };
 
 type UserInfo = {
@@ -24,18 +26,16 @@ type UserInfo = {
 
 const AuctionPlayModal = ({ closeModal, VipInfo }) => {
   const { userInfo } = useUser();
-  const webSocket = useRef(null);
+  const webSocket = useRef<WebSocket | null>(null);
   const [bidMessages, setBidMessages] = useState<BidMessage[]>([]);
-  const [HighestBidAmount, setHighestBidAmount] = useState();
-  const [currentHighestBidAmount, setCurrentHighestBidAmount] = useState(() =>
-    calculateNewBid(VipInfo.currentHighestBidAmount)
-  );
+  const [HighestBidAmount, setHighestBidAmount] = useState<number>(0);
+  const [currentHighestBidAmount, setCurrentHighestBidAmount] =
+    useState<number>(() => calculateNewBid(VipInfo.currentHighestBidAmount));
 
-  //--------------------------------------------------------
   const baseurl = process.env.NEXT_PUBLIC_WS_PROXY;
   const token = localStorage.getItem("Authorization");
-  //----------------------------------------------------------------
-  function calculateNewBid(currentBid) {
+
+  function calculateNewBid(currentBid: number) {
     if (currentBid < 1000000) {
       return currentBid + 100000;
     } else if (currentBid < 3000000) {
@@ -56,9 +56,9 @@ const AuctionPlayModal = ({ closeModal, VipInfo }) => {
       return currentBid + 5000000;
     }
   }
-  //----------------------------------------------------------------
+
   useEffect(() => {
-    const ws = new WebSocket(baseurl + "wss/bid");
+    const ws = new WebSocket(`${baseurl}wss/bid`);
 
     const enterMsg = {
       accessToken: token,
@@ -70,6 +70,7 @@ const AuctionPlayModal = ({ closeModal, VipInfo }) => {
       console.log("WebSocket Connected");
       ws.send(JSON.stringify(enterMsg));
     };
+
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (data && data.bidLogs) {
@@ -78,6 +79,8 @@ const AuctionPlayModal = ({ closeModal, VipInfo }) => {
         setCurrentHighestBidAmount(
           calculateNewBid(data.currentHighestBidAmount)
         );
+      } else {
+        console.error("Invalid data received:", data);
       }
     };
 
@@ -89,15 +92,14 @@ const AuctionPlayModal = ({ closeModal, VipInfo }) => {
       console.error("WebSocket Error:", error);
     };
 
-    webSocket.current = ws; // 웹소켓 인스턴스 저장
+    webSocket.current = ws;
 
     return () => {
       console.log("Cleanup function called");
-      ws.close(); // 컴포넌트 언마운트 시 웹소켓 연결 종료
+      ws.close();
     };
-  }, [baseurl, token, VipInfo.auctionUUID]); // 의존성 배열에 VipInfo.auctionUUID 추가
+  }, [baseurl, token, VipInfo.auctionUUID]);
 
-  //----------------------------------------------------------------
   const bid = () => {
     console.log("Bid function called");
 
@@ -111,35 +113,31 @@ const AuctionPlayModal = ({ closeModal, VipInfo }) => {
 
       webSocket.current.send(JSON.stringify(bidMsg));
       console.log("Bid message sent");
+    } else {
+      console.error("WebSocket is not open");
     }
   };
-  //----------------------------------------------------------------
+
   const handleModalClose = () => {
     if (webSocket.current && webSocket.current.readyState === WebSocket.OPEN) {
       webSocket.current.close();
     }
     closeModal();
   };
-  //----------------------------------------------------------------
-  function formatNumber(value) {
-    // 숫자로 변환 시도
-    const number = Number(value);
-    if (isNaN(number)) {
-      return "Invalid number"; // 유효하지 않은 숫자일 경우 오류 메시지 반환
-    }
-    return number.toLocaleString(); // 유효한 숫자면 천 단위로 쉼표가 포함된 형식으로 반환
+
+  function formatNumber(value: number) {
+    return value.toLocaleString();
   }
 
   return (
     <div className={styles.modalContainer}>
-      <div className={styles.close}>
+      <div className={styles.close} onClick={handleModalClose}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="29"
           height="29"
           viewBox="0 0 29 29"
           fill="none"
-          onClick={handleModalClose}
         >
           <path
             d="M6.71743 20.8599C6.52216 21.0551 6.52216 21.3717 6.71743 21.567C6.91269 21.7622 7.22927 21.7622 7.42453 21.567L6.71743 20.8599ZM20.8596 6.71774L6.71743 20.8599L7.42453 21.567L21.5667 7.42484L20.8596 6.71774Z"

@@ -1,16 +1,9 @@
 import { ReactNode } from "react";
 import Navbar from "../../../_component/Nav/Navbar";
-// import SideNav from "../_component/Nav/SideNav";
 import styles from "./ticketDetaillayout.module.css";
 import TicketOwnerController from "../_component/TicketOwnerController";
 
-export default function Layout({
-  children,
-}: // modal,
-{
-  children: ReactNode;
-  // modal: ReactNode;
-}) {
+export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div>
       <div className={styles.NavMenuContainer}>

@@ -39,7 +39,7 @@
 .signup-form input {
   width: 70%;
   padding: 10px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   border: none;
   border-bottom: 1px solid #e0e0e0;
   outline: none;
@@ -55,40 +55,71 @@
   flex-grow: 1;
   margin-right: 10px;
 }
-.verify-btn,
-.verify-btn-active,
-.verify-btn-yellow,
-.verify-btn-active-yellow {
+.verify-btn {
   background-color: #e0e0e0;
   color: #fff;
   border: none;
   padding: 10px;
-  margin-bottom: 20px;
-  cursor: pointer;
+  cursor: not-allowed;
   min-width: 80px;
 }
-.verify-btn:disabled,
-.verify-btn-yellow:disabled {
-  cursor: not-allowed;
-}
+
 .error {
-  color: #e74c3c;
-  margin-top: 10px;
+  position: relative;
+  font-size: 10px;
+  letter-spacing: -0.04em;
+  line-height: 15px;
+  font-family: SUIT;
+  color: #ff3d00;
+  text-align: left;
+  display: inline-block;
+  margin-top: 2px;
+  height: 15px;
+  margin-bottom: 3px;
+}
+
+.success {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: -0.04em;
+  line-height: 15px;
+  font-family: SUIT;
+  color: #28a745; /* 초록색 */
+  text-align: left;
+  display: inline-block;
+  margin-top: 2px;
+  height: 15px;
+  margin-bottom: 3px;
 }
 .signup-form input[readonly] {
-  background-color: #e0e0e0;
-  cursor: pointer;
+  color: #949597;
 }
 .verify-btn-yellow,
 .verify-btn-active-yellow {
+  border: none;
+  padding: 10px;
+  cursor: not-allowed;
+  min-width: 80px;
   background-color: #fff742;
   color: #000;
   font-weight: bold;
+  cursor: pointer;
 }
 .signup-btn {
   font-size: 16px;
   background-color: #e0e0e0;
   color: #fff;
+  border: none;
+  padding: 16px;
+  min-width: 180px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.signup-btn-active {
+  font-size: 16px;
+  background-color: #fff741;
+  color: #333;
   border: none;
   padding: 16px;
   min-width: 180px;

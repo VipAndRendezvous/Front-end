@@ -1,11 +1,10 @@
 .AuctionInfo_TicketBox_Container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-around;
-  width: 270px;
-  height: 270px;
-  border: 1px solid black;
+  width: 380px;
+  height: auto;
 }
 
 .AuctionInfo_box_TimeOut {
@@ -33,4 +32,50 @@
 
 .AuctionInfo_TicketBox_MaxBid {
   border: 1px solid black;
+}
+
+.Line {
+  width: 100%;
+  border-top: 1px solid #d9d9d9;
+  margin-bottom: 8px;
+}
+.first {
+  width: 70px;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  display: inline-block;
+  font-family: SUIT;
+  color: #949597;
+  text-align: left;
+}
+
+.second {
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.textWrapper {
+  margin-bottom: 8px;
+}
+
+.notice {
+  width: 223px;
+  position: relative;
+  font-size: 10px;
+  letter-spacing: -0.04em;
+  line-height: 15px;
+  font-family: SUIT;
+  color: #949597;
+  text-align: right;
+  display: inline-block;
+  margin-right: 0;
+  margin-bottom: 8px;
 }

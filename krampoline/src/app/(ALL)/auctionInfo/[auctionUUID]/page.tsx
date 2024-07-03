@@ -1,15 +1,14 @@
 "use client";
 
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
-
 import AuctionInfo from "../../../_component/Auction/AuctionInfo";
 import ScrollToTopButton from "../../../_component/ScrollToTopButton";
 import { usePathname } from "next/navigation";
-import axios from "axios";
 import styles from "./page.module.css";
 import { useUser } from "@/app/utils/UserProvider";
 import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 import { useRouter } from "next/navigation";
+
 type UserInfo = {
   auctionCreatedTime: string;
   currentHighestBidAmount: number;
@@ -64,6 +63,7 @@ const Page = () => {
 
     fetchData();
   }, [auctionUUID]);
+
   useEffect(() => {
     const handleScroll = () => {
       if (!userSelected) {

@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import ProfilePic from "../../../public/user.png";
+import React from "react";
 import Image from "next/image";
 import styles from "./mainUserInfo.module.css";
 import Link from "next/link";
@@ -8,6 +7,22 @@ import { useUser } from "../utils/UserProvider";
 const MainUserInfo = () => {
   const { userInfo, isLoggedIn, logout } = useUser();
 
+  // profileImages 배열은 항상 동일하게 정의됩니다.
+  const profileImages = [
+    "/user/1.jpg",
+    "/user/2.jpg",
+    "/user/3.jpg",
+    "/user/4.jpg",
+    "/user/5.jpg",
+    "/user/6.jpg",
+  ];
+
+  // useState를 항상 컴포넌트의 최상위 레벨에서 호출합니다.
+  const [randomImage, setRandomImage] = React.useState(
+    () => profileImages[Math.floor(Math.random() * profileImages.length)]
+  );
+
+  // isLoggedIn이 false일 때의 JSX를 반환하는 부분
   if (!isLoggedIn) {
     return (
       <div className={styles.NonLoginContainer}>
@@ -21,6 +36,7 @@ const MainUserInfo = () => {
     );
   }
 
+  // isLoggedIn이 true일 때의 JSX를 반환하는 부분
   return (
     <div className={styles.rectangleParent}>
       <div className={styles.groupChild}>
@@ -48,7 +64,7 @@ const MainUserInfo = () => {
             src={
               userInfo?.profileImgUrl?.startsWith("http")
                 ? userInfo.profileImgUrl
-                : ProfilePic
+                : randomImage
             }
             alt="ProfilePic"
             width={111}
@@ -76,7 +92,7 @@ const MainUserInfo = () => {
                 <Link href="/vipmypage">
                   <b className={styles.b3}>VIP 페이지</b>
                 </Link>
-              )}{" "}
+              )}
               {userInfo.userType === "ROLE_BASIC" && (
                 <Link href="/usermypage">
                   <b className={styles.b3}>마이페이지</b>

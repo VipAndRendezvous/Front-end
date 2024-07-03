@@ -1,5 +1,16 @@
-/* .swiper {
-  max-width: 1920px;
-  width: 100%;
-  height: inherit;
-} */
+.swiper-pagination-bullet {
+  background: white !important; /* 페이지네이션 색상 변경 */
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  padding: 1px 1px;
+
+  color: white !important;
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+}

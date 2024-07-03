@@ -62,6 +62,8 @@
   margin-top: 25px;
   margin-bottom: 100px;
   padding: 24px 30px 24px 30px;
+  max-width: 100%;
+  height: auto;
 }
 
 .Title {
@@ -90,4 +92,9 @@
   margin-top: 21px;
   cursor: pointer;
   margin-left: 20px;
+}
+
+.textContainer img {
+  max-width: 100%;
+  height: auto;
 }

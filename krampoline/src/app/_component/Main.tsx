@@ -4,8 +4,42 @@ import Link from "next/link";
 import CarouselMain from "./Carousel/CarouselMain";
 import styles from "./main.module.css";
 import MainUserInfo from "./MainUserInfo";
+import { useEffect, useRef } from "react";
+import { useUser } from "../utils/UserProvider";
 
 const Main = () => {
+  const { donation } = useUser();
+
+  const imageRef = useRef(null);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("isVisible");
+          } else {
+            entry.target.classList.remove("isVisible");
+          }
+        });
+      },
+      {
+        rootMargin: "0px",
+        threshold: 0.5, // 이미지가 화면의 50%를 차지할 때 효과 발동
+      }
+    );
+
+    const imageElement = imageRef.current;
+    if (imageElement) {
+      observer.observe(imageElement);
+    }
+
+    return () => {
+      if (imageElement) {
+        observer.unobserve(imageElement);
+      }
+    };
+  }, []);
+
   return (
     <div className={styles.MainContainer}>
       <div className={styles.MainPage}>
@@ -17,7 +51,12 @@ const Main = () => {
             <div className={styles.leftDonation}>
               <div className={styles.title1}>현재 기부 금액</div>
               <div className={styles.DonationContainer}>
-                <div className={styles.DonationText}>4,675,965,000 원</div>
+                <div className={styles.DonationText}>
+                  {new Intl.NumberFormat("ko-KR", { style: "decimal" }).format(
+                    donation.totalDonationPrice
+                  )}
+                  원
+                </div>
               </div>
             </div>
             <div className={styles.rightDonation}>
@@ -62,9 +101,14 @@ const Main = () => {
         <div className={styles.charlesdeluvioW8m5mcm91ryUnsParent}>
           <img
             className={styles.charlesdeluvioW8m5mcm91ryUnsIcon}
-            alt="1stimg"
+            alt="firstpageimg"
             src="/firstpageimg.png"
           />
+          {/* <div
+            className={styles.charlesdeluvioW8m5mcm91ryUnsIcon}
+            ref={imageRef} // Observer를 위한 ref
+            style={{ backgroundImage: "url(/firstpageimg.png)" }}
+          ></div> */}
           <div className={styles.vipParent}>
             <div className={styles.vip}>VIP 식사권 경매</div>
             <div className={styles.varVip}>
