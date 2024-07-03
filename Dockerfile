@@ -15,8 +15,8 @@ COPY krampoline/ .
 
 # .env 파일 생성
 RUN echo "NEXT_PUBLIC_KAKAO_API_KEY=27e18fb1f123f9fa8e5492566f736e97" > .env
-RUN echo "NEXT_PUBLIC_BASE_URL=https://vipandrendezvous.site" >> .env
-RUN echo "NEXT_PUBLIC_WS_PROXY=wss://vipandrendezvous.site/" >> .env
+RUN echo "NEXT_PUBLIC_BASE_URL=https://won-ras-server.r-e.kr:8081" >> .env
+RUN echo "NEXT_PUBLIC_WS_PROXY=https://won-ras-server.r-e.kr:8081" >> .env
 
 RUN npm run build
 
