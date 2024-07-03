@@ -10,7 +10,7 @@ import axios from "axios";
 
 const ReportModal = ({ onReportClose }: { onReportClose: () => void }) => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [fileUrl, setFileUrl] = useState(""); // S3에서 파일 URL을 저장하기 위한 상태
+  const [fileUrl, setFileUrl] = useState(""); // S3에서  파일 URL을 저장하기 위한 상태
   const [reportContent, setReportContent] = useState(""); // 사용자가 입력한 신고 내용을 관리할 상태
   const { ticketInfo, globalTicketUUID } = useUser();
   const [imgSrc, setImgSrc] = useState(ticketInfo.profile || ProfilePic);
