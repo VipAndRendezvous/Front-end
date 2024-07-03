@@ -5,6 +5,18 @@ import ProfilePic from "../../../../public/user.png";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import TicketDetailOption from "./TicketDetailOption";
+import { useUser } from "@/app/utils/UserProvider";
+
+// 날짜 형식을 변환하는 함수
+function formatDate(dateStr) {
+  const date = new Date(dateStr);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${year}.${month}.${day} ${hours}시 ${minutes}분`;
+}
 
 const AuctionTicketInfo = () => {
   //----------------------------------------------------------------날짜 형식
@@ -16,6 +28,7 @@ const AuctionTicketInfo = () => {
   //----------------------------------------------------------------시간 형식
   const twoHoursInMs = 2 * 60 * 60 * 1000;
   const [timeLeft, setTimeLeft] = useState(twoHoursInMs);
+  const { ticketInfo, setTicketInfo, setglobalTicketUUID } = useUser();
 
   useEffect(() => {
     // 타이머가 마운트되면 시작합니다.
@@ -38,15 +51,15 @@ const AuctionTicketInfo = () => {
   //----------------------------------------------------------------
 
   const user = {
-    profile: ProfilePic,
-    nickname: "John Ah",
-    maxBid: 1000000,
-    sub: dateString,
-    star: 4.5,
-    address: "경기도 판교",
-    period: "03-05~03-08",
-    auctionTime: timeLeft,
-    BidBy: "홍태균",
+    profile: ticketInfo.organizerProfileImg,
+    nickname: ticketInfo.organizerNickname,
+    maxBid: ticketInfo.winningBid,
+    sub: formatDate(ticketInfo.meetingDate),
+    // star: 4.5,
+    address: ticketInfo.meetingLocation,
+    // period: "03-05~03-08",
+    // auctionTime: ticketInfo.,
+    BidBy: ticketInfo.winnerNickname,
   };
 
   return (
@@ -59,6 +72,8 @@ const AuctionTicketInfo = () => {
                 src={user.profile}
                 alt="ProfilePic"
                 style={{ objectFit: "cover" }}
+                width={268}
+                height={268}
               />
             </Link>
           </div>

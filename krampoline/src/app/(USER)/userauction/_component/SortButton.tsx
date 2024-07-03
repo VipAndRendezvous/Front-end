@@ -29,7 +29,7 @@ const SortButton: React.FC = () => {
         <path d="M1 0V8" stroke="#949597" />
       </svg> */}
 
-      {/* <div
+      <div
         className={
           JSON.stringify(sort) ===
           JSON.stringify(["successBefore", "successAfter"])
@@ -39,7 +39,7 @@ const SortButton: React.FC = () => {
         onClick={() => setSort(["successBefore", "successAfter"])}
       >
         낙찰받은 경매
-      </div> */}
+      </div>
     </div>
   );
 };

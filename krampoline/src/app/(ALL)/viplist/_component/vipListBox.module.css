@@ -98,3 +98,43 @@
   color: #333;
   cursor: pointer;
 }
+
+.followerbutton {
+  position: relative;
+  border-radius: 3px;
+  background-color: #fff741;
+  width: 60px;
+  height: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 10px;
+  color: #333;
+  font-family: SUIT;
+  cursor: pointer;
+}
+
+.followerbutton2 {
+  position: relative;
+  border-radius: 3px;
+  color: #949597;
+  width: 150px;
+  height: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 10px;
+  color: #333;
+  font-family: SUIT;
+  cursor: pointer;
+}

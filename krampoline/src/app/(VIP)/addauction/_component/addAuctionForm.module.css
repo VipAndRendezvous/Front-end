@@ -49,7 +49,7 @@
   color: #333;
   text-align: left;
   display: inline-block;
-  margin-bottom: 102px;
+  margin-bottom: 100px;
 }
 
 .title2 {
@@ -63,7 +63,7 @@
   color: #333;
   text-align: left;
   display: inline-block;
-  margin-bottom: 149px;
+  margin-bottom: 140px;
 }
 
 .title3 {
@@ -77,7 +77,7 @@
   color: #333;
   text-align: left;
   display: inline-block;
-  margin-bottom: 410px;
+  margin-bottom: 285px;
 }
 
 .title4 {
@@ -91,7 +91,7 @@
   color: #333;
   text-align: left;
   display: inline-block;
-  margin-bottom: 630px;
+  margin-bottom: 635px;
 }
 
 .title5 {
@@ -166,7 +166,7 @@
 
 .content2Content {
   margin-left: 44px;
-  margin-top: 10px;
+  margin-top: 2px;
   width: 339px;
   display: flex;
   flex-direction: column;
@@ -174,7 +174,7 @@
 }
 
 .content2Input {
-  width: 100%; /* Use 100% width to fill the container */
+  width: 339px;
   border: none; /* No border */
   border-bottom: 1px solid #e0e0e0; /* Only a bottom border */
   font-size: 16px; /* Adjust font size as needed */
@@ -186,7 +186,6 @@
   font-family: SUIT;
   text-align: left;
   background-color: transparent;
-  height: 100%;
 }
 
 .content2Input::placeholder {
@@ -312,6 +311,19 @@
   display: inline-block;
   margin-top: 12px;
 }
+.subTitle2 {
+  width: 87px;
+  position: relative;
+  font-size: 16px;
+  letter-spacing: -0.04em;
+  line-height: 24px;
+  font-weight: 800;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+  margin-top: 33px;
+}
 
 .subTitle3 {
   width: 87px;
@@ -331,6 +343,7 @@
   display: flex;
   flex-direction: column;
   margin-left: 44px;
+  margin-top: 12px;
 }
 
 .content3DateInput {
@@ -389,14 +402,14 @@
 }
 
 .timeWaring {
-  width: 100%;
+  width: 339px;
   position: relative;
   border-radius: 8px;
   background-color: #fafafa;
   overflow: hidden;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  text-align: center;
   justify-content: flex-start;
   padding: 8px 16px;
   box-sizing: border-box;
@@ -404,8 +417,8 @@
   font-size: 10px;
   color: #949597;
   font-family: SUIT;
-  height: 30px;
-  margin-bottom: 20px;
+  height: 46px;
+  margin-bottom: 35px;
   margin-top: 7px;
 }
 .content3Input {
@@ -594,4 +607,140 @@
   gap: 8px;
   justify-content: center;
   margin-bottom: 80px;
+}
+
+.today {
+  position: relative;
+}
+
+.today::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  border: 2px solid #fff741;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.content4Input {
+  width: 339px;
+  border: none; /* No border */
+  border-bottom: 1px solid #e0e0e0; /* Only a bottom border */
+  font-size: 16px; /* Adjust font size as needed */
+  padding: 0 0 8px 0; /* Padding to ensure text is centered vertically */
+  color: #333; /* Text color for the input content */
+  font-size: 10px;
+  letter-spacing: -0.04em;
+  line-height: 15px;
+  font-family: SUIT;
+  text-align: left;
+  background-color: transparent;
+}
+
+.content4Input::placeholder {
+  width: 146px;
+  position: relative;
+  font-size: 10px;
+  letter-spacing: -0.04em;
+  line-height: 15px;
+  font-family: SUIT;
+  color: #949597;
+  text-align: left;
+  display: inline-block;
+}
+.content4Input:focus {
+  outline: none;
+}
+
+.content4Input::-webkit-outer-spin-button,
+.content4Input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.content3Controll {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.datePickerWrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-left: 350px;
+  z-index: 800;
+}
+
+.datePickerWrapper1 {
+  position: absolute;
+  left: 0;
+  z-index: 800;
+  margin-left: 130px;
+}
+
+.datePickerWrapper2 {
+  position: absolute;
+  left: 0;
+  z-index: 800;
+  margin-left: 225px;
+}
+.timeInput {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.timeInputField {
+  width: 50px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 16px;
+  padding: 8px 0;
+  color: #333;
+  background-color: transparent;
+  text-align: center;
+  cursor: pointer;
+}
+
+.timeInputField::placeholder {
+  font-size: 12px;
+  color: #949597;
+}
+
+.timeInputField:focus {
+  outline: none;
+}
+
+.spanStyled {
+  width: 24px;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: -0.04em;
+  line-height: 21px;
+  font-family: SUIT;
+  color: #333;
+  text-align: left;
+  display: inline-block;
+}
+
+.hideHours
+  .react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item {
+  display: none;
+}
+.hideHours
+  .react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item--minute {
+  display: block;
 }

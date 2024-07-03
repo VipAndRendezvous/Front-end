@@ -1,17 +1,17 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-
+import React, { useState, useRef, useEffect } from "react";
+import "react-datepicker/dist/react-datepicker.css";
 import styles from "./addAuctionForm.module.css";
 import AdressSearch from "./AdressSearch";
-import DateTimePickerValue from "./DateTimePickerValue";
+import DatePicker from "react-datepicker";
 import EditorComponent from "./EditorComponent";
-import PositionedPopper from "./PositionedPopper";
-import DatePopper from "./DatePopper";
+import EditorComponentWaring from "./EditorComponentWaring";
 import { useUser } from "@/app/utils/UserProvider";
 import { useAddAuction } from "@/app/utils/AddAuctionsProvider";
-import EditorComponentWaring from "./EditorComponentWaring";
 import Link from "next/link";
+import CustomMinutePicker from "./CustomMinutePicker";
+import CustomHourPicker from "./CustomHourPicker";
 
 const AddAuctionForm = () => {
   const { userInfo, isLoading } = useUser();
@@ -19,37 +19,103 @@ const AddAuctionForm = () => {
     Address,
     AuctionInfo,
     WarningInfo,
-    Date,
+    Date: selectedDate,
     createAuction,
     Bid,
     setBid,
+    setDate,
   } = useAddAuction();
-  const [amount, setAmount] = useState();
-  const [datePickerOpen, setDatePickerOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTime, setSelectedTime] = useState({ hours: "", minutes: "" });
+  const [amount, setAmount] = useState<number | undefined>();
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showHourPicker, setShowHourPicker] = useState(false);
+  const [showMinutePicker, setShowMinutePicker] = useState(false);
+  const [selectedHour, setSelectedHour] = useState<number | null>(null);
+  const [selectedMinute, setSelectedMinute] = useState<number | null>(null);
 
-  console.log(Bid, Address, AuctionInfo, WarningInfo, Date);
+  const hourPickerRef = useRef<HTMLDivElement>(null);
+  const minutePickerRef = useRef<HTMLDivElement>(null);
 
-  const handleDateChange = (newDate) => {
-    setSelectedDate(newDate);
-    setDatePickerOpen(false); // 날짜를 선택하면 선택기를 닫습니다.
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        hourPickerRef.current &&
+        !hourPickerRef.current.contains(event.target as Node)
+      ) {
+        setShowHourPicker(false);
+      }
+      if (
+        minutePickerRef.current &&
+        !minutePickerRef.current.contains(event.target as Node)
+      ) {
+        setShowMinutePicker(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleDateChange = (date: Date | null) => {
+    setDate(date);
+    setShowDatePicker(false); // 날짜 선택 후 DatePicker 숨기기
   };
 
-  const handleTimeChange = (field, value) => {
-    setSelectedTime({ ...selectedTime, [field]: value });
+  const handleHourChange = (hour: number) => {
+    setSelectedHour(hour);
+    setShowHourPicker(false); // 시간 선택 후 커스텀 시 선택기 숨기기
   };
 
-  const handleFormSubmit = (event: any) => {
-    createAuction(Bid, Date, Address, AuctionInfo, WarningInfo);
+  const handleMinuteChange = (minute: number) => {
+    setSelectedMinute(minute);
+    setShowMinutePicker(false); // 분 선택 후 커스텀 분 선택기 숨기기
   };
 
-  const onChangeAmount = (e) => {
+  const handleFormSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (selectedDate) {
+      const meetingDate = new Date(selectedDate);
+      if (selectedHour !== null) {
+        meetingDate.setHours(selectedHour);
+      }
+      if (selectedMinute !== null) {
+        meetingDate.setMinutes(selectedMinute);
+      }
+      // 밀리초와 초를 0으로 설정
+      meetingDate.setSeconds(0);
+      meetingDate.setMilliseconds(0);
+      // 로컬 시간대에서 YYYY-MM-DDTHH:MM:SS 형식으로 변환
+      const formattedDate = meetingDate.toISOString().split(".")[0];
+      console.log("Formatted Date:", formattedDate); // 출력된 값을 확인합니다.
+      createAuction(Bid, formattedDate, Address, AuctionInfo, WarningInfo);
+    }
+  };
+
+  const onChangeAmount = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBid(e.target.value);
   };
-  function formatWithComma(number) {
+
+  const formatWithComma = (number: number) => {
     return number.toLocaleString();
-  }
+  };
+
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + 30); // 현재 날짜보다 7일 후
+
+  const getDayClassName = (date: Date) => {
+    const today = new Date();
+    if (
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    ) {
+      return styles.today; // 오늘 날짜에 대해 특정 클래스를 반환
+    }
+    return "";
+  };
+
   if (isLoading) return <div>Loading...</div>;
 
   return (
@@ -114,20 +180,106 @@ const AddAuctionForm = () => {
             <div className={styles.content3Wrapper}>
               <div className={styles.subTitle3Wrapper}>
                 <div className={styles.subTitle1}>식사 날짜 </div>
+                <div className={styles.subTitle2}>식사 시간 </div>
 
                 <div className={styles.subTitle3}>식사 장소 </div>
               </div>
               <div className={styles.content3Content}>
-                <div className={styles.timeInput}>
-                  <DateTimePickerValue />
+                <div className={styles.content3Controll}>
+                  <input
+                    required
+                    className={styles.content4Input}
+                    value={
+                      selectedDate
+                        ? selectedDate.toLocaleDateString("ko-KR")
+                        : ""
+                    }
+                    readOnly
+                    placeholder="날짜를 선택해주세요."
+                  />
+                  <img
+                    src="/CalendarDots.png"
+                    onClick={() => setShowDatePicker(!showDatePicker)}
+                    style={{ marginLeft: "10px", cursor: "pointer" }}
+                    alt="calendar icon"
+                  />
+                  {showDatePicker && (
+                    <div className={styles.datePickerWrapper}>
+                      <DatePicker
+                        selected={selectedDate}
+                        onChange={handleDateChange}
+                        inline
+                        dateFormat="yyyy.MM.dd"
+                        minDate={minDate}
+                        dayClassName={getDayClassName}
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className={styles.conten3subtitle}>
                   낙찰자와 채팅을 통해 변경할 수 있어요.
                 </div>
+                <div className={styles.timeInput}>
+                  <div>
+                    <input
+                      required
+                      className={styles.timeInputField}
+                      value={
+                        // 시간을 12시간 형식으로 표시하고 AM/PM을 추가하는 부분
+                        selectedHour !== null
+                          ? new Date(0, 0, 0, selectedHour)
+                              .toLocaleTimeString([], {
+                                hour: "2-digit",
+                                hour12: true,
+                              })
+                              .replace(":00", "")
+                          : ""
+                      }
+                      readOnly
+                      onClick={() => setShowHourPicker(true)}
+                    />
+                    {showHourPicker && (
+                      <div
+                        className={styles.datePickerWrapper1}
+                        ref={hourPickerRef}
+                      >
+                        <CustomHourPicker
+                          selectedHour={selectedHour}
+                          onChange={handleHourChange}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <span className={styles.spanStyled}>시</span>
+                  <div>
+                    <input
+                      required
+                      className={styles.timeInputField}
+                      value={
+                        selectedMinute !== null ? selectedMinute.toString() : ""
+                      }
+                      readOnly
+                      onClick={() => setShowMinutePicker(true)}
+                    />
+                    {showMinutePicker && (
+                      <div
+                        className={styles.datePickerWrapper2}
+                        ref={minutePickerRef}
+                      >
+                        <CustomMinutePicker
+                          selectedMinute={selectedMinute}
+                          onChange={handleMinuteChange}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <span className={styles.spanStyled}>분</span>
+                </div>
+
                 <div className={styles.timeWaring}>
                   사용자의 귀책 사유로 인해 약속된 최소 만남 시간(n시간)을
                   채우지 못할 경우 <br />
-                  VIP : 낙찰금은 사용자에게 전액 환불됩니다.
+                  <li> VIP : 낙찰금은 사용자에게 전액 환불됩니다.</li>
                 </div>
                 <AdressSearch />
                 <div className={styles.adressSubTitle}>
@@ -178,59 +330,3 @@ const AddAuctionForm = () => {
 };
 
 export default AddAuctionForm;
-
-// <div className={styles.AddFormContainer}>
-//   <div className={styles.AddFormMoneyContainer}>
-//     <div>
-//       <div className={styles.FeePolicy}>
-//         <PositionedPopper />
-//       </div>
-//     </div>
-//     <div className={styles.PointInfo}>
-//       <div className={styles.PointInfoInput}>
-//         <input
-//           type="number"
-//           onChange={onChangeAmount}
-//           value={amount}
-//           required
-//         />
-//         <div>
-//           보유 포인트:
-//           {userInfo.point}
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-//   <div className={styles.AddFormDateContainer}>
-//     <DatePopper />
-//     <DateTimePickerValue />
-//   </div>
-//   <div className={styles.AddFormAddressContainer}>
-//     <div>식사 장소를 지정해 주세요</div>
-//     <div className={styles.PostContainer}>
-//
-//     </div>
-//   </div>
-//   <div className={styles.AddFormTextContainer}>
-//     <div className={styles.TextEditor}>
-//       <div>이 만남은 이런거에요</div>
-//       <EditorComponent />
-//     </div>
-//   </div>
-//   <div className={styles.AddFormTextContainer}>
-//     <div className={styles.TextEditor}>
-//       <div>이것 만큼은 지켜주세요</div>
-//       <EditorComponentWaring />
-//     </div>
-//   </div>
-//   <div className={styles.AuthCheck}>
-//     <input type="radio" />
-//     <span>모든 내용을 이해하였고 동의합니다</span>
-//   </div>
-//   <div className={styles.ButtonContainer}>
-//     <button className="btn-basic" onClick={handleFormSubmit}>
-//       경매생성
-//     </button>
-//     <button className="btn-basic">취소</button>
-//   </div>
-// </div>;

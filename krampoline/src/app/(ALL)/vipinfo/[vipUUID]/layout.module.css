@@ -4,56 +4,22 @@
   left: 0;
   right: 0;
   margin: 0 auto; /* 좌우 중앙 정렬 */
+  z-index: 999;
 }
+
 .container {
   display: flex;
-  align-items: stretch;
+  justify-content: center;
   background-color: #fff;
-  padding-top: 65px;
+  padding-top: 80px;
   top: 0;
   left: 0;
   right: 0;
   margin: 0 auto; /* 좌우 중앙 정렬 */
 }
 
-.leftSectionWrapper {
-  display: flex;
-  align-items: flex-end;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.leftSection {
-  width: 300px;
-  height: 100dvh;
-}
-.leftSectionFixed {
-  position: fixed;
-  width: inherit;
-  height: 100dvh;
-  display: flex;
-  flex-direction: column;
-}
-.leftSectionFixed nav {
-  flex: 1;
-}
-.rightSectionWrapper {
-  display: flex;
-  align-items: flex-start;
-  height: 200dvh;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.rightSectionWrapper h1 {
-  margin-top: 0;
-  padding-left: 190px;
-  font-size: 30px;
-  margin-left: 0;
-  display: flex;
-}
-
 .main {
-  width: 980px;
-  height: 200dvh;
+  width: 1168px;
+  height: 100dvh;
+  align-items: center;
 }

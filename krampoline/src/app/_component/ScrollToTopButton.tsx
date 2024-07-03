@@ -15,7 +15,7 @@ const ScrollToTopButton = () => {
       style={{
         position: "fixed",
         bottom: "70px",
-        right: "592px",
+        right: "300px",
         padding: "10px 20px",
         fontSize: "16px",
         cursor: "pointer",
@@ -28,7 +28,7 @@ const ScrollToTopButton = () => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_2034_594)">
+        <g clipPath="url(#clip0_2034_594)">
           <circle cx="26" cy="26" r="26" fill="#FFF741" />
           <path d="M14 32L26 20L38 32" stroke="black" />
         </g>

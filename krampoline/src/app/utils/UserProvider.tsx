@@ -7,6 +7,7 @@ import { KakaoInfo } from "@/models/KakaoInfo";
 import { useRouter } from "next/navigation";
 import { FollowingListResponse } from "@/models/FollowingList";
 import HttpAuthInstance from "./api/interceptor/axiosConfig";
+import { TicketInfo } from "@/models/TicketInfo";
 
 type UserContextType = {
   userInfo: UserInfo | null;
@@ -30,12 +31,14 @@ type UserContextType = {
   }) => Promise<void>;
   vipapply: string;
   isLoading: boolean;
-  ticketInfo;
+  ticketInfo: TicketInfo;
   setTicketInfo: (ticketInfo) => void;
   applyCheck;
   globalTicketUUID;
   setglobalTicketUUID;
   withdrawServiceAPI: () => Promise<void>;
+  DonationAPI();
+  donation;
 };
 
 const UserContext = createContext<UserContextType | null>(null);
@@ -53,6 +56,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [ticketInfo, setTicketInfo] = useState();
   const [applyCheck, setApplyCheck] = useState(false);
   const [globalTicketUUID, setglobalTicketUUID] = useState("");
+  const [donation, setDonation] = useState("");
 
   //----------------------------------------------------------------
 
@@ -136,6 +140,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await HttpAuthInstance.get("/api/user/followingList");
       if (response.status === 200) {
+        console.log(response.data);
         setFollowingList(response.data);
       } else {
         throw new Error("Failed to fetch following list");
@@ -162,7 +167,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         `/api/basic/applyVip`,
         formData
       );
-      // 응답 처리 코드...
+      if (response.status === 200) {
+        alert("👑VIP 신청이 완료되었습니다👑 좋은 결과 기대해주세요!");
+        window.location.href = "/";
+      }
     } catch (error) {
       console.error(error);
       throw error; // 오류를 던져서 상위 핸들러에서 처리할 수 있도록 합니다.
@@ -173,8 +181,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     // 사용자 정보와 티켓 정보를 불러옵니다.
     const fetchInitialData = async () => {
       await fetchUserInfo();
-      // 추가적으로 티켓 정보를 설정하는 로직이 필요할 수 있습니다.
-      // 예: setTicketInfo(someTicketData);
+      await DonationAPI();
+      console.log(donation);
     };
 
     fetchInitialData();
@@ -189,6 +197,21 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       if (response.status === 200) {
         localStorage.removeItem("Authorization");
         window.location.href = "/";
+      } else {
+        throw new Error("Failed to fetch following list");
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  //----------------------------------------------------------------도네이션 금액 가져오기
+  async function DonationAPI() {
+    try {
+      const response = await HttpAuthInstance.get("/api/all/totalDonation");
+      if (response.status === 200) {
+        setDonation(response.data);
       } else {
         throw new Error("Failed to fetch following list");
       }
@@ -221,6 +244,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         globalTicketUUID,
         setglobalTicketUUID,
         withdrawServiceAPI,
+        DonationAPI,
+        donation,
       }}
     >
       {children}

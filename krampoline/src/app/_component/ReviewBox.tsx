@@ -72,6 +72,20 @@ const ReviewBox = ({ reviewBox }: Props) => {
     return stars;
   };
 
+  const profileImages = [
+    "/user/1.jpg",
+    "/user/2.jpg",
+    "/user/3.jpg",
+    "/user/4.jpg",
+    "/user/5.jpg",
+    "/user/6.jpg",
+  ];
+
+  // useState를 사용하여 컴포넌트가 처음 로딩될 때 한 번만 랜덤 이미지를 선택하도록 합니다.
+  const [randomImage, setRandomImage] = useState(
+    profileImages[Math.floor(Math.random() * profileImages.length)]
+  );
+
   return (
     <div>
       <div className={styles.ReviewContainer}>
@@ -121,7 +135,7 @@ const ReviewBox = ({ reviewBox }: Props) => {
             <div className={styles.third}>
               <div className={styles.ReviewProfileExpanded}>
                 <Image
-                  src={reviewBox.writerImgUrl || ProfilePic}
+                  src={reviewBox.writerImgUrl || randomImage}
                   alt="ProfilePic"
                   width={24}
                   height={24}
@@ -143,7 +157,7 @@ const ReviewBox = ({ reviewBox }: Props) => {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <g clip-path="url(#clip0_2034_4350)">
+                    <g clipPath="url(#clip0_2034_4350)">
                       <circle
                         cx="14"
                         cy="14"
@@ -176,7 +190,7 @@ const ReviewBox = ({ reviewBox }: Props) => {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <g clip-path="url(#clip0_2034_4072)">
+                    <g clipPath="url(#clip0_2034_4072)">
                       <circle cx="14" cy="14" r="14" fill="#FFF741" />
                       <path
                         d="M14 19L8 12.8167L8.79245 12L14 17.35L19.1914 12L20 12.8167L14 19Z"

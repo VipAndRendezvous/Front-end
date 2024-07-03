@@ -20,7 +20,7 @@ type UserContextType = {
     meetingInfoText: string,
     meetingPromiseText: string
   ) => Promise<void>;
-  Date: string;
+  Date: any;
   setDate: (Date) => void;
   Bid: number;
   setBid: (Bid) => void;

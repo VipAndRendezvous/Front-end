@@ -1,21 +1,23 @@
 .AuctionInfoContainer {
   margin-top: 10px;
   display: flex;
-  width: 610px;
-}
-
-.AuctionInfo-Pic {
-  display: flex;
-  width: 270px;
-  height: 270px;
-  border: 1px solid black;
-}
-
-.AuctionInfo-Info {
-  flex-direction: row;
-  justify-content: space-between;
-  height: 275px;
   width: 100%;
+  flex-direction: row;
+  height: 268px;
+}
+
+.AuctionInfoPic {
+  display: flex;
+}
+
+.AuctionInfoInfo {
+  justify-content: space-between;
+  height: 268px;
+  width: 668px;
   display: flex;
   margin-bottom: 80px;
+}
+
+.AuctionInfoBoxFixed {
+  width: 380px;
 }

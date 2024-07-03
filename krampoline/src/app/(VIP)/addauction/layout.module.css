@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   margin: 0 auto; /* 좌우 중앙 정렬 */
-  z-index: 3;
+  z-index: 999;
 }
 .AddAuction-container {
   display: flex;
