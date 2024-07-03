@@ -5,7 +5,7 @@ FROM krmp-d2hub-idock.9rum.cc/goorm/node:18 AS base
 FROM base AS deps
 WORKDIR /usr/src/app
 COPY krampoline/package*.json ./
-RUN npm ci
+RUN npm install
 
 # 소스 코드 재구성
 FROM base AS builder
