@@ -71,15 +71,30 @@ const Message = ({ message, isCurrentUser }) => {
     : styles.otherUserMessage;
 
   const formattedTime = moment(message?.sendTime).format("YY-MM-DD HH:mm");
+
   return (
-    <div className={styles.messageWrapper}>
-      <div className={styles.messageSender}>
+    <div
+      className={`${styles.messageWrapper} ${
+        isCurrentUser ? styles.currentUser : ""
+      }`}
+    >
+      <div
+        className={`${styles.messageSender} ${
+          isCurrentUser ? styles.currentUser : ""
+        }`}
+      >
         {isCurrentUser ? "나" : message?.nickname || "Unknown"}
       </div>
       <div className={`${styles.message} ${messageClass}`}>
         <div className={styles.messageContent}>{message?.content || ""}</div>
       </div>
-      <span className={styles.messageTime}>{formattedTime}</span>
+      <span
+        className={`${styles.messageTime} ${
+          isCurrentUser ? styles.currentUser : ""
+        }`}
+      >
+        {formattedTime}
+      </span>
     </div>
   );
 };
@@ -154,7 +169,7 @@ const Chat = ({ chatRoomUUID }) => {
           </svg>
         </div>
         <div className={styles.FAQTitle}>
-          {ticketInfo?.organizerNickname || "Unknown"} 채팅
+          {ticketInfo ? ticketInfo.organizerNickname : "Loading..."} 채팅
         </div>
         <div
           onClick={() => setIsOpenReportModal(true)}

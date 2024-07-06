@@ -7,10 +7,6 @@ import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import Img1 from "../../../../public/CarouselImg/1.png";
-import Img2 from "../../../../public/CarouselImg/2.png";
-import Img3 from "../../../../public/CarouselImg/3.png";
-import Img4 from "../../../../public/CarouselImg/4.png";
 import HttpAuthInstance from "@/app/utils/api/interceptor/axiosConfig";
 import Link from "next/link";
 
@@ -42,7 +38,7 @@ const CarouselMain = () => {
   // 배너 데이터 불러오기
   async function fetchBannerData() {
     try {
-      const response = await HttpAuthInstance.get(`/api/all/banner`, {});
+      const response = await HttpAuthInstance.get(`/api/all/banner`);
       setBannerData(response.data);
     } catch (error) {
       console.error("오류 발생", error);
@@ -73,4 +69,5 @@ const CarouselMain = () => {
     </div>
   );
 };
+
 export default CarouselMain;

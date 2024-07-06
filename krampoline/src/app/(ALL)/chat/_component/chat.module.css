@@ -25,7 +25,8 @@
 
 .message {
   max-width: 60%;
-  margin: 5px;
+  margin-right: 5px;
+  margin-left: 5px;
   padding: 10px;
   border-radius: 20px;
   align-self: flex-start;
@@ -212,6 +213,10 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 4px;
+  align-items: flex-start; /* 기본적으로 좌측 정렬 */
+}
+.messageWrapper.currentUser {
+  align-items: flex-end; /* 현재 사용자의 메시지는 우측 정렬 */
 }
 
 .messageTime {
@@ -223,6 +228,13 @@
   color: #949597;
   text-align: left;
   display: inline-block;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.messageTime.currentUser {
+  text-align: right; /* 현재 사용자의 메시지 시간은 우측 정렬 */
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 .messageSender {
@@ -234,4 +246,11 @@
   color: #949597;
   text-align: left;
   display: inline-block;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.messageSender.currentUser {
+  text-align: right; /* 현재 사용자의 메시지 발신자는 우측 정렬 */
+  margin-right: 5px;
+  margin-left: 5px;
 }

@@ -16,11 +16,11 @@ import VipAuctionRecommends from "./VipAuctionRecommends";
 export default function VipPageAuction() {
   return (
     <div>
-      <div>
-        <VipPageMenu />
-      </div>
       <HydrationBoundary>
         <SearchProvider>
+          <div>
+            <VipPageMenu />
+          </div>
           <div className={styles["Auction-menu"]}>
             <div className={styles["Auction-btn"]}>
               <SortButton />
@@ -41,7 +41,7 @@ export async function getServerSideProps(context) {
   await queryClient.prefetchInfiniteQuery({
     queryKey: ["VIPMyPageAuction", sort],
     queryFn: () => getVipAuctionRecommends({ sort }),
-    initialPageParam: 0,
+    initialPageParam: 1,
   });
 
   return {

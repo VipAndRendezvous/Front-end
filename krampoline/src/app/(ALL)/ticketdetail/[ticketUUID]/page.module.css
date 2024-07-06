@@ -191,3 +191,8 @@
   width: 110px;
   height: 9px;
 }
+
+.textContainer img {
+  max-width: 100%;
+  height: auto;
+}

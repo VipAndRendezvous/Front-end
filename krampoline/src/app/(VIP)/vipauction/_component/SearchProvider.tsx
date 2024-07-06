@@ -14,7 +14,7 @@ const SearchContext = createContext<SearchContextType | undefined>(undefined);
 export function SearchProvider({ children }) {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const [sort, setSort] = useState<string>("");
+  const [sort, setSort] = useState<string>("PROGRESS");
 
   return (
     <SearchContext.Provider

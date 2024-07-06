@@ -82,16 +82,19 @@ const AuctionInfo_box = ({ VipInfo }: { VipInfo: Props }) => {
   };
   //----------------------------------------------------------------날짜
   // 날짜를 "20xx년 xx월 xx일" 형식으로 포맷팅하는 함수
-  const formatDate = (dateString: string) => {
+  // 날짜 형식을 변환하는 함수
+  function formatDate(dateString: string) {
     const date = new Date(dateString);
-    const year = date.getFullYear(); // 연도 가져오기
-    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // 월을 두 자리 숫자로 포맷
-    const day = date.getDate().toString().padStart(2, "0"); // 일을 두 자리 숫자로 포맷
-    const hours = date.getHours().toString().padStart(2, "0"); // 시를 두 자리 숫자로 포맷
-    const minutes = date.getMinutes().toString().padStart(2, "0"); // 분을 두 자리 숫자로 포맷
+    date.setHours(date.getHours() + 9); // UTC+9 시간대로 변환
 
-    return `${year}.${month}.${day} ${hours}:${minutes}`; // "YYYY.MM.DD HH:MM" 형식으로 반환
-  };
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+
+    return `${year}.${month}.${day} ${hours}:${minutes}`;
+  }
 
   //----------------------------------------------------------------
 

@@ -102,7 +102,7 @@ const AddAuctionForm = () => {
   };
 
   const minDate = new Date();
-  minDate.setDate(minDate.getDate() + 30); // 현재 날짜보다 7일 후
+  minDate.setDate(minDate.getDate() + 31); // 현재 날짜보다 30일 후
 
   const getDayClassName = (date: Date) => {
     const today = new Date();

@@ -79,6 +79,11 @@ const AuctionPlayModal = ({ closeModal, VipInfo }) => {
         setCurrentHighestBidAmount(
           calculateNewBid(data.currentHighestBidAmount)
         );
+        if (data.isBidMessage) {
+          alert("성공적으로 입찰하셨습니다.");
+        }
+      } else if (data.code === "2100") {
+        alert("입찰 권한이 없습니다.");
       } else {
         console.error("Invalid data received:", data);
       }
