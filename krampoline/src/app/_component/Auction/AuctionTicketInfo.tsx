@@ -51,15 +51,12 @@ const AuctionTicketInfo = () => {
   //----------------------------------------------------------------
 
   const user = {
-    profile: ticketInfo.organizerProfileImg,
-    nickname: ticketInfo.organizerNickname,
-    maxBid: ticketInfo.winningBid,
-    sub: formatDate(ticketInfo.meetingDate),
-    // star: 4.5,
-    address: ticketInfo.meetingLocation,
-    // period: "03-05~03-08",
-    // auctionTime: ticketInfo.,
-    BidBy: ticketInfo.winnerNickname,
+    profile: ticketInfo?.organizerProfileImg || "",
+    nickname: ticketInfo?.organizerNickname || "",
+    maxBid: ticketInfo?.winningBid || 0,
+    sub: ticketInfo?.meetingDate ? formatDate(ticketInfo.meetingDate) : "",
+    address: ticketInfo?.meetingLocation || "",
+    BidBy: ticketInfo?.winnerNickname || "",
   };
 
   return (
@@ -69,7 +66,7 @@ const AuctionTicketInfo = () => {
           <div className={styles.AuctionInfoPic}>
             <Link href="/vipinfo">
               <Image
-                src={user.profile}
+                src={user.profile || ProfilePic}
                 alt="ProfilePic"
                 style={{ objectFit: "cover" }}
                 width={268}

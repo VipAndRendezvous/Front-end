@@ -138,7 +138,9 @@ const Page = () => {
         <div className={styles.rectangle} />
         <div className={styles.header}>
           <div className={styles.headerWrapper}>
-            {ticketInfo.organizerNickname}와의 식사권
+            {ticketInfo?.organizerNickname
+              ? `${ticketInfo.organizerNickname}와의 식사권`
+              : "식사권 정보가 없습니다"}
             <button className={styles.CancelBtn} onClick={cancelTicket}>
               식사권 취소하기
             </button>
@@ -184,22 +186,29 @@ const Page = () => {
           <div className={styles.rectangle1} />
           <div className={styles.subtitle}>이 만남은요,</div>
           <div
-            dangerouslySetInnerHTML={{ __html: ticketInfo.meetingInfoText }}
+            dangerouslySetInnerHTML={{
+              __html: ticketInfo?.meetingInfoText || "",
+            }}
           />
         </div>
         <div className={styles.section} ref={auctionWarningRef}>
           <div className={styles.rectangle2} />
           <div className={styles.subtitle}>이것만큼은 꼿 지켜주세요.</div>
           <div
-            dangerouslySetInnerHTML={{ __html: ticketInfo.meetingPromiseText }}
+            dangerouslySetInnerHTML={{
+              __html: ticketInfo?.meetingPromiseText || "",
+            }}
           />
         </div>
 
         <div className={styles.map} ref={auctionMapRef}>
           <div className={styles.rectangle3} />
           <div className={styles.subtitle}>여기서 만나요.</div>
-          <div className={styles.address}>{ticketInfo.meetingLocation}</div>
-          <TicketDetailMap address={ticketInfo.meetingLocation} />
+          <div className={styles.address}>
+            {ticketInfo?.meetingLocation || ""}
+          </div>
+
+          <TicketDetailMap address={ticketInfo?.meetingLocation || ""} />
         </div>
       </div>
       <Modal

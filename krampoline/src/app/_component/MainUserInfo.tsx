@@ -36,7 +36,12 @@ const MainUserInfo = () => {
     );
   }
 
-  // isLoggedIn이 true일 때의 JSX를 반환하는 부분
+  // userInfo가 null인 경우 로딩 중이거나 데이터가 없는 경우를 처리합니다.
+  if (!userInfo) {
+    return <div>Loading...</div>;
+  }
+
+  // isLoggedIn이 true이고 userInfo가 존재할 때의 JSX를 반환하는 부분
   return (
     <div className={styles.rectangleParent}>
       <div className={styles.groupChild}>
@@ -88,15 +93,26 @@ const MainUserInfo = () => {
             </div>
 
             <div className={styles.wrapper}>
-              {userInfo.userType !== "ROLE_BASIC" && (
-                <Link href="/vipmypage">
-                  <b className={styles.b3}>VIP 페이지</b>
-                </Link>
+              {userInfo && userInfo.userType !== "ROLE_BASIC" && (
+                <>
+                  <div className={styles.wrapper1}>
+                    <Link href="/vipmypage">
+                      <b className={styles.b3}>VIP</b>
+                    </Link>
+                  </div>
+                  <div className={styles.wrapper1}>
+                    <Link href="/usermypage">
+                      <b className={styles.b3}>my</b>
+                    </Link>
+                  </div>
+                </>
               )}
-              {userInfo.userType === "ROLE_BASIC" && (
-                <Link href="/usermypage">
-                  <b className={styles.b3}>마이페이지</b>
-                </Link>
+              {userInfo && userInfo.userType === "ROLE_BASIC" && (
+                <div className={styles.wrapper2}>
+                  <Link href="/usermypage">
+                    <b className={styles.b3}>마이페이지</b>
+                  </Link>
+                </div>
               )}
             </div>
           </div>

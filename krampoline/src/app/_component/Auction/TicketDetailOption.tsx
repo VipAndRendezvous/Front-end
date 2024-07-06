@@ -1,9 +1,6 @@
 "use client";
 
 import styles from "./ticketDetailOption.module.css";
-import Link from "next/link";
-import { StaticImageData } from "next/image";
-import { useState } from "react";
 
 //----------------------------------------------------------------시간 폼
 const TicketDetailOption = ({ user }: any) => {

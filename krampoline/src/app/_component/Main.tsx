@@ -104,11 +104,7 @@ const Main = () => {
             alt="firstpageimg"
             src="/firstpageimg.png"
           />
-          {/* <div
-            className={styles.charlesdeluvioW8m5mcm91ryUnsIcon}
-            ref={imageRef} // Observer를 위한 ref
-            style={{ backgroundImage: "url(/firstpageimg.png)" }}
-          ></div> */}
+
           <div className={styles.vipParent}>
             <div className={styles.vip}>VIP 식사권 경매</div>
             <div className={styles.varVip}>

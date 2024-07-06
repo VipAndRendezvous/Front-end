@@ -71,9 +71,7 @@
 
 .wrapper {
   margin-top: 6px;
-
   border-radius: 5px;
-  border: 1px solid #e0e0e0;
   box-sizing: border-box;
   width: 205px;
   overflow: hidden;
@@ -81,9 +79,32 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 4px 67px;
   font-size: 12px;
   color: #333;
+}
+.wrapper1 {
+  width: 100px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  cursor: pointer;
+}
+.b3 {
+  color: #333;
+  font-family: SUIT;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px; /* 150% */
+  letter-spacing: -0.48px;
+  text-decoration: none;
 }
 
 .donation_price {
@@ -128,17 +149,6 @@
   font-weight: 800;
   line-height: 18px; /* 128.571% */
   letter-spacing: -0.56px;
-}
-
-.b3 {
-  color: #333;
-  font-family: SUIT;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 18px; /* 150% */
-  letter-spacing: -0.48px;
-  text-decoration: none;
 }
 
 .wrapper a {
